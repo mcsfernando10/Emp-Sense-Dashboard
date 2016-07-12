@@ -82,9 +82,9 @@
 					</a>
 					<ul class="sub-menu">
 						<li >
-                                                    <a href="extra_profile.php" id="UserProfile">
+                                                    <!--a href="extra_profile.php" id="UserProfile">
 							<i class="icon-user"></i>
-							User Profile</a>
+							User Profile</a-->
 						</li>
 						<li >
                                                     <a href="extra_lock.php">
