@@ -585,6 +585,26 @@ var Charts = function () {
                         show: false
                     }
                 });
+                
+            $.plot($("#pie_chart_dept"), data, {
+                    series: {
+                        pie: {
+                            show: true,
+                            radius: 1,
+                            label: {
+                                show: true,
+                                radius: 2 / 3,
+                                formatter: function (label, series) {
+                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+                                },
+                                threshold: 0.1
+                            }
+                        }
+                    },
+                    legend: {
+                        show: false
+                    }
+                });
 
             // GRAPH 7
             $.plot($("#pie_chart_7"), data, {
@@ -650,12 +670,22 @@ var Charts = function () {
                     }
                 });
 
+            var data = [];
+            var series = Math.floor(Math.random() * 10) + 1;
+            series = series < 5 ? 5 : series;
+            
+            for (var i = 0; i < 2; i++) {
+                data[i] = {
+                    label: "Series" + (i + 1),
+                    data: 1
+                }
+            }
             // DONUT
             $.plot($("#donut"), data, {
                     series: {
                         pie: {
-                            innerRadius: 0.5,
-                            show: true
+                            innerRadius: 0.1,
+                            show: false
                         }
                     }
                 });

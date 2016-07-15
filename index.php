@@ -213,15 +213,30 @@
                                         <i class="icon-male"></i>
                                     </div>
                                     <div class="details">
-                                        <div class="number">
-                                                1349
+                                        <div class="number">                                            
+                                            <?php                                            
+                                                $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                                                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                                                //get distinct Doctor Details
+                                                $sqlToGetEmployeeCount = "SELECT count(*) as 'count' FROM `employeesit_predict`"; 
+                                                $result = mysqli_query($con,$sqlToGetEmployeeCount);
+
+                                                if ($row = mysqli_fetch_assoc($result)) {
+                                                    echo $row['count'];
+                                                } 
+                                                
+                                                mysqli_close($con);
+                                            ?>
                                         </div>
+                                        <div class="desc">Present</div>
                                         <div class="desc">                           
-                                                Employees
+                                            Employees
                                         </div>
                                     </div>
                                     <a class="more" href="#" id="Emp_ViewMore">
-                                        View more <i class="m-icon-swapright m-icon-white"></i>
+                                        View more 
+                                        <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
                             </div>
@@ -231,10 +246,46 @@
                                         <i class="icon-warning-sign"></i>
                                     </div>
                                     <div class="details">
-                                        <div class="number">45%</div>
-                                        <div class="desc">Churn Rate</div>
+                                        <div class="number">
+                                            <?php                                            
+                                                /*$con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                                                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                                                //get distinct Doctor Details
+                                                $sqlToGetChurnRate = "SELECT avg(probability) as 'averageChurn' FROM `employeesit_predict`"; 
+                                                $result = mysqli_query($con,$sqlToGetChurnRate);
+
+                                                if ($row = mysqli_fetch_assoc($result)) {
+                                                    echo $row['averageChurn']."%";
+                                                } 
+                                                
+                                                mysqli_close($con);*/
+                                                $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                                                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                                                //get distinct Doctor Details
+                                                $sqlToGetMaxDept = "Select max(d.avgChurn) as 'maxProb', d.ageRange as 'ageRange'
+                                                    from (
+                                                    select
+                                                      concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`,
+                                                      count(*) as `employeeCount`,avg(probability) as `avgChurn`
+                                                    from employeesit_predict
+                                                    group by 1
+                                                    order by age) d"; 
+                                                $result = mysqli_query($con,$sqlToGetMaxDept);
+                                                
+                                                
+                                                if ($row = mysqli_fetch_assoc($result)) {
+                                                    echo $row['maxProb']."%";
+                                                    $GLOBALS['ageRange'] = $row['ageRange'];
+                                                }                                                 
+                                                mysqli_close($con);
+                                            ?>
+                                        </div>
+                                        <div class="desc"><?php echo $GLOBALS['ageRange']?></div>
+                                        <div class="desc">Age Range</div>
                                     </div>
-                                    <a class="more" href="#">
+                                    <a class="more" href="#" id="AgeGroup_ViewMore">
                                         View more <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
@@ -245,10 +296,28 @@
                                         <i class="icon-building"></i>
                                     </div>
                                     <div class="details">
-                                        <div class="number">89%</div>
+                                        <div class="number">
+                                            <?php                                            
+                                                $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                                                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                                                //get distinct Doctor Details
+                                                $sqlToGetMaxDept = "select max(d.avgProb) as 'maxProb', d.department as 'maxDept'
+                                                                from (SELECT department,avg(probability) as 'avgProb' FROM `employeesit_predict` group by department) d"; 
+                                                $result = mysqli_query($con,$sqlToGetMaxDept);
+                                                
+                                                
+                                                if ($row = mysqli_fetch_assoc($result)) {
+                                                    echo $row['maxProb']."%";
+                                                    $GLOBALS['department'] = $row['maxDept'];
+                                                }                                                 
+                                                mysqli_close($con);
+                                            ?>
+                                        </div>
+                                        <div class="desc"><?php echo $GLOBALS['department']; ?></div>
                                         <div class="desc">Departments</div>
                                     </div>
-                                    <a class="more" href="#">
+                                    <a class="more" href="#" id="Dept_ViewMore">
                                         View more <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
@@ -259,10 +328,27 @@
                                         <i class="icon-info-sign"></i>
                                     </div>
                                     <div class="details">
-                                        <div class="number">60%</div>
+                                        <div class="number">
+                                            <?php                                            
+                                                $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                                                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                                                //get distinct Doctor Details
+                                                $sqlToGetMaxReason = "select max(d.avgProb) as 'maxProb', d.Reason_To_Leave as 'maxReason' from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' FROM `employeesit_train` group by Reason_To_Leave) d"; 
+                                                $result = mysqli_query($con,$sqlToGetMaxReason);
+                                                
+                                                
+                                                if ($row = mysqli_fetch_assoc($result)) {
+                                                    echo $row['maxProb']."%";
+                                                    $GLOBALS['maxReason'] = $row['maxReason'];
+                                                }                                                 
+                                                mysqli_close($con);
+                                            ?>
+                                        </div>
+                                        <div class="desc"><?php echo $GLOBALS['maxReason']; ?></div>
                                         <div class="desc">Factors</div>
                                     </div>
-                                    <a class="more" href="#">
+                                    <a class="more" href="#" id="Factor_ViewMore">
                                         View more <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
@@ -271,15 +357,15 @@
                         <!-- END DASHBOARD STATS -->
                         <div class="clearfix"></div>
                         <div class="row-fluid">
-                            <div class="span6">
+                            <div class="span12">
                                 <!-- BEGIN PORTLET -->
                                 <div class="portlet solid bordered light-grey">
                                     <div class="portlet-title">
-                                        <div class="caption"><i class="icon-bar-chart"></i>Site Visits</div>
+                                        <div class="caption"><i class="icon-bar-chart"></i>Churn Comparison</div>
                                         <div class="tools">
                                             <div class="btn-group pull-right" data-toggle="buttons-radio">
-                                                <a href="" class="btn mini">Users</a>
-                                                <a href="" class="btn mini active">Feedbacks</a>
+                                                <a href="" class="btn mini">Past Churn Rate</a>
+                                                <a href="" class="btn mini active">Future Churn Rage</a>
                                             </div>
                                         </div>
                                     </div>
@@ -294,9 +380,9 @@
                                 </div>
                                 <!-- END PORTLET -->
                             </div>
-                            <div class="span6">
+                            <!--div class="span6">
                                 <!-- BEGIN PORTLET -->
-                                <div class="portlet solid light-grey bordered">
+                                <!--div class="portlet solid light-grey bordered">
                                     <div class="portlet-title">
                                         <div class="caption"><i class="icon-bullhorn"></i>Activities</div>
                                         <div class="tools">
@@ -317,7 +403,7 @@
                                 </div>
                                 <!-- END PORTLET-->
                                 <!-- BEGIN PORTLET-->
-                                <div class="portlet solid bordered light-grey">
+                                <!--div class="portlet solid bordered light-grey">
                                     <div class="portlet-title">
                                         <div class="caption"><i class="icon-signal"></i>Server Load</div>
                                         <div class="tools">
@@ -339,11 +425,42 @@
                                     </div>
                                 </div>
                                 <!-- END PORTLET-->
+                            <!--/div-->
+                        </div>
+                        
+                        <div class="row-fluid">
+                            <!-- BEGIN STACK CHART CONTROLS PORTLET-->
+                            <div class="portlet box yellow">
+                                <div class="portlet-title">
+                                    <div class="caption"><i class="icon-reorder"></i>Stack Chart Controls</div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse"></a>
+                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                        <a href="javascript:;" class="reload"></a>
+                                        <a href="javascript:;" class="remove"></a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div id="chart_5" style="height:350px;"></div>
+                                    <div class="btn-toolbar">
+                                        <div class="btn-group stackControls">
+                                            <input type="button" class="btn blue" value="With stacking" />
+                                            <input type="button" class="btn red" value="Without stacking" />
+                                        </div>
+                                        <div class="space5"></div>
+                                        <div class="btn-group graphControls">
+                                            <input type="button" class="btn" value="Bars" />
+                                            <input type="button" class="btn" value="Lines" />
+                                            <input type="button" class="btn" value="Lines with steps" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <!-- END STACK CHART CONTROLS PORTLET-->
                         </div>
 
-                        <div class="clearfix"></div>
-                        <div class="row-fluid">
+                        <!--div class="clearfix"></div>
+                        <!--div class="row-fluid">
                             <div class="span6">
                                 <div class="portlet box purple">
                                     <div class="portlet-title">
@@ -473,6 +590,10 @@
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="assets/scripts/app.js" type="text/javascript"></script>
         <script src="assets/scripts/index.js" type="text/javascript"></script>
+        <!-- POPUPS -->
+        <script src="assets/scripts/popup/ModelMessage.js" type="text/javascript"></script>
+        <script src="assets/scripts/popup/bootbox.js" type="text/javascript"></script>
+        <!-- POPUPS -->
         <script src="assets/scripts/tasks.js" type="text/javascript"></script>        
         <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
         <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>

@@ -9,6 +9,21 @@ var Index = function () {
                     map.width(map.parent().width());
                 });
             });
+            
+            $("#Emp_ViewMore").click(function () {
+                displayEmployeePopup();
+            });
+            $("#AgeGroup_ViewMore").click(function () {
+                displayAgeGroupPopup();
+            });
+            $("#Dept_ViewMore").click(function () {
+                displayDeptChurnPopup();
+            });
+            $("#Factor_ViewMore").click(function () {
+                displayFactorPopup();
+            });
+            
+            chart5();
         },
 
         initJQVMAP: function () {
@@ -206,27 +221,27 @@ var Index = function () {
                 return (Math.floor(Math.random() * (1 + 50 - 20))) + 10;
             }
 
-            var chartData = new Array();
+            var predictData = new Array();
+            var trainData = new Array();
 
             $.ajax({
                 type:     "post",
-                url:      "assets/db/fillChart.php",
+                url:      "assets/controllers/chart_controllers/fillChart.php",
                 data:     $(this).serialize(),
                 dataType: "json"
             }).done(function(response) {
-                chartData = response;            
+                predictData = response['predict']; 
+                trainData = response['train'];
                 var pageviews = [];
                 
                 var visitors = [];
                 
-                for (var i = 0; i <= 30; i++) {
-                    pageviews.push([i,chartData[i]['jobRole']]);
-                    i++;
+                for (var i = 0; i < 12; i++) {
+                    pageviews.push([i,20]);
                 }
                 
-                for (var i = 0; i <= 30; i++) {
-                    visitors.push([i,18]);
-                    i++;
+                for (var i = 0; i < 12; i++) {
+                    visitors.push([i,30]);
                 }
                 /*
                 var pageviews = [
@@ -470,7 +485,7 @@ var Index = function () {
                 $('#site_activities').bind("mouseleave", function () {
                     $("#tooltip").remove();
                 });
-            }
+            }            
         },
 
         initMiniCharts: function () {
@@ -839,6 +854,39 @@ var Index = function () {
             }, 60000);
         }
 
+        /*initPopUpMessages: function (){
+            //Set click for forgot password anchor
+            $("#Emp_ViewMore").click(function () {
+                alert("ABC");
+                /*showSendEmailForm(function(result){
+                    var emailAddress = $('#email').val();
+                    //if(emailAddress.length() == 0){
+                    //    showModalMessage("","Please enter a valid email address!", 2);
+                    //} else {
+                    //Create json array
+                    emailAddToGetMail = { "emailAdd":emailAddress };
+                        var pageURL = window.location.origin
+                            + "/knowyourdoctor/index.php/ForgotAdminDetailController/sendEmail";
+                    $.ajax({
+                        url: pageURL,
+                        dataType:'JSON',
+                        data: {"emailAddJSON" : emailAddToGetMail},
+                        type: "POST",
+                        success: function(res) {
+                            console.log("Error");
+                            alert("ABC");
+                            if(res) {
+                                showModalMessage("Successful", "Your message was sent successfully!", 1);
+                            } else {
+                                showModalMessage("Problem with your E-Mail address", "Your E-mail address doesn't exists!", 3);
+                            }
+                        }
+                    });
+                    //}
+                });
+
+            });
+        }*/
     };
 
 }();
@@ -854,7 +902,7 @@ function displayChart(pageviews,visitors){
                 label: "Future Turnover"
             }, {
                 data: visitors,
-                label: "Current Turnover"
+                label: "Past Turnover"
             }
         ], {
             series: {
@@ -884,7 +932,7 @@ function displayChart(pageviews,visitors){
             },
             colors: ["#d12610", "#37b7f3", "#52e136"],
             xaxis: {
-                ticks: 11,
+                ticks: 5,
                 tickDecimals: 0
             },
             yaxis: {
@@ -927,3 +975,154 @@ function showTooltip(title, x, y, contents) {
         'background-color': '#fff',
     }).appendTo("body").fadeIn(200);
 }
+
+function displayEmployeePopup(){
+    $.ajax({
+        type:     "post",
+        url:      "assets/controllers/popup_controllers/employeeChurnData.php",
+        data:     $(this).serialize(),
+        dataType: "json"
+    }).done(function(response) {
+        var employeeChurnData = response;
+        var title = '<i class="icon-male"></i> ' +
+            '<span>More about present working Employees</span>';
+        var message = "";
+        message +='<table>';
+        message +='<th>Employee Name</th>' + '<th>Churn Probability</th>'
+        for (var i = 0; i < employeeChurnData.length; i++) {
+            message += '<tr>';
+            message += '<td>'+employeeChurnData[i]['empName']+'</td>';
+            message += '<td>'+employeeChurnData[i]['prob']+'</td>';
+            message += '</tr>';
+        }
+        message += '<tr>';
+        message += '<td> Employee Count </td>';
+        message += '<td>'+employeeChurnData.length+'</td>';
+        message += '</tr>';
+        message +='</table>'
+        showEmployeeChurn(title,message);        
+    });
+}
+
+function displayAgeGroupPopup(){
+    $.ajax({
+        type:     "post",
+        url:      "assets/controllers/popup_controllers/employeeChurnAgeData.php",
+        data:     $(this).serialize(),
+        dataType: "json"
+    }).done(function(response) {
+        var employeeChurnData = response;
+        var title = '<i class="icon-male"></i> ' +
+            '<span>Churn Probability with Age range</span>';
+        var message = "";
+        message +='<table>';
+        message +='<th>Age Range</th>' + '<th>Churn Probability</th>'
+        for (var i = 0; i < employeeChurnData.length; i++) {
+            message += '<tr>';
+            message += '<td>'+employeeChurnData[i]['ageRange']+'</td>';
+            message += '<td>'+employeeChurnData[i]['prob']+'</td>';
+            message += '</tr>';   
+        }
+        message +='</table>'
+        showEmployeeChurn(title,message);        
+    });
+}
+
+function displayDeptChurnPopup(){
+    $.ajax({
+        type:     "post",
+        url:      "assets/controllers/popup_controllers/employeeChurnDeptData.php",
+        data:     $(this).serialize(),
+        dataType: "json"
+    }).done(function(response) {
+        var employeeChurnDeptData = response;
+        var title = '<i class="icon-building"></i> ' +
+            '<span>Employee Churn with Departments</span>';
+        var message = "";
+        message +='<table>';
+        message +='<th>Department</th>' + '<th>Churn Probability</th>'
+        for (var i = 0; i <= employeeChurnDeptData.length; i++) {
+            message += '<tr>';
+            message += '<td>'+employeeChurnDeptData[i]['dept']+'</td>';
+            message += '<td>'+employeeChurnDeptData[i]['prob']+'</td>';
+            message += '</tr>';    
+        }
+        message +='</table>'
+        showEmployeeChurn(title,message);        
+    });
+}
+
+function displayFactorPopup(){
+    $.ajax({
+        type:     "post",
+        url:      "assets/controllers/popup_controllers/employeeChurnFactorData.php",
+        data:     $(this).serialize(),
+        dataType: "json"
+    }).done(function(response) {
+        var employeeChurnFactorData = response;
+        var title = '<i class="icon-info-sign"></i> ' +
+            '<span>Employee Churn with Reasons </span>';
+        var message = "";
+        message +='<table>';
+        message +='<th>Reason To Leave</th>' + '<th>Churn Probability</th>'
+        for (var i = 0; i < employeeChurnFactorData.length; i++) {
+            message += '<tr>';
+            message += '<td>'+employeeChurnFactorData[i]['reason']+'</td>';
+            message += '<td>'+employeeChurnFactorData[i]['prob']+'</td>';
+            message += '</tr>'; 
+        }
+        message +='</table>'
+        showEmployeeChurn(title,message);        
+    });
+}
+
+function chart5() {
+                var d1 = [];
+                for (var i = 0; i <= 10; i += 1)
+                    d1.push([i, parseInt(Math.random() * 30)]);
+
+                var d2 = [];
+                for (var i = 0; i <= 10; i += 1)
+                    d2.push([i, parseInt(Math.random() * 30)]);
+
+                var d3 = [];
+                for (var i = 0; i <= 10; i += 1)
+                    d3.push([i, parseInt(Math.random() * 30)]);
+
+                var stack = 0,
+                    bars = true,
+                    lines = false,
+                    steps = false;
+
+                function plotWithOptions() {
+                    $.plot($("#chart_5"), [d1], {
+                            series: {
+                                stack: stack,
+                                lines: {
+                                    show: lines,
+                                    fill: true,
+                                    steps: steps
+                                },
+                                bars: {
+                                    show: bars,
+                                    barWidth: 0.6
+                                }
+                            }
+                        });
+                }
+
+                $(".stackControls input").click(function (e) {
+                    e.preventDefault();
+                    stack = $(this).val() == "With stacking" ? true : null;
+                    plotWithOptions();
+                });
+                $(".graphControls input").click(function (e) {
+                    e.preventDefault();
+                    bars = $(this).val().indexOf("Bars") != -1;
+                    lines = $(this).val().indexOf("Lines") != -1;
+                    steps = $(this).val().indexOf("steps") != -1;
+                    plotWithOptions();
+                });
+
+                plotWithOptions();
+            }

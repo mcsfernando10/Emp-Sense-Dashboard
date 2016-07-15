@@ -1,6 +1,7 @@
 <!-- BEGIN HEADER --> 
 <?php
     include_once "assets/controllers/checkSessionController.php";
+    include_once "assets/db/DBDetails.php";
 ?>
 <div class="header navbar navbar-inverse navbar-fixed-top">
     <!-- BEGIN TOP NAVIGATION BAR -->
