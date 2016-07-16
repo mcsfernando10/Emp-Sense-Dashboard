@@ -21,9 +21,7 @@ var Index = function () {
             });
             $("#Factor_ViewMore").click(function () {
                 displayFactorPopup();
-            });
-            
-            chart5();
+            });          
         },
 
         initJQVMAP: function () {
@@ -217,104 +215,124 @@ var Index = function () {
                 return res;
             }
             
-            function randValue() {
+            /*function randValue() {
                 return (Math.floor(Math.random() * (1 + 50 - 20))) + 10;
-            }
+            }*/
 
-            var predictData = new Array();
-            var trainData = new Array();
-
+            //First chart display
             $.ajax({
-                type:     "post",
-                url:      "assets/controllers/chart_controllers/fillChart.php",
-                data:     $(this).serialize(),
+                type:     "POST",
+                url:      "assets/controllers/chart_controllers/fillChartIndexPage1.php",
+                data:     ({field:'department'}),
                 dataType: "json"
-            }).done(function(response) {
-                predictData = response['predict']; 
-                trainData = response['train'];
-                var pageviews = [];
-                
-                var visitors = [];
-                
-                for (var i = 0; i < 12; i++) {
-                    pageviews.push([i,20]);
-                }
-                
-                for (var i = 0; i < 12; i++) {
-                    visitors.push([i,30]);
-                }
-                /*
-                var pageviews = [
-                    [1, randValue()],
-                    [2, randValue()],
-                    [3, 2 + randValue()],
-                    [4, 3 + randValue()],
-                    [5, 5 + randValue()],
-                    [6, 10 + randValue()],
-                    [7, 15 + randValue()],
-                    [8, 20 + randValue()],
-                    [9, 25 + randValue()],
-                    [10, 30 + randValue()],
-                    [11, 35 + randValue()],
-                    [12, 25 + randValue()],
-                    [13, 15 + randValue()],
-                    [14, 20 + randValue()],
-                    [15, 45 + randValue()],
-                    [16, 50 + randValue()],
-                    [17, 65 + randValue()],
-                    [18, 70 + randValue()],
-                    [19, 85 + randValue()],
-                    [20, 80 + randValue()],
-                    [21, 75 + randValue()],
-                    [22, 80 + randValue()],
-                    [23, 75 + randValue()],
-                    [24, 70 + randValue()],
-                    [25, 65 + randValue()],
-                    [26, 75 + randValue()],
-                    [27, 80 + randValue()],
-                    [28, 85 + randValue()],
-                    [29, 90 + randValue()],
-                    [30, 95 + randValue()]
-                ];*/
-
-            /*var visitors = [
-                    [1, randValue() - 5],
-                    [2, randValue() - 5],
-                    [3, randValue() - 5],
-                    [4, 6 + randValue()],
-                    [5, 5 + randValue()],
-                    [6, 20 + randValue()],
-                    [7, 25 + randValue()],
-                    [8, 36 + randValue()],
-                    [9, 26 + randValue()],
-                    [10, 38 + randValue()],
-                    [11, 39 + randValue()],
-                    [12, 50 + randValue()],
-                    [13, 51 + randValue()],
-                    [14, 12 + randValue()],
-                    [15, 13 + randValue()],
-                    [16, 14 + randValue()],
-                    [17, 15 + randValue()],
-                    [18, 15 + randValue()],
-                    [19, 16 + randValue()],
-                    [20, 17 + randValue()],
-                    [21, 18 + randValue()],
-                    [22, 19 + randValue()],
-                    [23, 20 + randValue()],
-                    [24, 21 + randValue()],
-                    [25, 14 + randValue()],
-                    [26, 24 + randValue()],
-                    [27, 25 + randValue()],
-                    [28, 26 + randValue()],
-                    [29, 27 + randValue()],
-                    [30, 31 + randValue()]
-                ];*/
+            }).done(function(response) { 
+                loadFirstComparisonGraph(response);
+            }); 
             
-                displayChart(pageviews,visitors);
-            });              
-                           
+            function loadFirstComparisonGraph(response){
+                var predictData = response[0]['predict'];
+                var trainData = response[0]['train'];
+                //alert(predictData[0]['dept'] + trainData[0]['prob']);
+                var futureTurnOver = [];
+                var pastTurnOver = [];
+                var xaxisLables = [];
+                var j = 1;
+                
+                //first index fill with empty values
+                futureTurnOver.push([0,0]);
+                xaxisLables.push([0,'']);
+                pastTurnOver.push([0,'']);
+                for (var i = 0; i < predictData.length; i++) {                    
+                    var predProb = predictData[i]['prob'];
+                    futureTurnOver.push([j,predProb]);
+                    xaxisLables.push([j++,predictData[i]['dept']+" Department"]);
+                }
+                
+                j=1;
+                for (var i = 0; i < trainData.length; i++) {
+                    var trainProb = predictData[i]['prob'];
+                    pastTurnOver.push([j++,trainProb]);
+                }   
+                
+                //last index fill with empty values
+                futureTurnOver.push([j,0]);
+                xaxisLables.push([j,'']);
+                pastTurnOver.push([j,'']);
+                displayChart(futureTurnOver,pastTurnOver,xaxisLables);
+            }
+            //First Dropdown handler
+            $("#churnComparisonField").change(function () {
+                var field = this.value;
+                alert(field);
+                /*alert(field);
+                if(field === 'Job Role')
+                    field = 'job_role';
+                
+                $.ajax({
+                    type:     "POST",
+                    url:      "assets/controllers/chart_controllers/fillChartIndexPage1.php",
+                    data:     ({field:field}),
+                    dataType: "json"
+                }).done(function(response) { 
+                    loadFirstComparisonGraph(response);
+                });*/
+            });
+            
+            //Second chart display               
+            $.ajax({
+                type:     "POST",
+                url:      "assets/controllers/chart_controllers/fillChartIndexPage2.php",
+                data:     ({field:'department'}),
+                dataType: "json"
+            }).done(function(response) { 
+                loadComparisonGraph(response);
+            }); 
+            
+            function loadComparisonGraph(response) {
+                var maleData = response['maleDeptData'];
+                var femaleData = response['femaleDeptData'];
 
-            if ($('#load_statistics').size() != 0) {
+                var maleTurnOver = [];
+                var femaleTurnOver = [];
+                var xaxisLables = [];
+
+                var j = 1;
+
+                //first index fill with empty values
+                for (var i = 0; i < maleData.length; i++) {                    
+                    var predProb = maleData[i]['probMale'];
+                    maleTurnOver.push([j,predProb]);
+                    xaxisLables.push([j++,maleData[i]['dept']+" Department"]);
+                }
+
+                j=1;
+                for (var i = 0; i < femaleData.length; i++) {
+                    var trainProb = femaleData[i]['probFemale'];
+                    femaleTurnOver.push([j++,trainProb]);
+                }   
+
+                //last index fill with empty values
+
+                xaxisLables.push([j,'']);
+                displayComparisonChart(maleTurnOver,femaleTurnOver,xaxisLables);
+            }
+            //Second Dropdown handler
+            $("#comparisonField").change(function () {
+                var field = this.value;
+                if(field === 'Job Role')
+                    field = 'job_role';
+                $.ajax({
+                    type:     "POST",
+                    url:      "assets/controllers/chart_controllers/fillChartIndexPage2.php",
+                    data:     ({field:field}),
+                    dataType: "json"
+                }).done(function(response) { 
+                    loadComparisonGraph(response);
+                });
+            });
+            
+            
+            if ($('#load_statistics').size() !== 0) {
                  //server load
                 $('#load_statistics_loading').hide();
                 $('#load_statistics_content').show();
@@ -891,17 +909,17 @@ var Index = function () {
 
 }();
 
-function displayChart(pageviews,visitors){
+function displayChart(futureTurnOver,pastTurnOver, xaxisLables){
     if ($('#site_statistics').size() !== 0) {
 
         $('#site_statistics_loading').hide();
         $('#site_statistics_content').show();
 
         var plot_statistics = $.plot($("#site_statistics"), [{
-                data: pageviews,
+                data: futureTurnOver,
                 label: "Future Turnover"
             }, {
-                data: visitors,
+                data: pastTurnOver,
                 label: "Past Turnover"
             }
         ], {
@@ -932,12 +950,12 @@ function displayChart(pageviews,visitors){
             },
             colors: ["#d12610", "#37b7f3", "#52e136"],
             xaxis: {
-                ticks: 5,
+                ticks: xaxisLables,
                 tickDecimals: 0
             },
             yaxis: {
-                ticks: 11,
-                tickDecimals: 0
+                ticks: 10,
+                tickDecimals: 3
             }
         });
 
@@ -986,14 +1004,23 @@ function displayEmployeePopup(){
         var employeeChurnData = response;
         var title = '<i class="icon-male"></i> ' +
             '<span>More about present working Employees</span>';
-        var message = "";
-        message +='<table>';
-        message +='<th>Employee Name</th>' + '<th>Churn Probability</th>'
+        var message = ""; 
+        message +='<table class="table">';
+        message +='<thead><tr><th>Employee Name</th>' + '<th>Churn Probability</th></tr></thead>'
         for (var i = 0; i < employeeChurnData.length; i++) {
-            message += '<tr>';
-            message += '<td>'+employeeChurnData[i]['empName']+'</td>';
-            message += '<td>'+employeeChurnData[i]['prob']+'</td>';
-            message += '</tr>';
+            var churnProb = parseFloat(employeeChurnData[i]['prob']);
+            churnProb = Number((churnProb).toFixed(2));
+            if(churnProb > 0.8){
+                message += '<tr class="danger">';
+                message += '<td>'+employeeChurnData[i]['empName']+'</td>';
+                message += '<td>'+churnProb+'</td>';
+                message += '</tr>';
+            } else {
+                message += '<tr class="info">';
+                message += '<td>'+employeeChurnData[i]['empName']+'</td>';
+                message += '<td>'+churnProb+'</td>';
+                message += '</tr>';
+            }
         }
         message += '<tr>';
         message += '<td> Employee Count </td>';
@@ -1012,7 +1039,7 @@ function displayAgeGroupPopup(){
         dataType: "json"
     }).done(function(response) {
         var employeeChurnData = response;
-        var title = '<i class="icon-male"></i> ' +
+        var title = '<i class="icon-building"></i> ' +
             '<span>Churn Probability with Age range</span>';
         var message = "";
         message +='<table>';
@@ -1023,7 +1050,7 @@ function displayAgeGroupPopup(){
             message += '<td>'+employeeChurnData[i]['prob']+'</td>';
             message += '</tr>';   
         }
-        message +='</table>'
+        message +='</table>';
         showEmployeeChurn(title,message);        
     });
 }
@@ -1035,19 +1062,19 @@ function displayDeptChurnPopup(){
         data:     $(this).serialize(),
         dataType: "json"
     }).done(function(response) {
-        var employeeChurnDeptData = response;
-        var title = '<i class="icon-building"></i> ' +
-            '<span>Employee Churn with Departments</span>';
+        var employeeChurnData = response;
+        var title = '<i class="icon-male"></i> ' +
+            '<span>Churn Probability with Departments</span>';
         var message = "";
         message +='<table>';
         message +='<th>Department</th>' + '<th>Churn Probability</th>'
-        for (var i = 0; i <= employeeChurnDeptData.length; i++) {
+        for (var i = 0; i < employeeChurnData.length; i++) {
             message += '<tr>';
-            message += '<td>'+employeeChurnDeptData[i]['dept']+'</td>';
-            message += '<td>'+employeeChurnDeptData[i]['prob']+'</td>';
-            message += '</tr>';    
+            message += '<td>'+employeeChurnData[i]['dept']+'</td>';
+            message += '<td>'+employeeChurnData[i]['prob']+'</td>';
+            message += '</tr>';   
         }
-        message +='</table>'
+        message +='</table>';
         showEmployeeChurn(title,message);        
     });
 }
@@ -1076,53 +1103,53 @@ function displayFactorPopup(){
     });
 }
 
-function chart5() {
-                var d1 = [];
-                for (var i = 0; i <= 10; i += 1)
-                    d1.push([i, parseInt(Math.random() * 30)]);
+function displayComparisonChart(maleTurnOver,femaleTurnOver,xaxisLables) {
+    var stack = 0,
+        bars = true,
+        lines = false,
+        steps = false;
 
-                var d2 = [];
-                for (var i = 0; i <= 10; i += 1)
-                    d2.push([i, parseInt(Math.random() * 30)]);
-
-                var d3 = [];
-                for (var i = 0; i <= 10; i += 1)
-                    d3.push([i, parseInt(Math.random() * 30)]);
-
-                var stack = 0,
-                    bars = true,
-                    lines = false,
-                    steps = false;
-
-                function plotWithOptions() {
-                    $.plot($("#chart_5"), [d1], {
-                            series: {
-                                stack: stack,
-                                lines: {
-                                    show: lines,
-                                    fill: true,
-                                    steps: steps
-                                },
-                                bars: {
-                                    show: bars,
-                                    barWidth: 0.6
-                                }
-                            }
-                        });
+    function plotWithOptions() {
+        $.plot($("#chart_5"), 
+                [{
+                    data: maleTurnOver,
+                    label: "Male"
+                }, {
+                    data: femaleTurnOver,
+                    label: "Female"
+                }], {
+                series: {
+                    stack: stack,
+                    lines: {
+                        show: lines,
+                        fill: true,
+                        steps: steps
+                    },
+                    bars: {
+                        show: bars,
+                        barWidth: 0.3
+                    }
+                },
+                xaxis: {
+                    ticks: xaxisLables,
+                    tickDecimals: 0
                 }
-
-                $(".stackControls input").click(function (e) {
-                    e.preventDefault();
-                    stack = $(this).val() == "With stacking" ? true : null;
-                    plotWithOptions();
-                });
-                $(".graphControls input").click(function (e) {
-                    e.preventDefault();
-                    bars = $(this).val().indexOf("Bars") != -1;
-                    lines = $(this).val().indexOf("Lines") != -1;
-                    steps = $(this).val().indexOf("steps") != -1;
-                    plotWithOptions();
-                });
-
-                plotWithOptions();
             }
+        );
+    }
+
+    $(".stackControls input").click(function (e) {
+        e.preventDefault();
+        stack = $(this).val() === "With stacking" ? true : null;
+        plotWithOptions();
+    });
+    $(".graphControls input").click(function (e) {
+        e.preventDefault();
+        bars = $(this).val().indexOf("Bars") !== -1;
+        lines = $(this).val().indexOf("Lines") !== -1;
+        steps = $(this).val().indexOf("steps") !== -1;
+        plotWithOptions();
+    });
+
+    plotWithOptions();
+}

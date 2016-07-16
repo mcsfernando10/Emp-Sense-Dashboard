@@ -24,7 +24,7 @@
         <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
         <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+        <!--link href="assets/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/-->
         <link href="assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
         <!-- END PAGE LEVEL PLUGIN STYLES -->
         <!-- BEGIN PAGE LEVEL STYLES --> 
@@ -276,7 +276,7 @@
                                                 
                                                 
                                                 if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo $row['maxProb']."%";
+                                                    echo round($row['maxProb'])."%";
                                                     $GLOBALS['ageRange'] = $row['ageRange'];
                                                 }                                                 
                                                 mysqli_close($con);
@@ -308,7 +308,7 @@
                                                 
                                                 
                                                 if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo $row['maxProb']."%";
+                                                    echo round($row['maxProb'])."%";
                                                     $GLOBALS['department'] = $row['maxDept'];
                                                 }                                                 
                                                 mysqli_close($con);
@@ -334,12 +334,16 @@
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
                                                 //get distinct Doctor Details
-                                                $sqlToGetMaxReason = "select max(d.avgProb) as 'maxProb', d.Reason_To_Leave as 'maxReason' from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' FROM `employeesit_train` group by Reason_To_Leave) d"; 
+                                                $sqlToGetMaxReason = "select max(d.avgProb) as 'maxProb', d.Reason_To_Leave as 'maxReason' "
+                                                        . "from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' "
+                                                            . "FROM `employeesit_train` "
+                                                            . "where Reason_To_Leave<>'' "
+                                                            . "group by Reason_To_Leave) d"; 
                                                 $result = mysqli_query($con,$sqlToGetMaxReason);
                                                 
                                                 
                                                 if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo $row['maxProb']."%";
+                                                    echo round($row['maxProb'])."%";
                                                     $GLOBALS['maxReason'] = $row['maxReason'];
                                                 }                                                 
                                                 mysqli_close($con);
@@ -361,7 +365,7 @@
                                 <!-- BEGIN PORTLET -->
                                 <div class="portlet solid bordered light-grey">
                                     <div class="portlet-title">
-                                        <div class="caption"><i class="icon-bar-chart"></i>Churn Comparison</div>
+                                        <div class="caption"><i class="icon-bar-chart"></i>Churn Comparison with Past and Future</div>
                                         <div class="tools">
                                             <div class="btn-group pull-right" data-toggle="buttons-radio">
                                                 <a href="" class="btn mini">Past Churn Rate</a>
@@ -370,6 +374,15 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <label>Select a Field for Compare :</label>
+                                                <select id="churnComparisonField" class="form-control">
+                                                    <option>Department</option>
+                                                    <option>Job Role</option>
+                                                </select>
+                                            </div>
+                                        </form>
                                         <div id="site_statistics_loading">
                                             <img src="assets/img/loading.gif" alt="loading" />
                                         </div>
@@ -432,7 +445,9 @@
                             <!-- BEGIN STACK CHART CONTROLS PORTLET-->
                             <div class="portlet box yellow">
                                 <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Stack Chart Controls</div>
+                                    <div class="caption"><i class="icon-reorder"></i>
+                                        Churn Comparison for Gender
+                                    </div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse"></a>
                                         <a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -441,6 +456,18 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="exampleInputName2">Select a Field for Compare :</label>
+                                            <select id="comparisonField" class="form-control">
+                                                <option>Department</option>
+                                                <option>Job Role</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                    <div class="form-group">
+                                         
+                                    
                                     <div id="chart_5" style="height:350px;"></div>
                                     <div class="btn-toolbar">
                                         <div class="btn-group stackControls">
@@ -542,7 +569,7 @@
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <div class="footer">
-            <div class="footer-inner">
+            <div class="footer-inner">                
                 2016 &copy; Emp - Sense by Sri Lanka Institute of Information Technology.
             </div>
             <div class="footer-tools">
@@ -570,22 +597,23 @@
         <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
         <!-- END CORE PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <script src="assets/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>   
+        <!--script src="assets/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>   
         <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
         <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
         <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
         <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
         <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>  
-        <script src="assets/plugins/flot/jquery.flot.js" type="text/javascript"></script>
-        <script src="assets/plugins/flot/jquery.flot.resize.js" type="text/javascript"></script>
+        <script src="assets/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script-->  
+        
         <script src="assets/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
         <script src="assets/plugins/bootstrap-daterangepicker/date.js" type="text/javascript"></script>
         <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>     
         <script src="assets/plugins/gritter/js/jquery.gritter.js" type="text/javascript"></script>
         <script src="assets/plugins/fullcalendar/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/flot/jquery.flot.js" type="text/javascript"></script>
+        <script src="assets/plugins/flot/jquery.flot.resize.js" type="text/javascript"></script>
         <script src="assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery.sparkline.min.js" type="text/javascript"></script>  
+        <!--script src="assets/plugins/jquery.sparkline.min.js" type="text/javascript"></script-->  
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="assets/scripts/app.js" type="text/javascript"></script>
@@ -594,7 +622,7 @@
         <script src="assets/scripts/popup/ModelMessage.js" type="text/javascript"></script>
         <script src="assets/scripts/popup/bootbox.js" type="text/javascript"></script>
         <!-- POPUPS -->
-        <script src="assets/scripts/tasks.js" type="text/javascript"></script>        
+        <!--script src="assets/scripts/tasks.js" type="text/javascript"></script>        
         <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
         <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->  
@@ -602,11 +630,11 @@
                 jQuery(document).ready(function() {    
                    App.init(); // initlayout and core plugins
                    Index.init();
-                   Index.initJQVMAP(); // init index page's custom scripts
-                   Index.initCalendar(); // init index page's custom scripts
+                   //Index.initJQVMAP(); // init index page's custom scripts
+                   //Index.initCalendar(); // init index page's custom scripts
                    Index.initCharts(); // init index page's custom scripts
                    Index.initChat();
-                   Index.initMiniCharts();
+                   //Index.initMiniCharts();
                    Index.initIntro();
                    Tasks.initDashboardWidget();
                 });
