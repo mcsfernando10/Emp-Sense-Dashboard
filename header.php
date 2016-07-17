@@ -20,7 +20,7 @@
             <!-- BEGIN TOP NAVIGATION MENU -->              
             <ul class="nav pull-right">
                 <!-- BEGIN NOTIFICATION DROPDOWN -->   
-                <li class="dropdown" id="header_notification_bar">
+                <!--li class="dropdown" id="header_notification_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="icon-warning-sign"></i>
                         <span class="badge">6</span>
@@ -103,7 +103,7 @@
                 </li>
                 <!-- END NOTIFICATION DROPDOWN -->
                 <!-- BEGIN INBOX DROPDOWN -->
-                <li class="dropdown" id="header_inbox_bar">
+                <!--li class="dropdown" id="header_inbox_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="icon-envelope"></i>
                         <span class="badge">5</span>
@@ -190,22 +190,68 @@
                 <li class="dropdown" id="header_task_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                     <i class="icon-tasks"></i>
-                    <span class="badge">5</span>
+                    <span class="badge">
+                        <?php
+                            $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                            mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                            //get distinct Doctor Details
+                            $sqlToGetEmployeeChurn = "SELECT count(*) as 'NumOfEmployees' FROM `employeesit_predict`";//where probability>0.9"; 
+                            $result = mysqli_query($con,$sqlToGetEmployeeChurn);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo $row['NumOfEmployees'];                                               
+                            }
+                            mysqli_close($con);	
+                        ?> 
+                    </span>
                     </a>
                     <ul class="dropdown-menu extended tasks">
                             <li>
-                                <p>You have 12 pending tasks</p>
+                                <p>Risk of Employee Leaving</p>
                             </li>
                             <li>
-                                <ul class="dropdown-menu-list scroller"  style="height:250px">
+                                <ul class="dropdown-menu-list scroller"  style="height:250px">                                    
                                     <li>
+                                        <?php
+                                            $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                                            mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                                            //get distinct Doctor Details
+                                            $sqlToGetEmployeeChurn = "SELECT Employee_Name,probability,Gender FROM `employeesit_predict`";//where probability>0.9"; 
+                                            $result = mysqli_query($con,$sqlToGetEmployeeChurn);
+
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $gender = $row['Gender'];
+                                                $imgUrl = '';
+                                                if(strcmp($gender,"Female"))
+                                                    $imgUrl = './assets/img/profile_female.png';
+                                                else
+                                                    $imgUrl = './assets/img/profile.png';
+                                                echo 
+                                                '<a href="#">
+                                                    <span class="photo"><img src="'.$imgUrl.'" alt="" /></span>
+                                                    <span class="task">
+                                                        <span class="desc">'.$row['Employee_Name'].'</span>
+                                                        <span class="percent">'.($row['probability']*100).'%</span>
+                                                    </span>
+                                                    <span class="progress progress-danger progress-striped active">
+                                                        <span style="width: '.($row['probability']*100).'%;" class="bar"></span>
+                                                    </span>  
+                                                </a>';                                               
+                                            }
+                                            mysqli_close($con);	
+                                        ?>                                         
+                                    </li>
+                                    
+                                    <!--li>
                                         <a href="#">
                                             <span class="task">
                                                 <span class="desc">New release v1.2</span>
                                                 <span class="percent">30%</span>
                                             </span>
                                             <span class="progress progress-success ">
-                                                <span style="width: 30%;" class="bar"></span>
+                                                <span style="width: 99%;" class="bar"></span>
                                             </span>
                                         </a>
                                     </li>
@@ -274,11 +320,8 @@
                                                 <span style="width: 18%;" class="bar"></span>
                                             </span>
                                         </a>
-                                    </li>
+                                    </li-->
                                 </ul>
-                            </li>
-                            <li class="external">
-                                <a href="#">See all tasks <i class="m-icon-swapright"></i></a>
                             </li>
                         </ul>
                 </li>

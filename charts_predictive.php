@@ -229,38 +229,8 @@
                         </div>
                     </div>
                     
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <div class="portlet box blue">
-                                <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Graph11</div>
-                                    <div class="tools">
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <h4>The pie can be made interactive with hover and click events.</h4>
-                                    <div id="interactive" class="chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span6">
-                            <div class="portlet box blue">
-                                <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Graph10</div>
-                                    <div class="tools">
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <h4>A donut hole can be added.</h4>
-                                    <div id="donut" class="chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                        
                     <!-- END PIE CHART PORTLET-->
                     <!-- BEGIN CHART PORTLETS-->
                     <div class="row-fluid">
