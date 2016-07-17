@@ -10,7 +10,7 @@
         count(*) as `employeeCount`,avg(probability) as `avgChurn`
       from employeesit_predict
       group by 1
-      order by age;"; 
+      order by age"; 
     $result = mysqli_query($con,$sqlToGetEmployeeAgeChurn);
 
     $return_arr = array(); 

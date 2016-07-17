@@ -264,19 +264,21 @@
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
                                                 //get distinct Doctor Details
-                                                $sqlToGetMaxDept = "Select max(d.avgChurn) as 'maxProb', d.ageRange as 'ageRange'
-                                                    from (
-                                                    select
-                                                      concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`,
-                                                      count(*) as `employeeCount`,avg(probability) as `avgChurn`
-                                                    from employeesit_predict
-                                                    group by 1
-                                                    order by age) d"; 
+                                                $sqlToGetMaxDept = "Select b.ageRange as 'ageRange',b.avgChurn as 'maxProb'
+                                                    From ( select concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`, count(*) as `employeeCount`,avg(probability) as `avgChurn` 
+                                                          from employeesit_predict 
+                                                          group by 1 
+                                                          order by age ) b 
+                                                    where b.avgChurn = (Select max(d.avgChurn) as 'maxProb' 
+                                                                        from ( select concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`, count(*) as `employeeCount`,avg(probability) as `avgChurn` 
+                                                                              from employeesit_predict 
+                                                                              group by 1 
+                                                                              order by age) d)"; 
                                                 $result = mysqli_query($con,$sqlToGetMaxDept);
                                                 
                                                 
                                                 if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo round($row['maxProb'])."%";
+                                                    echo round($row['maxProb']*100)."%";
                                                     $GLOBALS['ageRange'] = $row['ageRange'];
                                                 }                                                 
                                                 mysqli_close($con);
@@ -302,13 +304,18 @@
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
                                                 //get distinct Doctor Details
-                                                $sqlToGetMaxDept = "select max(d.avgProb) as 'maxProb', d.department as 'maxDept'
-                                                                from (SELECT department,avg(probability) as 'avgProb' FROM `employeesit_predict` group by department) d"; 
+                                                $sqlToGetMaxDept = "select b.department as 'maxDept',b.avgProb as 'maxProb'
+                                                    from (SELECT department,avg(probability) as 'avgProb' 
+                                                          FROM `employeesit_predict` group by department) b
+                                                    where b.avgProb=(select max(d.avgProb) as 'maxProb' 
+                                                                     from (SELECT department,avg(probability) as 'avgProb' 
+                                                                           FROM `employeesit_predict` 
+                                                                           group by department) d)"; 
                                                 $result = mysqli_query($con,$sqlToGetMaxDept);
                                                 
                                                 
                                                 if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo round($row['maxProb'])."%";
+                                                    echo round($row['maxProb']*100)."%";
                                                     $GLOBALS['department'] = $row['maxDept'];
                                                 }                                                 
                                                 mysqli_close($con);
@@ -334,16 +341,21 @@
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
                                                 //get distinct Doctor Details
-                                                $sqlToGetMaxReason = "select max(d.avgProb) as 'maxProb', d.Reason_To_Leave as 'maxReason' "
-                                                        . "from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' "
-                                                            . "FROM `employeesit_train` "
-                                                            . "where Reason_To_Leave<>'' "
-                                                            . "group by Reason_To_Leave) d"; 
+                                                $sqlToGetMaxReason = "select d.Reason_To_Leave as 'maxReason',d.avgProb as 'maxProb'
+                                                    from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' 
+                                                            FROM `employeesit_train` 
+                                                            where Reason_To_Leave<>'' 
+                                                            group by Reason_To_Leave) d
+                                                    where d.avgProb = (Select max(d.avgProb) as 'maxAvg'
+                                                            from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' 
+                                                            FROM `employeesit_train` 
+                                                            where Reason_To_Leave<>'' 
+                                                            group by Reason_To_Leave) d)"; 
                                                 $result = mysqli_query($con,$sqlToGetMaxReason);
                                                 
                                                 
                                                 if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo round($row['maxProb'])."%";
+                                                    echo round($row['maxProb']*100)."%";
                                                     $GLOBALS['maxReason'] = $row['maxReason'];
                                                 }                                                 
                                                 mysqli_close($con);
