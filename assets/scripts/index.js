@@ -243,14 +243,14 @@ var Index = function () {
                 xaxisLables.push([0,'']);
                 pastTurnOver.push([0,'']);
                 for (var i = 0; i < predictData.length; i++) {                    
-                    var predProb = predictData[i]['prob'];
+                    var predProb = predictData[i]['prob'] * 100;
                     futureTurnOver.push([j,predProb]);
                     xaxisLables.push([j++,predictData[i]['dept']+" Department"]);
                 }
                 
                 j=1;
                 for (var i = 0; i < trainData.length; i++) {
-                    var trainProb = predictData[i]['prob'];
+                    var trainProb = trainData[i]['prob'] * 100;
                     pastTurnOver.push([j++,trainProb]);
                 }   
                 
@@ -263,8 +263,6 @@ var Index = function () {
             //First Dropdown handler
             $("#churnComparisonField").change(function () {
                 var field = this.value;
-                alert(field);
-                /*alert(field);
                 if(field === 'Job Role')
                     field = 'job_role';
                 
@@ -275,7 +273,7 @@ var Index = function () {
                     dataType: "json"
                 }).done(function(response) { 
                     loadFirstComparisonGraph(response);
-                });*/
+                });
             });
             
             //Second chart display               

@@ -4,7 +4,7 @@
     $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
     mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
     
-    $requestedField = 'department';//$_POST['field'];
+    $requestedField = $_POST['field'];
     
     $sqlToGetDeptWithPredict = "SELECT ".$requestedField.",avg(probability) as 'avgProb' "
             . "FROM `employeesit_predict` "
