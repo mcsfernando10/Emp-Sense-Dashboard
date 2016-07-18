@@ -371,7 +371,7 @@
     <!-- POPUPS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="assets/scripts/app.js"></script>
-    <script src="assets/scripts/charts.js"></script>      
+    <script src="assets/scripts/charts_predictive.js"></script>      
     <script>
         jQuery(document).ready(function() {    
            App.init(); // initlayout and core plugins                   

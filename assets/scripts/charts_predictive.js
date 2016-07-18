@@ -720,7 +720,7 @@ var Charts = function () {
 
         $.ajax({
             type:     "POST",
-            url:      "assets/controllers/chart_controllers/pieChart_Predictive.php",
+            url:      "assets/controllers/chart_controllers/Chart_Predictive.php",
             data:     data,
             dataType: "json"
         }).done(function(response) {

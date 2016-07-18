@@ -5,7 +5,10 @@
     mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
     //get distinct Doctor Details
-    $sqlToGetEmployeeChurn = "SELECT department,avg(probability) as 'avgProb' FROM `employeesit_predict` group by department ORDER BY avg(probability) DESC"; 
+    $sqlToGetEmployeeChurn = "SELECT department,avg(probability) as 'avgProb' 
+        FROM `employeesit_predict` 
+        group by department 
+        ORDER BY avg(probability) DESC"; 
     $result = mysqli_query($con,$sqlToGetEmployeeChurn);
 
     $return_arr = array(); 
