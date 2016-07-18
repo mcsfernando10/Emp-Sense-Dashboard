@@ -10,6 +10,7 @@
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="assets/plugins/bootstrap/css/bootstrap.custom.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -195,6 +196,66 @@
                         </div>
                     </div>
                     <!-- END PAGE HEADER-->
+                    <div align="center" style="margin-bottom: 10px; border-style: solid; border-color: #dcdcdc; padding-left: 10px; color: #1E90FF">
+                        <table>
+                            <tr>
+                                <td style="padding-left: 10px;">
+                                    Graph Type:
+                                    <button class="btn" style="background-color: white">
+                                        <img src="assets/img/pages/graph.png"/>
+                                    </button>
+                                </td>
+                                <td>
+                                    <div class="verticalLine">
+                                        <button class="btn" style="background-color: white">
+                                            <img src="assets/img/pages/table.png"/>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td style="padding-left: 40px;">
+                                    Probability: 
+                                </td>
+                                <td>
+                                    <br/>
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="probability"></label>
+                                            <select id="comparisonField" class="form-control">
+                                                <option>90%</option>
+                                                <option>80%</option>
+                                                <option>70%</option>
+                                                <option>60%</option>
+                                                <option>50%</option>
+                                                <option>40%</option>
+                                                <option>30%</option>
+                                                <option>20%</option>
+                                                <option>10%</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td style="padding-left: 40px; margin-right: 10px">
+                                    Group Results: 
+                                </td>
+                                <td>
+                                    <br/>
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="probability"></label>
+                                            <select id="comparisonField" class="form-control">
+                                                <option>Age</option>
+                                                <option>Gender</option>
+                                                <option>Department</option>
+                                                <option>Factors</option>
+                                                <option>Salary</option>
+                                                <option>Tenure</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                     <!-- BEGIN PIE CHART PORTLET-->
                     <div class="row-fluid">
                         <div class="span6">
@@ -229,38 +290,7 @@
                         </div>
                     </div>
                     
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <div class="portlet box blue">
-                                <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Graph11</div>
-                                    <div class="tools">
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <h4>The pie can be made interactive with hover and click events.</h4>
-                                    <div id="interactive" class="chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span6">
-                            <div class="portlet box blue">
-                                <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Graph10</div>
-                                    <div class="tools">
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <h4>A donut hole can be added.</h4>
-                                    <div id="donut" class="chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!-- END PIE CHART PORTLET-->
                     <!-- BEGIN CHART PORTLETS-->
                     <div class="row-fluid">
@@ -481,64 +511,7 @@
                     </div>
                     <!-- END PIE CHART PORTLET-->
                     <!-- BEGIN PIE CHART PORTLET-->
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <div class="portlet box yellow">
-                                <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Graph8</div>
-                                    <div class="tools">
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <h4>The radius can also be set to a specific size (even larger than the container itself).</h4>
-                                    <div id="pie_chart_8" class="chart"></div>
-                                </div>
-                            </div>
-                                <div class="portlet box purple">
-                                    <div class="portlet-title">
-                                        <div class="caption"><i class="icon-reorder"></i>Graph9</div>
-                                        <div class="tools">
-                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                            <a href="javascript:;" class="reload"></a>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <h4>The pie can be tilted at an angle.</h4>
-                                        <div id="pie_chart_9" class="chart"></div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="span6">
-                            <div class="portlet box blue">
-                                <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Graph10</div>
-                                    <div class="tools">
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <h4>A donut hole can be added.</h4>
-                                    <div id="donut" class="chart"></div>
-                                </div>
-                            </div>
-                            <div class="portlet box red">
-                                <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Graph11</div>
-                                    <div class="tools">
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <h4>The pie can be made interactive with hover and click events.</h4>
-                                    <div id="interactive" class="chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!-- END PIE CHART PORTLET-->
                     <!-- END PAGE CONTENT-->
                 </div>
