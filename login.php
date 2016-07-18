@@ -47,7 +47,7 @@
 <body class="login">
 	<!-- BEGIN LOGO -->
 	<div class="logo">
-		<img src="assets/img/ScreenLogo.png" alt="logo" />
+            <img src="assets/img/logo_emp.png" alt="logo" />
 	</div>
 	<!-- END LOGO -->
 	<!-- BEGIN LOGIN -->

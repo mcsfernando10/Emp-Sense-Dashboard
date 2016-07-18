@@ -36,7 +36,7 @@
         <div class="page-lock">
             <div class="page-logo">
                 <a class="brand" href="">
-                    <img src="assets/img/ScreenLogo.png" alt="logo" />
+                    <img src="assets/img/logo_emp.png" alt="logo" />
                 </a>
             </div>
             <div class="page-body">

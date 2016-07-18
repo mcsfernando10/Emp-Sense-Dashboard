@@ -1003,7 +1003,7 @@ function displayEmployeePopup(){
         var title = '<i class="icon-male"></i> ' +
             '<span>More about present working Employees</span>';
         var message = ""; 
-        message +='<table class="table">';
+        message +='<table class="table table-striped">';
         message +='<thead><tr><th>Employee Name</th>' + '<th>Churn Probability</th></tr></thead>'
         for (var i = 0; i < employeeChurnData.length; i++) {
             var churnProb = parseFloat(employeeChurnData[i]['prob']);

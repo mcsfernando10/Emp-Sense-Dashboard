@@ -388,7 +388,7 @@
                                     <div class="portlet-body">
                                         <form class="form-inline">
                                             <div class="form-group">
-                                                <label>Select a Field for Compare :</label>
+                                                <!--<label>Select a Field for Compare :</label>-->
                                                 <select id="churnComparisonField" class="form-control">
                                                     <option>Department</option>
                                                     <option>Job Role</option>
@@ -470,7 +470,7 @@
                                 <div class="portlet-body">
                                     <form class="form-inline">
                                         <div class="form-group">
-                                            <label for="exampleInputName2">Select a Field for Compare :</label>
+                                            <!--<label for="exampleInputName2">Select a Field for Compare :</label>-->
                                             <select id="comparisonField" class="form-control">
                                                 <option>Department</option>
                                                 <option>Job Role</option>
@@ -482,15 +482,15 @@
                                     
                                     <div id="chart_5" style="height:350px;"></div>
                                     <div class="btn-toolbar">
-                                        <div class="btn-group stackControls">
+                                        <!--<div class="btn-group stackControls">
                                             <input type="button" class="btn blue" value="With stacking" />
                                             <input type="button" class="btn red" value="Without stacking" />
-                                        </div>
+                                        </div>-->
                                         <div class="space5"></div>
                                         <div class="btn-group graphControls">
-                                            <input type="button" class="btn" value="Bars" />
-                                            <input type="button" class="btn" value="Lines" />
-                                            <input type="button" class="btn" value="Lines with steps" />
+                                            <input type="button" class="btn blue" value="Bars" />
+                                            <input type="button" class="btn red" value="Lines" />
+                                            <input type="button" class="btn green" value="Lines with steps" />
                                         </div>
                                     </div>
                                 </div>
