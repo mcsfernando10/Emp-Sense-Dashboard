@@ -213,21 +213,8 @@
                                         <i class="icon-male"></i>
                                     </div>
                                     <div class="details">
-                                        <div class="number">                                            
-                                            <?php                                            
-                                                $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
-                                                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
-
-                                                //get distinct Doctor Details
-                                                $sqlToGetEmployeeCount = "SELECT count(*) as 'count' FROM `employeesit_predict`"; 
-                                                $result = mysqli_query($con,$sqlToGetEmployeeCount);
-
-                                                if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo $row['count'];
-                                                } 
-                                                
-                                                mysqli_close($con);
-                                            ?>
+                                        <div class="number" id="empCount">   
+                                            
                                         </div>
                                         <div class="desc">Present</div>
                                         <div class="desc">                           
@@ -243,10 +230,10 @@
                             <div class="span3 responsive" data-tablet="span6" data-desktop="span3">
                                 <div class="dashboard-stat green">
                                     <div class="visual">
-                                        <i class="icon-warning-sign"></i>
+                                        <i class="icon-group"></i>
                                     </div>
                                     <div class="details">
-                                        <div class="number">
+                                        <div class="number" id="ageRange">
                                             <?php                                            
                                                 /*$con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
@@ -258,7 +245,7 @@
                                                 if ($row = mysqli_fetch_assoc($result)) {
                                                     echo $row['averageChurn']."%";
                                                 } 
-                                                
+
                                                 mysqli_close($con);*/
                                                 $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
@@ -275,10 +262,10 @@
                                                                               group by 1 
                                                                               order by age) d)"; 
                                                 $result = mysqli_query($con,$sqlToGetMaxDept);
-                                                
-                                                
+
+
                                                 if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo round($row['maxProb']*100)."%";
+                                                    $age = round($row['maxProb']*100);
                                                     $GLOBALS['ageRange'] = $row['ageRange'];
                                                 }                                                 
                                                 mysqli_close($con);
@@ -298,7 +285,7 @@
                                         <i class="icon-building"></i>
                                     </div>
                                     <div class="details">
-                                        <div class="number">
+                                        <div class="number" id="deptPercent">
                                             <?php                                            
                                                 $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
@@ -315,14 +302,14 @@
                                                 
                                                 
                                                 if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo round($row['maxProb']*100)."%";
+                                                    $dept = round($row['maxProb']*100)."%";
                                                     $GLOBALS['department'] = $row['maxDept'];
                                                 }                                                 
                                                 mysqli_close($con);
                                             ?>
                                         </div>
                                         <div class="desc"><?php echo $GLOBALS['department']; ?></div>
-                                        <div class="desc">Departments</div>
+                                        <div class="desc">Department</div>
                                     </div>
                                     <a class="more" href="#" id="Dept_ViewMore">
                                         View more <i class="m-icon-swapright m-icon-white"></i>
@@ -335,7 +322,7 @@
                                         <i class="icon-info-sign"></i>
                                     </div>
                                     <div class="details">
-                                        <div class="number">
+                                        <div class="number" id="reasonPercent">
                                             <?php                                            
                                                 $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
@@ -355,7 +342,7 @@
                                                 
                                                 
                                                 if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo round($row['maxProb']*100)."%";
+                                                    $reason = round($row['maxProb']*100)."%";
                                                     $GLOBALS['maxReason'] = $row['maxReason'];
                                                 }                                                 
                                                 mysqli_close($con);
@@ -634,6 +621,7 @@
         <script src="assets/scripts/popup/ModelMessage.js" type="text/javascript"></script>
         <script src="assets/scripts/popup/bootbox.js" type="text/javascript"></script>
         <!-- POPUPS -->
+        <script src="assets/scripts/jquery.animateNumber.min.js" type="text/javascript"></script>
         <!--script src="assets/scripts/tasks.js" type="text/javascript"></script>        
         <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
         <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
@@ -650,8 +638,138 @@
                    Index.initIntro();
                    Tasks.initDashboardWidget();
                 });
+                
         </script>
         <script type="text/javascript">
+            var percent_number_step = $.animateNumber.numberStepFactories.append('%')
+            <?php                                            
+                $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                //get distinct Doctor Details
+                $sqlToGetEmployeeCount = "SELECT count(*) as 'count' FROM `employeesit_predict`"; 
+                $result = mysqli_query($con,$sqlToGetEmployeeCount);
+                if ($row = mysqli_fetch_assoc($result)) {
+                    //echo $row['count'];
+                    $empCount = $row['count'];
+                }
+                mysqli_close($con);
+            ?>
+            var empCount = '<?php echo $empCount; ?>';
+            $('#empCount').animateNumber(
+                    { 
+                        number: empCount
+                    },
+                    2000
+            );
+    
+            <?php                                            
+                /*$con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                //get distinct Doctor Details
+                $sqlToGetChurnRate = "SELECT avg(probability) as 'averageChurn' FROM `employeesit_predict`"; 
+                $result = mysqli_query($con,$sqlToGetChurnRate);
+
+                if ($row = mysqli_fetch_assoc($result)) {
+                    echo $row['averageChurn']."%";
+                } 
+
+                mysqli_close($con);*/
+                $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                //get distinct Doctor Details
+                $sqlToGetMaxDept = "Select b.ageRange as 'ageRange',b.avgChurn as 'maxProb'
+                    From ( select concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`, count(*) as `employeeCount`,avg(probability) as `avgChurn` 
+                          from employeesit_predict 
+                          group by 1 
+                          order by age ) b 
+                    where b.avgChurn = (Select max(d.avgChurn) as 'maxProb' 
+                                        from ( select concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`, count(*) as `employeeCount`,avg(probability) as `avgChurn` 
+                                              from employeesit_predict 
+                                              group by 1 
+                                              order by age) d)"; 
+                $result = mysqli_query($con,$sqlToGetMaxDept);
+
+
+                if ($row = mysqli_fetch_assoc($result)) {
+                    $age = round($row['maxProb']*100);
+                    //$GLOBALS['ageRange'] = $row['ageRange'];
+                }                                                 
+                mysqli_close($con);
+            ?>
+            var age = '<?php echo $age; ?>';
+            $('#ageRange').animateNumber(
+                    { 
+                        number: age,
+                        numberStep: percent_number_step
+                    },
+                    2000
+            );
+               
+            <?php                                            
+                $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                //get distinct Doctor Details
+                $sqlToGetMaxDept = "select b.department as 'maxDept',b.avgProb as 'maxProb'
+                    from (SELECT department,avg(probability) as 'avgProb' 
+                          FROM `employeesit_predict` group by department) b
+                    where b.avgProb=(select max(d.avgProb) as 'maxProb' 
+                                     from (SELECT department,avg(probability) as 'avgProb' 
+                                           FROM `employeesit_predict` 
+                                           group by department) d)"; 
+                $result = mysqli_query($con,$sqlToGetMaxDept);
+
+
+                if ($row = mysqli_fetch_assoc($result)) {
+                    $dept = round($row['maxProb']*100)."%";
+                    //$GLOBALS['department'] = $row['maxDept'];
+                }                                                 
+                mysqli_close($con);
+            ?>
+            var dept = '<?php echo $dept; ?>';
+            $('#deptPercent').animateNumber(
+                    { 
+                        number: dept,
+                        numberStep: percent_number_step
+                    },
+                    2000
+            );
+    
+            <?php                                            
+                $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
+                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
+
+                //get distinct Doctor Details
+                $sqlToGetMaxReason = "select d.Reason_To_Leave as 'maxReason',d.avgProb as 'maxProb'
+                    from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' 
+                            FROM `employeesit_train` 
+                            where Reason_To_Leave<>'' 
+                            group by Reason_To_Leave) d
+                    where d.avgProb = (Select max(d.avgProb) as 'maxAvg'
+                            from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' 
+                            FROM `employeesit_train` 
+                            where Reason_To_Leave<>'' 
+                            group by Reason_To_Leave) d)"; 
+                $result = mysqli_query($con,$sqlToGetMaxReason);
+
+
+                if ($row = mysqli_fetch_assoc($result)) {
+                    $reason = round($row['maxProb']*100)."%";
+                    $GLOBALS['maxReason'] = $row['maxReason'];
+                }                                                 
+                mysqli_close($con);
+            ?>
+            var reason = '<?php echo $reason; ?>';
+            $('#reasonPercent').animateNumber(
+                    { 
+                        number: reason,
+                        numberStep: percent_number_step
+                    },
+                    2000
+            );
             /*$(document).ready(function(){
                                  $("#Rightcontent").load("dashboard.html");
                                  $('.page-sidebar-menu').on('click', 'li', function() {

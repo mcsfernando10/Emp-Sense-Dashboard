@@ -1003,24 +1003,26 @@ function displayEmployeePopup(){
         var title = '<i class="icon-male"></i> ' +
             '<span>More about present working Employees</span>';
         var message = ""; 
-        message +='<table class="table table-striped">';
+        message +='<table class="table table-hover">';
         message +='<thead><tr><th>Employee Name</th>' + '<th>Churn Probability</th></tr></thead>'
         for (var i = 0; i < employeeChurnData.length; i++) {
             var churnProb = parseFloat(employeeChurnData[i]['prob']);
             churnProb = Number((churnProb).toFixed(2));
             if(churnProb > 0.8){
-                message += '<tr class="danger">';
+                var prob = churnProb * 100
+                message += '<tr class="warning">';
                 message += '<td>'+employeeChurnData[i]['empName']+'</td>';
-                message += '<td>'+churnProb+'</td>';
+                message += '<td>'+prob+'%'+'</td>';
                 message += '</tr>';
             } else {
+                var prob = churnProb * 100
                 message += '<tr class="info">';
                 message += '<td>'+employeeChurnData[i]['empName']+'</td>';
-                message += '<td>'+churnProb+'</td>';
+                message += '<td>'+prob+'%'+'</td>';
                 message += '</tr>';
             }
         }
-        message += '<tr>';
+        message += '<tr class="success">';
         message += '<td> Employee Count </td>';
         message += '<td>'+employeeChurnData.length+'</td>';
         message += '</tr>';
@@ -1040,7 +1042,7 @@ function displayAgeGroupPopup(){
         var title = '<i class="icon-building"></i> ' +
             '<span>Churn Probability with Age range</span>';
         var message = "";
-        message +='<table>';
+        message +='<table class="table table-hover">';
         message +='<th>Age Range</th>' + '<th>Churn Probability</th>'
         for (var i = 0; i < employeeChurnData.length; i++) {
             message += '<tr>';
