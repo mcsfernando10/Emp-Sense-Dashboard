@@ -15,7 +15,8 @@
             <!-- BEGIN RESPONSIVE MENU TOGGLER -->
             <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
                 <img src="assets/img/menu-toggler.png" alt="" />
-            </a>          
+            </a>    
+            
             <!-- END RESPONSIVE MENU TOGGLER -->            
             <!-- BEGIN TOP NAVIGATION MENU -->              
             <ul class="nav pull-right">
@@ -186,8 +187,12 @@
                     </ul>
                 </li>
                 <!-- END INBOX DROPDOWN -->
-                <!-- BEGIN TODO DROPDOWN -->
-                <li class="dropdown" id="header_task_bar">
+                <select id="languageSelect" class="form-control" style="background-color: #000000;color:#ffffff;width: 100px; height:30px; margin-top:5px">
+                    <option>English</option>
+                    <option>සිංහල</option>
+                </select>
+                <!-- BEGIN TODO DROPDOWN -->                
+                <li class="dropdown" id="header_task_bar">                    
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                     <i class="icon-tasks"></i>
                     <span class="badge">
@@ -323,11 +328,12 @@
                                     </li-->
                                 </ul>
                             </li>
+                            
                         </ul>
                 </li>
                 <!-- END TODO DROPDOWN -->               
                 <!-- BEGIN USER LOGIN DROPDOWN -->
-                <li class="dropdown user">
+                <li class="dropdown user">                    
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <img alt="" src="assets/img/profile.png" />
                         <span class="username"><?php echo strtoupper($_SESSION[$GLOBALS['sessionName']]) ?></span>
@@ -343,7 +349,9 @@
                         <li><a href="assets/controllers/lockScreenController.php"><i class="icon-lock"></i> Lock Screen</a></li>
                         <li><a href="assets/controllers/logoutController.php"><i class="icon-key"></i> Log Out</a></li>
                     </ul>
+                    
                 </li>
+                
                 <!-- END USER LOGIN DROPDOWN -->
                 <!-- END USER LOGIN DROPDOWN -->
             </ul>

@@ -5,7 +5,9 @@
     mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
     //get distinct Doctor Details
-    $sqlToGetEmployeeChurn = "SELECT Employee_Name,probability FROM `employeesit_predict`"; 
+    $sqlToGetEmployeeChurn = "SELECT Employee_Name,probability 
+        FROM `employeesit_predict`
+        Order by probability DESC"; 
     $result = mysqli_query($con,$sqlToGetEmployeeChurn);
 
     $return_arr = array(); 

@@ -6,13 +6,13 @@
     
     $requestedField = 'department';
     
-    $sqlToGetDeptWithPredict = "select department, avg(probability) as 'prob', count(employee_id) as 'empCount'
+    $sqlToGetFieldWithPredict = "select ".$requestedField.", avg(probability) as 'prob', count(employee_id) as 'empCount'
         from employeesit_predict
         where probability > 0.9
-        group by department"; 
-    $predictData = mysqli_query($con,$sqlToGetDeptWithPredict);
+        group by ".$requestedField; 
+    $predictData = mysqli_query($con,$sqlToGetFieldWithPredict);
     
-    $maxCountDept = "select f.Department as 'department'
+    $maxCountField = "select f.Department as 'department'
         from (select department, avg(probability) as 'prob', count(employee_id) as 'empCount'
                 from employeesit_predict
                 where probability > 0.9
@@ -23,10 +23,10 @@
         from employeesit_predict 
         where probability > 0.9
         group by department) d)";
-    $maxEmpCountDept = mysqli_query($con,$maxCountDept);   
+    $maxEmpCountField = mysqli_query($con,$maxCountField);   
 
     $predict_arr = array(); 
-    $maxDept;
+    $maxDept = "";
 
     while ($row = mysqli_fetch_assoc($predictData)) {
         $row_array['dept'] = $row[$requestedField];
@@ -35,7 +35,7 @@
         array_push($predict_arr,$row_array);
     }
     
-    if($row = mysqli_fetch_assoc($maxEmpCountDept)) {
+    if($row = mysqli_fetch_assoc($maxEmpCountField)) {
         $maxDept = $row[$requestedField];
     }
     

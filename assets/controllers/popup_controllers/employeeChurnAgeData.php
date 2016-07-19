@@ -5,12 +5,11 @@
     mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
     //get distinct Doctor Details
-    $sqlToGetEmployeeAgeChurn = "select
-        concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`,
+    $sqlToGetEmployeeAgeChurn = "select concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`,
         count(*) as `employeeCount`,avg(probability) as `avgChurn`
       from employeesit_predict
       group by 1
-      order by age"; 
+      order by avg(probability) DESC"; 
     $result = mysqli_query($con,$sqlToGetEmployeeAgeChurn);
 
     $return_arr = array(); 
