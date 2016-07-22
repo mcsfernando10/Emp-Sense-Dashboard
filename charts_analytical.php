@@ -21,12 +21,14 @@
             <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
             <!-- END GLOBAL MANDATORY STYLES -->
             <link rel="shortcut icon" href="assets/img/favicon.ico" />
+            
+            <script src="assets/scripts/Chart.min.js"></script>   
     </head>
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
     <body class="page-header-fixed">
             <?php include_once("header.php"); ?>
-
+            
             <!-- BEGIN CONTAINER -->
             <div class="page-container">
                     <!-- BEGIN SIDEBAR -->
@@ -198,7 +200,7 @@
                                     <!-- END PAGE HEADER-->
                                     <!-- BEGIN CHART PORTLETS-->
                                     <div class="row-fluid">
-                                            <div class="span12">
+                                            
                                                     <!-- BEGIN BASIC CHART PORTLET-->
                                                     <div class="portlet box yellow">
                                                             <div class="portlet-title">
@@ -518,7 +520,7 @@
             <!-- END PAGE LEVEL PLUGINS -->
             <!-- BEGIN PAGE LEVEL SCRIPTS -->
             <script src="assets/scripts/app.js"></script>
-            <script src="assets/scripts/charts_analytical.js"></script>      
+            <script src="assets/scripts/charts_analytical.js"></script>
             <script>
                     jQuery(document).ready(function() {    
                        App.init(); // initlayout and core plugins                   

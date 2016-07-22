@@ -43,7 +43,7 @@
     $predictedData['maxDept'] = $maxDept;
     echo json_encode($predictedData);
     
-    mysqli_close($con);
+    mysqli_close($con); 
 ?> 
 
 

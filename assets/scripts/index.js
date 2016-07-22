@@ -1000,31 +1000,38 @@ function displayEmployeePopup(){
         dataType: "json"
     }).done(function(response) {
         var employeeChurnData = response;
-        var title = '<i class="icon-male"></i> ' +
-            '<span>More about present working Employees</span>';
+        var title = '<p  align=center style="background-color:#3BB9FF; padding: 10px; margin-right: 15px; color: white;">' +
+                '<i class="icon-male"></i>&nbsp;&nbsp;<b> More about present working Employees</b></p>';
         var message = ""; 
         message +='<table class="table table-hover">';
-        message +='<thead><tr><th>Employee Name</th>' + '<th>Churn Probability</th></tr></thead>'
+        message +='<thead><tr><th bgcolor="#3BB9FF" style="padding-left:80px">Employee Name</th>' + 
+                '<th bgcolor="#3BB9FF">Churn Probability</th></tr></thead>'
         for (var i = 0; i < employeeChurnData.length; i++) {
             var churnProb = parseFloat(employeeChurnData[i]['prob']);
             churnProb = Number((churnProb).toFixed(2));
-            if(churnProb > 0.8){
+            if(churnProb >= 0.8){
+                var prob = churnProb * 100
+                message += '<tr class="error">';
+                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                message += '</tr>';
+            } else if(churnProb < 0.8 & churnProb >= 0.5){
                 var prob = churnProb * 100
                 message += '<tr class="warning">';
-                message += '<td>'+employeeChurnData[i]['empName']+'</td>';
-                message += '<td>'+prob+'%'+'</td>';
+                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
                 message += '</tr>';
-            } else {
+            } else{
                 var prob = churnProb * 100
                 message += '<tr class="info">';
-                message += '<td>'+employeeChurnData[i]['empName']+'</td>';
-                message += '<td>'+prob+'%'+'</td>';
+                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
                 message += '</tr>';
             }
         }
         message += '<tr class="success">';
-        message += '<td> Employee Count </td>';
-        message += '<td>'+employeeChurnData.length+'</td>';
+        message += '<td style="padding-left:80px"><b> Employee Count </b></td>';
+        message += '<td style="padding-left:55px"><b>'+employeeChurnData.length+'</b></td>';
         message += '</tr>';
         message +='</table>'
         showEmployeeChurn(title,message);        

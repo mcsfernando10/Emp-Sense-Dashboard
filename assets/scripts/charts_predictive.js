@@ -23,7 +23,7 @@ var Charts = function () {
             
             $("#tableBtn").click(function(){
                 displayTablePopup();
-            }); 
+            });
             
         },
 
@@ -446,7 +446,7 @@ var Charts = function () {
                         
             //graph
             //chart1();
-            chart2();
+            //chart2();
             //chart3();
             //chart4();
             //chart5();
@@ -710,8 +710,6 @@ var Charts = function () {
                 alert('' + obj.series.label + ': ' + percent + '%');
             }  
         } 
-        
-        
     };
     
     function displayCharts(){
@@ -725,7 +723,7 @@ var Charts = function () {
             dataType: "json"
         }).done(function(response) {
             var pieChartData = response['predict'];
-            var barChartData = response['predict'];            
+            var barChartData = response['predict'];
             
             for (var i = 0; i < pieChartData.length; i++) {
                 data[i] = {
@@ -737,11 +735,228 @@ var Charts = function () {
             for (var i = 0; i < barChartData.length; i++) {
                 barData[i] = [i+1,barChartData[i]['count']];
             }
-            displayPieChart(data);  
+            //displayPieChart(data);  
             displayBarChart(barData);
-            
+            //barChart(data);
+            //pieChart(data);
+            barHighChart(data);
+            pieHighChart(data);
+            lineHighChart(data);
             return response['maxDept'];
         });        
+    }
+    
+    function barChart(data){
+        
+        var labels = [];
+        var count = [];
+        for(i = 0; i < 5; i++){
+            labels[i] = data[i].label;
+            count[i] = data[i].data;    
+        }
+        // line chart data
+        var buyerData = {
+            labels : labels,
+            datasets : [
+                    {
+                            fillColor : "rgba(65,105,225,0.5)",
+                            strokeColor : "rgba(65,105,225,0.5)",
+                            data : count
+                    }
+            ]
+        }
+        // get line chart canvas
+        var buyers = document.getElementById('buyers').getContext('2d');
+
+        // draw line chart
+        new Chart(buyers).Bar(buyerData);
+        
+    }
+    
+    function pieChart(data){
+        
+        var labels = [];
+        var count = [];
+        for(i = 0; i < 5; i++){
+            labels[i] = data[i].label;
+            count[i] = data[i].data;    
+        }
+       // pie chart data
+	var pieData = [
+		{
+			value: count[0],
+			color:"#878BB6",
+                        label:labels[0]
+		},
+		{
+			value : count[1],
+			color : "#4ACAB4",
+                        label:labels[1]
+		},
+		{
+			value : count[2],
+			color : "#FF8153",
+                        label:labels[2]
+		},
+		{
+			value : count[3],
+			color : "#FFEA88",
+                        label:labels[3]
+		},
+                {
+			value : count[4],
+			color : "#FFEC22",
+                        label:labels[4]
+		}
+	];
+        // pie chart options
+	var pieOptions = {
+		segmentShowStroke : false,
+		animateScale : true,
+                animateRotate : true
+	}
+	
+	// get pie chart canvas
+	var countries= document.getElementById('pie_data').getContext("2d");
+	
+	// draw pie chart
+	var pie = new Chart(countries).Pie(pieData, pieOptions);
+        document.getElementById("legendDiv").innerHTML = pie.generateLegend();
+        //$('#pie_data').append(legend);
+    }
+    
+    function barHighChart(data){
+        var labels = [];
+        var count = [];
+        for(i = 0; i < 5; i++){
+            labels[i] = data[i].label;
+            count[i] = parseInt(data[i].data);    
+        }
+        
+        $('#bar_data').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '0.9 vs Department' //Dynamic
+            },
+            credits: {
+                 text: 'Emp-Sense',
+            },
+            xAxis: {
+                categories: labels,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Employee Count'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Department',
+                data: count
+            }]
+        });
+    }
+    
+    function pieHighChart(data){
+        var dataSeries = [];
+        for(i = 0; i < data.length; i++){
+            dataSeries.push({name : data[i].label, y : parseInt(data[i].data)});
+        }
+        // Build the chart
+        $('#pie_data').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: '0.9 vs Department' //Dynamic
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y}</b>'
+            },
+            credits: {
+                 text: 'Emp-Sense'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Employee Count',
+                colorByPoint: true,
+                data: dataSeries
+            }]
+        });
+    }
+    
+    function lineHighChart(data){
+        var labels = [];
+        var count = [];
+        for(i = 0; i < 5; i++){
+            labels[i] = data[i].label;
+            count[i] = parseInt(data[i].data);    
+        }
+        
+        $('#line_data').highcharts({
+            title: {
+                text: '0.9 vs Department', //Dynamic
+                x: -20 //center
+            },
+            xAxis: {
+                categories:labels
+            },
+            yAxis: {
+                title: {
+                    text: 'Employee  Count'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            credits: {
+                 text: 'Emp-Sense'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Employee Count',
+                data: count
+            }]
+        });
     }
     
     function displayPieChart(data){
@@ -833,7 +1048,7 @@ var Charts = function () {
                     max: 20
                 }
             });
-
+            
             $("#site_activities").bind("plothover", function (event, pos, item) {
                 $("#x").text(pos.x.toFixed(2));
                 $("#y").text(pos.y.toFixed(2));
@@ -852,6 +1067,7 @@ var Charts = function () {
                 $("#tooltip").remove();
             });
         }
+        
     }
     
     function displayTablePopup(){
@@ -862,34 +1078,46 @@ var Charts = function () {
                 dataType: "json"
             }).done(function(response) {
                 var employeeChurnData = response;
-                var title = '<i class="icon-male"></i> ' +
-                    '<span>More about present working Employees</span>';
+                var title = '<p  align=center style="background-color:#3BB9FF; padding: 10px; margin-right: 15px; color: white;">' +
+                        '<i class="icon-male"></i>&nbsp;&nbsp;<b> More about present working Employees</b></p>';
                 var message = ""; 
-                message +='<table class="table table-striped">';
-                message +='<thead><tr><th>Employee Name</th>' + '<th>Churn Probability</th></tr></thead>'
+                message +='<table id="predictiveDataTable" class="table table-hover">';
+                message +='<thead><tr><th bgcolor="#3BB9FF" style="padding-left:80px">Employee Name</th>' + 
+                        '<th bgcolor="#3BB9FF">Churn Probability</th></tr></thead>'
                 for (var i = 0; i < employeeChurnData.length; i++) {
                     var churnProb = parseFloat(employeeChurnData[i]['prob']);
                     churnProb = Number((churnProb).toFixed(2));
-                    if(churnProb > 0.8){
-                        message += '<tr class="danger">';
-                        message += '<td>'+employeeChurnData[i]['empName']+'</td>';
-                        message += '<td>'+churnProb+'</td>';
+                    if(churnProb >= 0.8){
+                        var prob = churnProb * 100
+                        message += '<tr class="error">';
+                        message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                        message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
                         message += '</tr>';
-                    } else {
+                    } else if(churnProb < 0.8 & churnProb >= 0.5){
+                        var prob = churnProb * 100
+                        message += '<tr class="warning">';
+                        message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                        message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                        message += '</tr>';
+                    } else{
+                        var prob = churnProb * 100
                         message += '<tr class="info">';
-                        message += '<td>'+employeeChurnData[i]['empName']+'</td>';
-                        message += '<td>'+churnProb+'</td>';
+                        message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                        message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
                         message += '</tr>';
                     }
                 }
-                message += '<tr>';
-                message += '<td> Employee Count </td>';
-                message += '<td>'+employeeChurnData.length+'</td>';
+                message += '<tr class="success">';
+                message += '<td style="padding-left:80px"><b> Employee Count </b></td>';
+                message += '<td style="padding-left:55px"><b>'+employeeChurnData.length+'</b></td>';
                 message += '</tr>';
                 message +='</table>'
-                showEmployeeChurn(title,message);        
+                showEmployeeChurn(title,message);  
+                //alert();
+                //var a = $('#predictiveDataTable').DataTable();
+                //alert(a);
             });
-            
+
         }
 
 }();

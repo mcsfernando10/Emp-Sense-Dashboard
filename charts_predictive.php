@@ -10,10 +10,12 @@
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+        
         <link href="assets/plugins/bootstrap/css/bootstrap.custom.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/pages/charts.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/css/style-metro.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
@@ -21,6 +23,10 @@
 	<link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 	<!-- END GLOBAL MANDATORY STYLES -->
         <link rel="shortcut icon" href="assets/img/favicon.ico" />
+        <script src="assets/scripts/Chart.min.js"></script>   
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/datatables.min.css"/>
+ 
+        
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -220,7 +226,7 @@
                                     <form class="form-inline">
                                         <div class="form-group">
                                             <label for="probability"></label>
-                                            <select id="probabilityField" class="form-control">
+                                            <select id="probabilityField" class="form-control" name="probabField">
                                                 <option>90%</option>
                                                 <option>80%</option>
                                                 <option>70%</option>
@@ -262,7 +268,7 @@
                             <!-- BEGIN PORTLET -->
                                 <div class="portlet box blue">
                                     <div class="portlet-title">
-                                        <div class="caption"><i class="icon-bar-chart"></i>Churn - 
+                                        <div class="caption"><i class="icon-bar-chart"></i>Highest Rate - 
                                             <b id="highestFieldBar">IT Department</b>
                                         </div>
                                         <div class="tools">
@@ -272,12 +278,15 @@
                                     </div>
                                     <div class="portlet-body">
                                         
-                                        <div id="site_activities_loading">
+                                        <!--<div id="site_activities_loading">
                                             <img src="assets/img/loading.gif" alt="loading" />
                                         </div>
                                         <div id="site_activities_content" class="hide">
                                             <div id="site_activities" class="chart"></div>
+                                        </div>-->
+                                        <div id="bar_data">
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <!-- END PORTLET-->                            
@@ -285,7 +294,7 @@
                         <div class="span6">
                             <div class="portlet box blue">
                                 <div class="portlet-title">
-                                    <div class="caption"><i class="icon-bar-chart"></i>Churn - 
+                                    <div class="caption"><i class="icon-bar-chart"></i>Highest Rate - 
                                         <b id="highestFieldPie">IT Department</b>
                                     </div>
                                     <div class="tools">
@@ -294,7 +303,14 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div id="pie_chart_3" class="chart"></div>
+                                    <div id="pie_data"></div>
+                                    <!--<div id="pie_chart_3" class="chart"></div>
+                                    <table class="chart">
+                                            <tr>
+                                                <td style="width:65%"><canvas id="pie_data"></canvas></td>
+                                                <td id="legendDiv" class="chart-legend" style="width:35%"></td>
+                                            </tr>
+                                    </table>-->
                                 </div>
                             </div> 
                         </div>
@@ -308,7 +324,7 @@
                             <!-- BEGIN INTERACTIVE CHART PORTLET-->
                             <div class="portlet box red">
                                 <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Interactive Chart</div>
+                                    <div class="caption"><i class="icon-reorder"></i>Highest Rate - IT Department</div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse"></a>
                                         <a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -317,7 +333,8 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div id="chart_2" class="chart"></div>
+                                    <!--<div id="chart_2" class="chart"></div>-->
+                                    <div id="line_data"></div>
                                 </div>
                             </div>
                             <!-- END INTERACTIVE CHART PORTLET-->                 
@@ -329,6 +346,9 @@
             </div>
             <!-- END PAGE -->
     </div>
+    <!--<div id="tablee-container" style="display:none">
+        <table id="aaaa" class="display"></table>
+    </div>-->
     <!-- END CONTAINER -->
     <!-- BEGIN FOOTER -->
     <div class="footer">
@@ -343,7 +363,9 @@
     </div>
     <!-- END FOOTER -->
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-    <!-- BEGIN CORE PLUGINS -->   <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <!-- BEGIN CORE PLUGINS -->   
+    <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/datatables.min.js"></script>
     <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
     <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
     <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
@@ -371,7 +393,11 @@
     <!-- POPUPS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="assets/scripts/app.js"></script>
-    <script src="assets/scripts/charts_predictive.js"></script>      
+    <script src="assets/scripts/charts_predictive.js"></script>
+    <!-- CHARTS -->
+    <script src="assets/scripts/highcharts.js"></script>
+    <script src="assets/scripts/exporting.js"></script>
+    
     <script>
         jQuery(document).ready(function() {    
            App.init(); // initlayout and core plugins                   
@@ -379,7 +405,108 @@
            Charts.initCharts();
            Charts.initPieCharts();
         });
-    </script>	
+    </script>
+    <script type="text/javascript">
+        /*$("#tableBtn").click(function(){
+                displayTablePopup();
+            });
+            var message ="";
+            function displayTablePopup(){
+                
+                var table = document.createElement('table');
+                var title = '<p  align=center style="background-color:#3BB9FF; padding: 10px; margin-right: 15px; color: white;">' +
+                                '<i class="icon-male"></i>&nbsp;&nbsp;<b> More about present working Employees</b></p>';
+                $.ajax({
+                        type:     "post",
+                        url:      "assets/controllers/popup_controllers/employeeChurnData.php",
+                        data:     $(this).serialize(),
+                        dataType: "json"
+                    }).done(function(response) {
+                        var employeeChurnData = response;
+                        //message +='<div id="table-container" style="display:none">'
+                        //message +='<table class="table table-hover">';
+                        message +='<thead><tr><th bgcolor="#3BB9FF" style="padding-left:80px">Employee Name</th>' + 
+                                '<th bgcolor="#3BB9FF">Churn Probability</th></tr></thead>'
+                        for (var i = 0; i < employeeChurnData.length; i++) {
+                            var churnProb = parseFloat(employeeChurnData[i]['prob']);
+                            churnProb = Number((churnProb).toFixed(2));
+                            if(churnProb >= 0.8){
+                                var prob = churnProb * 100
+                                message += '<tr class="error">';
+                                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                                message += '</tr>';
+                            } else if(churnProb < 0.8 & churnProb >= 0.5){
+                                var prob = churnProb * 100
+                                message += '<tr class="warning">';
+                                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                                message += '</tr>';
+                            } else{
+                                var prob = churnProb * 100
+                                message += '<tr class="info">';
+                                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                                message += '</tr>';
+                            }
+                        }
+                        message += '<tr class="success">';
+                        message += '<td style="padding-left:80px"><b> Employee Count </b></td>';
+                        message += '<td style="padding-left:55px"><b>'+employeeChurnData.length+'</b></td>';
+                        message += '</tr>';
+                        //message +='</table>'
+                        //alert(message);
+                        
+                        //table.id = 'aaaa';
+                        //table.className= 'display';
+                        //table.innerHTML = message;
+                        var a = document.getElementById('aaaa');
+                        a.innerHTML = message;
+                        //alert(a.innerHTML);
+                        //alert(div);
+                        
+                        //container.find('div').attr('id', 'aaaa');
+            });
+            var container = $('#tablee-container').clone();
+            //document.getElementById('tablee-container').appendChild(table);
+            container.find('table').attr('id', 'aaaa');
+                
+                var box = bootbox.dialog({
+                  show: false,
+                  message: "a",
+                  title: title,
+                  buttons: {
+                    OK: {
+                      label: "OK",
+                      className: "btn-primary",
+                      callback: function() {
+                        console.log('OK Button');
+                      }
+                    },
+                    cancel: {
+                      label: "Cancel",
+                      className: "btn-default"
+                    }
+                  }
+                });
+
+                box.on("shown.bs.modal", function() {
+                   $('#aaaa').DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": {
+                            "url": "assets/controllers/popup_controllers/employeeChurnData.php",
+                            "type": "POST"
+                        },
+                        "columns": [
+                            { "data": "empName" }
+                        ]        
+                   }); 
+                });
+
+                box.modal('show');     
+        }*/
+    </script>
 </body>
 <!-- END BODY -->
 </html>
