@@ -3,6 +3,10 @@
     include_once "assets/controllers/checkSessionController.php";
     include_once "assets/db/DBDetails.php";
 ?>
+
+<!--script src='languageSelector.php'></script-->
+
+
 <div class="header navbar navbar-inverse navbar-fixed-top">
     <!-- BEGIN TOP NAVIGATION BAR -->
     <div class="navbar-inner">
@@ -189,7 +193,18 @@
                 <!-- END INBOX DROPDOWN -->
                 <select id="languageSelect" class="form-control" style="background-color: #000000;color:#ffffff;width: 100px; height:30px; margin-top:5px">
                     <option>English</option>
-                    <option>සිංහල</option>
+                    <option>Sinhala</option>
+                    <option>Tamil</option>                    
+                    <!--?php 
+                        if($_SESSION['language'] =='Sinhala'){
+                            echo "";
+                            echo "<script>alert('" . $_SESSION['language'] . "New')</script>";
+                        } else if($_SESSION['language'] =='English'){
+                            echo "<option>English</option> 
+                                <option>සිංහල</option>";
+                            echo "<script>alert('" . $_SESSION['language'] . "New')</script>";
+                        }
+                    ?-->                     
                 </select>
                 <!-- BEGIN TODO DROPDOWN -->                
                 <li class="dropdown" id="header_task_bar">                    

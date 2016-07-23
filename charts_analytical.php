@@ -32,89 +32,108 @@
             <!-- BEGIN CONTAINER -->
             <div class="page-container">
                     <!-- BEGIN SIDEBAR -->
-                    <div class="page-sidebar nav-collapse collapse">
-                            <!-- BEGIN SIDEBAR MENU -->        
-                            <ul class="page-sidebar-menu">
-                                    <li>
-                                            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                                            <div class="sidebar-toggler hidden-phone"></div>
-                                            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                                    </li>
-                                    <li>
-                                            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-                                            <form class="sidebar-search">
-                                                    <div class="input-box">
-                                                            <a href="javascript:;" class="remove"></a>
-                                                            <input type="text" placeholder="Search..." />
-                                                            <input type="button" class="submit" value=" " />
-                                                    </div>
-                                            </form>
-                                            <!-- END RESPONSIVE QUICK SEARCH FORM -->
-                                    </li>
-                                    <li class="start">
-                                        <a href="index.php" id="Dashboard">
-                                            <i class="icon-dashboard"></i> 
-                                            <span class="title">Dashboard</span>					
-                                            </a>
-                                    </li>				
-                                    <li class="active">
-                                            <a href="#">
-                                            <i class="icon-bar-chart"></i>
-                                            <span class="title">Visual Charts</span>
-                                            <span class="arrow open"></span>
-                                            <span class="selected"></span>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                    <li class="active">
-                                                        <a href="charts_analytical.php" id="AnalyticalDesigner">
-                                                            <i class="icon-cogs"></i>
-                                                            Analytical Designer</a>
-                                                    </li>
-                                                    <li >
-                                                            <a href="charts_predictive.php" id="PredictiveAnalytics">
-                                                            <i class="icon-lightbulb"></i>
-                                                            Predictive Analytics</a>
-                                                    </li>
-                                            </ul>
-                                    </li>
-                                    <li >
-                                            <a href="#">
-                                            <i class="icon-gift"></i> 
-                                            <span class="title">Extra</span>
-                                            <span class="arrow "></span>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                    <li >
-                                                        <!--a href="extra_profile.php" id="UserProfile">
-                                                            <i class="icon-user"></i>
-                                                            User Profile</a-->
-                                                    </li>
-                                                    <li >
-                                                        <a href="extra_lock.php">
-                                                            <i class="icon-lock"></i>
-                                                            Lock Screen</a>
-                                                    </li>
-                                                    <li >
-                                                        <a href="extra_faq.php" id="Faq">
-                                                            <i class="icon-info"></i>
-                                                            FAQ</a>
-                                                    </li>
-                                                    <li >
-                                                        <a href="extra_about.php" id="AboutUs">
-                                                            <i class="icon-group"></i>
-                                                            About Us</a>
-                                                    </li>
-                                                    <li >
-                                                        <a href="extra_contact.php" id="ContactUs">
-                                                            <i class="icon-envelope-alt"></i>
-                                                            Contact Us</a>
-                                                    </li>						
-                                            </ul>
-                                    </li>				
-                            </ul>
-                            <!-- END SIDEBAR MENU -->
-                    </div>
-                    <!-- END SIDEBAR -->
+            <div class="page-sidebar nav-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->        
+                <ul class="page-sidebar-menu">
+                    <li>
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        <div class="sidebar-toggler hidden-phone"></div>
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    </li>
+                    <li>
+                        <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                        <form class="sidebar-search">
+                            <div class="input-box">
+                                <a href="javascript:;" class="remove"></a>
+                                <input type="text" placeholder="Search..." />
+                                <input type="button" class="submit" value=" " />
+                            </div>
+                        </form>
+                        <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                    </li>
+                    <li class="start">
+                        <a href="index.php" id="Dashboard">
+                            <i class="icon-dashboard"></i> 
+                            <span class="title" data-translate="menu_dashboard">
+                                Dashboard
+                            </span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>				
+                    <li class="active">
+                        <a href="#">
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">
+                                <span class="title" data-translate="menu_visualCharts">
+                                    Visual Charts
+                                </span>                                    
+                            </span>
+                            <span class="arrow open"></span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="active">
+                                <a href="charts_analytical.php" id="AnalyticalDesigner">
+                                    <i class="icon-cogs"></i>
+                                    <span data-translate="menu_analytical">
+                                        Analytical Designer
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="charts_predictive.php" id="PredictiveAnalytics">
+                                    <i class="icon-lightbulb"></i>
+                                    <span data-translate="menu_predictive">
+                                        Predictive Analytics
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="#">
+                            <i class="icon-gift"></i> 
+                            <span class="title" data-translate="menu_extra">Extra</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <!--li >
+                                <a href="extra_profile.php" id="UserProfile">
+                                    <i class="icon-user"></i>
+                                    User Profile</a>
+                            </li-->
+                            <li>
+                                <a href="extra_lock.php">
+                                    <i class="icon-lock"></i>
+                                    <span data-translate="menu_lockScreen">Lock Screen</span>
+                                </a>
+                            </li>
+                            <li >
+                                <a href="extra_faq.php" id="Faq">
+                                    <i class="icon-info"></i>
+                                    <span data-translate="menu_faq">FAQ</span>
+                                </a>
+                            </li>
+                            <li >
+                                <a href="extra_about.php" id="AboutUs">
+                                    <i class="icon-group"></i>
+                                    <span data-translate="menu_about_us">About Us</span>
+                                </a>
+                            </li>
+                            <li >
+                                <a href="extra_contact.php" id="ContactUs">
+                                    <i class="icon-envelope-alt"></i>
+                                    <span data-translate="menu_contact_us">Contact Us</span>
+                                </a>
+                            </li>						
+                        </ul>
+                    </li>				
+                </ul>
+                <!-- END SIDEBAR MENU -->
+                
+                
+            </div>
+            <!-- END SIDEBAR -->
                     <!-- BEGIN PAGE -->
                     <div class="page-content">
                         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -517,18 +536,21 @@
             <script src="assets/plugins/flot/jquery.flot.pie.js"></script>
             <script src="assets/plugins/flot/jquery.flot.stack.js"></script>
             <script src="assets/plugins/flot/jquery.flot.crosshair.js"></script>
+            <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
             <!-- END PAGE LEVEL PLUGINS -->
             <!-- BEGIN PAGE LEVEL SCRIPTS -->
             <script src="assets/scripts/app.js"></script>
             <script src="assets/scripts/charts_analytical.js"></script>
+            
             <script>
-                    jQuery(document).ready(function() {    
-                       App.init(); // initlayout and core plugins                   
-                       Charts.init();
-                       Charts.initCharts();
-                       Charts.initPieCharts();
-                    });
-            </script>	
+                jQuery(document).ready(function() {    
+                   App.init(); // initlayout and core plugins                   
+                   Charts.init();
+                   Charts.initCharts();
+                   Charts.initPieCharts();
+                });
+            </script>
+            
     </body>
     <!-- END BODY -->
 </html>

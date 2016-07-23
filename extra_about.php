@@ -61,67 +61,75 @@
                     </li>
                     <li class="start">
                         <a href="index.php" id="Dashboard">
-                        <i class="icon-dashboard"></i> 
-                        <span class="title">Dashboard</span>                                        
+                            <i class="icon-dashboard"></i> 
+                            <span class="title" data-translate="menu_dashboard">
+                                Dashboard
+                            </span>
+                            <span class="selected"></span>
                         </a>
                     </li>				
                     <li>
                         <a href="#">
-                        <i class="icon-bar-chart"></i>
-                        <span class="title">Visual Charts</span>
-                        <span class="arrow "></span>
+                            <i class="icon-bar-chart"></i>
+                            <span class="title" data-translate="menu_visualCharts">
+                                Visual Charts
+                            </span>
+                            <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
-                            <li >
+                            <li>
                                 <a href="charts_analytical.php" id="AnalyticalDesigner">
                                     <i class="icon-cogs"></i>
-                                    Analytical Designer
+                                    <span data-translate="menu_analytical">
+                                        Analytical Designer
+                                    </span>
                                 </a>
                             </li>
                             <li >
                                 <a href="charts_predictive.php" id="PredictiveAnalytics">
                                     <i class="icon-lightbulb"></i>
-                                    Predictive Analytics
+                                    <span data-translate="menu_predictive">
+                                        Predictive Analytics
+                                    </span>
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>                
                     <li class="active">
                         <a href="#">
                             <i class="icon-gift"></i> 
-                            <span class="title">Extra</span>
+                            <span class="title" data-translate="menu_extra">Extra</span>
                             <span class="arrow open"></span>
                             <span class="selected"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li >
-                                <!--a href="extra_profile.php" id="UserProfile">
+                            <!--li >
+                                <a href="extra_profile.php" id="UserProfile">
                                     <i class="icon-user"></i>
-                                    User Profile
-                                </a-->
-                            </li>
-                            <li >
+                                    User Profile</a>
+                            </li-->
+                            <li>
                                 <a href="extra_lock.php">
                                     <i class="icon-lock"></i>
-                                    Lock Screen
+                                    <span data-translate="menu_lockScreen">Lock Screen</span>
                                 </a>
                             </li>
-                            <li >
-                                <a href="extra_faq.php" id="Faq">
+                            <li>
+                                <a href="extra_faq.php" id="Faq" class="active">
                                     <i class="icon-info"></i>
-                                    FAQ
+                                    <span data-translate="menu_faq">FAQ</span>
                                 </a>
                             </li>
                             <li class="active">
                                 <a href="extra_about.php" id="AboutUs">
                                     <i class="icon-group"></i>
-                                    About Us
+                                    <span data-translate="menu_about_us">About Us</span>
                                 </a>
                             </li>
                             <li >
                                 <a href="extra_contact.php" id="ContactUs">
                                     <i class="icon-envelope-alt"></i>
-                                    Contact Us  
+                                    <span data-translate="menu_contact_us">Contact Us</span>
                                 </a>
                             </li>						
                         </ul>
@@ -367,7 +375,8 @@
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="assets/scripts/app.js" type="text/javascript"></script>
         <script src="assets/scripts/index.js" type="text/javascript"></script>
-        <script src="assets/scripts/tasks.js" type="text/javascript"></script>        
+        <script src="assets/scripts/tasks.js" type="text/javascript"></script>    
+        <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
         <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
         <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->  

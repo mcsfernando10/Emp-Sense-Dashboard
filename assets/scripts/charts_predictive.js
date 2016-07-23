@@ -773,11 +773,11 @@ var Charts = function () {
         
     }
     
-    function pieChart(data){
+    /*function pieChart(data){
         
         var labels = [];
         var count = [];
-        for(i = 0; i < 5; i++){
+        for(i = 0; i < data.length; i++){
             labels[i] = data[i].label;
             count[i] = data[i].data;    
         }
@@ -823,12 +823,12 @@ var Charts = function () {
 	var pie = new Chart(countries).Pie(pieData, pieOptions);
         document.getElementById("legendDiv").innerHTML = pie.generateLegend();
         //$('#pie_data').append(legend);
-    }
+    }*/
     
     function barHighChart(data){
         var labels = [];
         var count = [];
-        for(i = 0; i < 5; i++){
+        for(i = 0; i < data.length; i++){
             labels[i] = data[i].label;
             count[i] = parseInt(data[i].data);    
         }
@@ -917,7 +917,7 @@ var Charts = function () {
     function lineHighChart(data){
         var labels = [];
         var count = [];
-        for(i = 0; i < 5; i++){
+        for(i = 0; i < data.length; i++){
             labels[i] = data[i].label;
             count[i] = parseInt(data[i].data);    
         }

@@ -58,13 +58,20 @@
                     <li class="start">
                         <a href="index.php" id="Dashboard">
                             <i class="icon-dashboard"></i> 
-                            <span class="title">Dashboard</span>					
+                            <span class="title" data-translate="menu_dashboard">
+                                Dashboard
+                            </span>
+                            <span class="selected"></span>
                         </a>
                     </li>				
                     <li class="active">
                         <a href="#">
                             <i class="icon-bar-chart"></i>
-                            <span class="title">Visual Charts</span>
+                            <span class="title">
+                                <span class="title" data-translate="menu_visualCharts">
+                                    Visual Charts
+                                </span>                                    
+                            </span>
                             <span class="arrow open"></span>
                             <span class="selected"></span>
                         </a>
@@ -72,51 +79,63 @@
                             <li>
                                 <a href="charts_analytical.php" id="AnalyticalDesigner">
                                     <i class="icon-cogs"></i>
-                                    Analytical Designer</a>
+                                    <span data-translate="menu_analytical">
+                                        Analytical Designer
+                                    </span>
+                                </a>
                             </li>
                             <li class="active">
                                 <a href="charts_predictive.php" id="PredictiveAnalytics">
-                                <i class="icon-lightbulb"></i>
-                                Predictive Analytics</a>
+                                    <i class="icon-lightbulb"></i>
+                                    <span data-translate="menu_predictive">
+                                        Predictive Analytics
+                                    </span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li >
                         <a href="#">
                             <i class="icon-gift"></i> 
-                            <span class="title">Extra</span>
+                            <span class="title" data-translate="menu_extra">Extra</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
-                            <li >
-                                <!--a href="extra_profile.php" id="UserProfile">
+                            <!--li >
+                                <a href="extra_profile.php" id="UserProfile">
                                     <i class="icon-user"></i>
-                                    User Profile</a-->
-                            </li>
-                            <li >
+                                    User Profile</a>
+                            </li-->
+                            <li>
                                 <a href="extra_lock.php">
                                     <i class="icon-lock"></i>
-                                    Lock Screen</a>
+                                    <span data-translate="menu_lockScreen">Lock Screen</span>
+                                </a>
                             </li>
                             <li >
                                 <a href="extra_faq.php" id="Faq">
                                     <i class="icon-info"></i>
-                                    FAQ</a>
+                                    <span data-translate="menu_faq">FAQ</span>
+                                </a>
                             </li>
                             <li >
                                 <a href="extra_about.php" id="AboutUs">
                                     <i class="icon-group"></i>
-                                    About Us</a>
+                                    <span data-translate="menu_about_us">About Us</span>
+                                </a>
                             </li>
                             <li >
                                 <a href="extra_contact.php" id="ContactUs">
                                     <i class="icon-envelope-alt"></i>
-                                    Contact Us</a>
+                                    <span data-translate="menu_contact_us">Contact Us</span>
+                                </a>
                             </li>						
                         </ul>
                     </li>				
                 </ul>
                 <!-- END SIDEBAR MENU -->
+                
+                
             </div>
             <!-- END SIDEBAR -->
             <!-- BEGIN PAGE -->
@@ -390,6 +409,8 @@
     <!-- POPUPS -->
     <script src="assets/scripts/popup/ModelMessage.js" type="text/javascript"></script>
     <script src="assets/scripts/popup/bootbox.js" type="text/javascript"></script>
+    
+    <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
     <!-- POPUPS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="assets/scripts/app.js"></script>

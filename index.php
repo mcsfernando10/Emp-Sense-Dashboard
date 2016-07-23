@@ -66,27 +66,35 @@
                     <li class="start active">
                         <a href="index.php" id="Dashboard">
                             <i class="icon-dashboard"></i> 
-                            <span class="title">Dashboard</span>
+                            <span class="title" data-translate="menu_dashboard">
+                                Dashboard
+                            </span>
                             <span class="selected"></span>
                         </a>
                     </li>				
                     <li>
                         <a href="#">
                             <i class="icon-bar-chart"></i>
-                            <span class="title">Visual Charts</span>
+                            <span class="title" data-translate="menu_visualCharts">
+                                Visual Charts
+                            </span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
-                            <li >
+                            <li>
                                 <a href="charts_analytical.php" id="AnalyticalDesigner">
                                     <i class="icon-cogs"></i>
-                                    Analytical Designer
+                                    <span data-translate="menu_analytical">
+                                        Analytical Designer
+                                    </span>
                                 </a>
                             </li>
                             <li >
                                 <a href="charts_predictive.php" id="PredictiveAnalytics">
                                     <i class="icon-lightbulb"></i>
-                                    Predictive Analytics
+                                    <span data-translate="menu_predictive">
+                                        Predictive Analytics
+                                    </span>
                                 </a>
                             </li>
                         </ul>
@@ -94,7 +102,7 @@
                     <li >
                         <a href="#">
                             <i class="icon-gift"></i> 
-                            <span class="title">Extra</span>
+                            <span class="title" data-translate="menu_extra">Extra</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
@@ -103,28 +111,28 @@
                                     <i class="icon-user"></i>
                                     User Profile</a>
                             </li-->
-                            <li >
+                            <li>
                                 <a href="extra_lock.php">
                                     <i class="icon-lock"></i>
-                                    Lock Screen
+                                    <span data-translate="menu_lockScreen">Lock Screen</span>
                                 </a>
                             </li>
                             <li >
                                 <a href="extra_faq.php" id="Faq">
                                     <i class="icon-info"></i>
-                                    FAQ
+                                    <span data-translate="menu_faq">FAQ</span>
                                 </a>
                             </li>
                             <li >
                                 <a href="extra_about.php" id="AboutUs">
                                     <i class="icon-group"></i>
-                                    About Us
+                                    <span data-translate="menu_about_us">About Us</span>
                                 </a>
                             </li>
                             <li >
                                 <a href="extra_contact.php" id="ContactUs">
                                     <i class="icon-envelope-alt"></i>
-                                    Contact Us
+                                    <span data-translate="menu_contact_us">Contact Us</span>
                                 </a>
                             </li>						
                         </ul>
@@ -187,15 +195,28 @@
                             <!-- END BEGIN STYLE CUSTOMIZER -->    
                             <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                             <h3 class="page-title">
-                                    Dashboard <small>statistics and more</small>
+                                <span data-translate="menu_dashboard">
+                                    Dashboard
+                                </span> 
+                                <small>
+                                    <span data-translate="semiHead">
+                                        statistics and more
+                                    </span>
+                                </small>
                             </h3>
                             <ul class="breadcrumb">
                                     <li>
                                         <i class="icon-home"></i>
-                                        <a href="index.php">Home</a> 
+                                        <a href="index.php">
+                                            <span data-translate="home">Home</span>
+                                        </a> 
                                         <i class="icon-angle-right"></i>
                                     </li>
-                                    <li><a href="#">Dashboard</a></li>
+                                    <li>
+                                        <a href="#">
+                                            <span data-translate="menu_dashboard">Dashboard</span>
+                                        </a>
+                                    </li>
                                     <li class="pull-right no-text-shadow">
                                         <div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
                                                 <i class="icon-calendar"></i>
@@ -226,7 +247,7 @@
                                         </div>
                                     </div>
                                     <a class="more" href="#" id="Emp_ViewMore">
-                                        View more 
+                                        <span data-translate="viewMore">View more</span> 
                                         <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
@@ -279,7 +300,8 @@
                                         <div class="desc">Age Range</div>
                                     </div>
                                     <a class="more" href="#" id="AgeGroup_ViewMore">
-                                        View more <i class="m-icon-swapright m-icon-white"></i>
+                                        <span data-translate="viewMore">View more</span>
+                                        <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
                             </div>
@@ -316,7 +338,8 @@
                                         <div class="desc">Department</div>
                                     </div>
                                     <a class="more" href="#" id="Dept_ViewMore">
-                                        View more <i class="m-icon-swapright m-icon-white"></i>
+                                        <span data-translate="viewMore">View more</span>
+                                        <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
                             </div>
@@ -356,7 +379,8 @@
                                         <div class="desc">Factors</div>
                                     </div>
                                     <a class="more" href="#" id="Factor_ViewMore">
-                                        View more <i class="m-icon-swapright m-icon-white"></i>
+                                        <span data-translate="viewMore">View more</span>
+                                        <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
                             </div>
@@ -640,10 +664,12 @@
                    Index.initChat();
                    //Index.initMiniCharts();
                    Index.initIntro();
-                   Tasks.initDashboardWidget();
+                   //Tasks.initDashboardWidget();
                 });
                 
         </script>
+        
+        <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
         <script type="text/javascript">
             var percent_number_step = $.animateNumber.numberStepFactories.append('%')
             <?php                                            

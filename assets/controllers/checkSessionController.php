@@ -14,8 +14,10 @@
             session_destroy();
         } else if(strcmp($_SESSION['active'],"Lock")==0){            
             echo "<script type='text/javascript'> window.parent.location='extra_lock.php';</script>";
-        } 
-        
+        }         
     }
+    /*if(!isset($_SESSION['language'])){
+        $_SESSION['language'] = "English";
+    }*/
 ?>
 
