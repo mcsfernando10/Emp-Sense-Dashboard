@@ -18,6 +18,14 @@ dictionary = {
         "home" : "Home",
         "semiHead" : "statistics and more",
         "viewMore" : "View More",
+        
+        //Analytica Designer Page
+        //Predictive Analytic Page
+        //Lock Screen Page
+        //About Us Page
+        //Contact Us Page
+        //FAQ Page
+        //Login Page
     },
     "sinhala": {
         "menu_dashboard": "උපකරණ පුවරුව",
@@ -31,9 +39,17 @@ dictionary = {
         "menu_contact_us" : "අප අමතන්න",
         
         //Index Page
-        "home" : "ගෙදර",
-        "semiHead" : "සංඛ්‍යා ලේඛන සහ තවත්" ,,
-        "viewMore" : "තවත් බලන්න",
+        "home" : "මුල් පිටුව",
+        "semiHead" : "සංඛ්‍යා ලේඛන සහ වෙනත්" ,
+        "viewMore" : "වැඩි විස්තර",
+        
+        //Analytica Designer Page
+        //Predictive Analytic Page
+        //Lock Screen Page
+        //About Us Page
+        //Contact Us Page
+        //FAQ Page
+        //Login Page
     },
     "tamil": {
         "menu_dashboard": "கட்டுப்பாட்டு அறை",
@@ -50,6 +66,14 @@ dictionary = {
         "home" : "வீட்டில்",
         "semiHead" : "புள்ளியியல் மற்றும் மேலும்",
         "viewMore" : "மேலும் பார்க்க",
+        
+        //Analytica Designer Page
+        //Predictive Analytic Page
+        //Lock Screen Page
+        //About Us Page
+        //Contact Us Page
+        //FAQ Page
+        //Login Page
     }
 };
 
