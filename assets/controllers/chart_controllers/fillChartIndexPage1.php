@@ -6,18 +6,69 @@
     
     $requestedField = $_POST['field'];
     
-    $sqlToGetDeptWithPredict = "SELECT ".$requestedField.",avg(probability) as 'avgProb' "
-            . "FROM `employeesit_predict` "
-            . "group by ".$requestedField." "
-            . "ORDER BY avg(probability) DESC"; 
-    $predictData = mysqli_query($con,$sqlToGetDeptWithPredict);
+    if($requestedField == 'Age'){
+        $sqlToGetDeptWithPredict = "Select b.ageRange as ".$requestedField.",b.avgChurn as 'avgProb' "
+                . "From ( select concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as 'ageRange',avg(probability) as 'avgChurn' " 
+                        . "from employeesit_predict "
+                        . "group by 1 "
+                        . "order by age ) b"; 
+        $predictData = mysqli_query($con,$sqlToGetDeptWithPredict);
+    }
+    else if($requestedField == 'Salary'){
+        $sqlToGetDeptWithPredict = "Select b.salRange as ".$requestedField.",b.avgChurn as 'avgProb'
+                    From ( select concat(10000 * round(salary / 10000), '-', 10000 * round(salary / 10000) + 9000) as 'salRange', avg(probability) as 'avgChurn'
+                            from employeesit_predict
+                            group by 1 
+                            order by salary) b";
+        $predictData = mysqli_query($con,$sqlToGetDeptWithPredict);
+    }
+    else if($requestedField == 'Tenure'){
+        $sqlToGetDeptWithPredict = "Select b.tenRange as ".$requestedField.",b.avgChurn as 'avgProb'
+                    From ( select concat(5 * round(Tenure / 5), '-', 5 * round(Tenure / 5) + 4) as 'tenRange', avg(probability) as 'avgChurn'
+                            from employeesit_predict
+                            group by 1 
+                            order by Tenure) b";
+        $predictData = mysqli_query($con,$sqlToGetDeptWithPredict);
+    }
+    else{
+        $sqlToGetDeptWithPredict = "SELECT ".$requestedField.",avg(probability) as 'avgProb' "
+                . "FROM `employeesit_predict` "
+                . "group by ".$requestedField." "
+                . "ORDER BY avg(probability) DESC"; 
+        $predictData = mysqli_query($con,$sqlToGetDeptWithPredict);
+    }
     
-    $sqlToGetDeptWithTrain = "SELECT ".$requestedField.",avg(probability) as 'avgProb' "
+    if($requestedField == 'Age'){
+        $sqlToGetDeptWithTrain = "Select b.ageRange as ".$requestedField.",b.avgChurn as 'avgProb' "
+                . "From ( select concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as 'ageRange',avg(probability) as 'avgChurn' " 
+                        . "from employeesit_train "
+                        . "group by 1 "
+                        . "order by age ) b"; 
+        $trainData = mysqli_query($con,$sqlToGetDeptWithTrain);
+    }
+    else if($requestedField == 'Salary'){
+        $sqlToGetDeptWithTrain = "Select b.salRange as ".$requestedField.",b.avgChurn as 'avgProb'
+                    From ( select concat(10000 * round(salary / 10000), '-', 10000 * round(salary / 10000) + 9000) as 'salRange', avg(probability) as 'avgChurn'
+                            from employeesit_train
+                            group by 1 
+                            order by salary) b";
+        $trainData = mysqli_query($con,$sqlToGetDeptWithTrain);
+    }
+    else if($requestedField == 'Tenure'){
+        $sqlToGetDeptWithTrain = "Select b.tenRange as ".$requestedField.",b.avgChurn as 'avgProb'
+                    From ( select concat(5 * round(Tenure / 5), '-', 5 * round(Tenure / 5) + 4) as 'tenRange', avg(probability) as 'avgChurn'
+                            from employeesit_train
+                            group by 1 
+                            order by Tenure) b";
+        $trainData = mysqli_query($con,$sqlToGetDeptWithTrain);
+    }
+    else {
+        $sqlToGetDeptWithTrain = "SELECT ".$requestedField.",avg(probability) as 'avgProb' "
             . "FROM `employeesit_train` "
             . "group by ".$requestedField." "
             . "ORDER BY avg(probability) DESC"; 
-    $trainData = mysqli_query($con,$sqlToGetDeptWithTrain);
-
+        $trainData = mysqli_query($con,$sqlToGetDeptWithTrain);
+   }
     $predict_arr = array(); 
     $train_arr = array(); 
 

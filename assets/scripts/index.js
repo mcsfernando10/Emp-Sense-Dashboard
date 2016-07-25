@@ -241,30 +241,47 @@ var Index = function () {
                 //first index fill with empty values
                 futureTurnOver.push([0,0]);
                 xaxisLables.push([0,'']);
-                pastTurnOver.push([0,'']);
+                pastTurnOver.push([0,0]);
                 for (var i = 0; i < predictData.length; i++) {                    
                     var predProb = predictData[i]['prob'] * 100;
-                    futureTurnOver.push([j,predProb]);
-                    xaxisLables.push([j++,predictData[i]['dept']+" Department"]);
+                    parseInt(futureTurnOver.push([j,predProb]));
+                    xaxisLables.push([j++,predictData[i]['dept']]);
+                }
+                var future = [];
+                for(i = 0; i < futureTurnOver.length; i++){
+                    future[i] = parseFloat(futureTurnOver[i][1]);    
                 }
                 
                 j=1;
                 for (var i = 0; i < trainData.length; i++) {
                     var trainProb = trainData[i]['prob'] * 100;
-                    pastTurnOver.push([j++,trainProb]);
+                    parseInt(pastTurnOver.push([j++,trainProb]));
                 }   
-                
+                var past = [];
+                for(i = 0; i < pastTurnOver.length; i++){
+                    past[i] = parseFloat(pastTurnOver[i][1]);    
+                }
+                var xaxis = [];
+                for(i = 0; i < xaxisLables.length; i++){
+                    xaxis[i] = xaxisLables[i][1];    
+                }
                 //last index fill with empty values
-                futureTurnOver.push([j,0]);
-                xaxisLables.push([j,'']);
-                pastTurnOver.push([j,'']);
-                displayChart(futureTurnOver,pastTurnOver,xaxisLables);
+                future.push([0]);
+                xaxis.push(['']);
+                past.push([0]);
+                displayChart(future,past,xaxis);
             }
             //First Dropdown handler
             $("#churnComparisonField").change(function () {
                 var field = this.value;
                 if(field === 'Job Role')
                     field = 'job_role';
+                else if(field === 'Age')
+                    field = 'Age';
+                else if(field === 'Salary')
+                    field = 'Salary';
+                else if(field === 'Tenure')
+                    field = 'Tenure';
                 
                 $.ajax({
                     type:     "POST",
@@ -282,11 +299,12 @@ var Index = function () {
                 url:      "assets/controllers/chart_controllers/fillChartIndexPage2.php",
                 data:     ({field:'department'}),
                 dataType: "json"
-            }).done(function(response) { 
-                loadComparisonGraph(response);
+            }).done(function(response) {
+                var field = 'Department';
+                loadComparisonGraph(response, field);
             }); 
             
-            function loadComparisonGraph(response) {
+            function loadComparisonGraph(response,field) {
                 var maleData = response['maleDeptData'];
                 var femaleData = response['femaleDeptData'];
 
@@ -299,33 +317,55 @@ var Index = function () {
                 //first index fill with empty values
                 for (var i = 0; i < maleData.length; i++) {                    
                     var predProb = maleData[i]['probMale'];
-                    maleTurnOver.push([j,predProb]);
-                    xaxisLables.push([j++,maleData[i]['dept']+" Department"]);
+                    parseInt(maleTurnOver.push([j,predProb]));
+                    xaxisLables.push([j++,maleData[i]['dept']]);
                 }
-
+                var male = [];
+                for(i = 0; i < maleTurnOver.length; i++){
+                    male[i] = parseFloat(maleTurnOver[i][1]);    
+                }
+                
                 j=1;
                 for (var i = 0; i < femaleData.length; i++) {
                     var trainProb = femaleData[i]['probFemale'];
-                    femaleTurnOver.push([j++,trainProb]);
+                    parseInt(femaleTurnOver.push([j++,trainProb]));
                 }   
-
+                
+                var female = [];
+                for(i = 0; i < femaleTurnOver.length; i++){
+                    female[i] = parseFloat(femaleTurnOver[i][1]);    
+                }
+                var xaxis = [];
+                for(i = 0; i < xaxisLables.length; i++){
+                    xaxis[i] = xaxisLables[i][1];    
+                }
+                
                 //last index fill with empty values
 
-                xaxisLables.push([j,'']);
-                displayComparisonChart(maleTurnOver,femaleTurnOver,xaxisLables);
+                xaxis.push(['']);
+                displayComparisonChart(male,female,xaxis, field);
             }
             //Second Dropdown handler
             $("#comparisonField").change(function () {
                 var field = this.value;
                 if(field === 'Job Role')
                     field = 'job_role';
+                else if(field === 'Age')
+                    field = 'Age';
+                else if(field === 'Salary')
+                    field = 'Salary';
+                else if(field === 'Reason')
+                    field = 'Reason_To_Leave';
+                else if(field === 'Tenure')
+                    field = 'Tenure';
+                
                 $.ajax({
                     type:     "POST",
                     url:      "assets/controllers/chart_controllers/fillChartIndexPage2.php",
                     data:     ({field:field}),
                     dataType: "json"
                 }).done(function(response) { 
-                    loadComparisonGraph(response);
+                    loadComparisonGraph(response, field);
                 });
             });
             
@@ -912,8 +952,47 @@ function displayChart(futureTurnOver,pastTurnOver, xaxisLables){
 
         $('#site_statistics_loading').hide();
         $('#site_statistics_content').show();
+        $('#site_statistics').highcharts({
+            title: {
+                text: 'Churn Comparison with Past and Future', //Dynamic
+                x: -20 //center
+            },
+            xAxis: {
+                categories:xaxisLables
+            },
+            yAxis: {
+                title: {
+                    text: 'Average Churn Rate'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            credits: {
+                 text: 'Emp-Sense'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Future Turn Over',
+                data: futureTurnOver,
+                color: '#d12610'
+            },{
+                name: 'Past Turn Over',
+                data: pastTurnOver
+            }]
+        });
 
-        var plot_statistics = $.plot($("#site_statistics"), [{
+        /*var plot_statistics = $.plot($("#site_statistics"), [{
                 data: futureTurnOver,
                 label: "Future Turnover"
             }, {
@@ -975,7 +1054,7 @@ function displayChart(futureTurnOver,pastTurnOver, xaxisLables){
                 $("#tooltip").remove();
                 previousPoint = null;
             }
-        });
+        });*/
     }
 }
 
@@ -1110,8 +1189,53 @@ function displayFactorPopup(){
     });
 }
 
-function displayComparisonChart(maleTurnOver,femaleTurnOver,xaxisLables) {
-    var stack = 0,
+function displayComparisonChart(maleTurnOver,femaleTurnOver,xaxisLables, field) {
+    
+    $('#chart_5').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Probability vs ' + field
+            },
+            credits: {
+                 text: 'Emp-Sense',
+            },
+            xAxis: {
+                categories: xaxisLables,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Average Probability'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Male Turn Over',
+                data: maleTurnOver,
+                color: '#50D050'
+            },{
+                name: 'Female Turn Over',
+                data: femaleTurnOver
+            }]
+        });
+    
+    /*var stack = 0,
         bars = true,
         lines = false,
         steps = false;
@@ -1158,5 +1282,5 @@ function displayComparisonChart(maleTurnOver,femaleTurnOver,xaxisLables) {
         plotWithOptions();
     });
 
-    plotWithOptions();
+    plotWithOptions();*/
 }

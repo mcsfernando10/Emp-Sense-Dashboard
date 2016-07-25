@@ -43,7 +43,7 @@
 
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
-            <!-- BEGIN SIDEBAR -->
+             <!-- BEGIN SIDEBAR -->
             <div class="page-sidebar nav-collapse collapse">
                 <!-- BEGIN SIDEBAR MENU -->        
                 <ul class="page-sidebar-menu">
@@ -194,7 +194,7 @@
                             </div>
                             <!-- END BEGIN STYLE CUSTOMIZER -->    
                             <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                            <h3 class="page-title">
+                            <h4 class="page-title">
                                 <span data-translate="menu_dashboard">
                                     Dashboard
                                 </span> 
@@ -203,8 +203,8 @@
                                         statistics and more
                                     </span>
                                 </small>
-                            </h3>
-                            <ul class="breadcrumb">
+                            </h4>
+                            <ul class="breadcrumb" style="margin-bottom: 7px">
                                     <li>
                                         <i class="icon-home"></i>
                                         <a href="index.php">
@@ -241,13 +241,13 @@
                                         <div class="number" id="empCount">   
                                             
                                         </div>
-                                        <div class="desc">Present</div>
-                                        <div class="desc">                           
+                                        <div class="desc" style="font-size: 15px">Present Employees</div>
+                                        <!--<div class="desc">                           
                                             Employees
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <a class="more" href="#" id="Emp_ViewMore">
-                                        <span data-translate="viewMore">View more</span> 
+                                        <span data-translate="viewMore">View more</span>  
                                         <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
@@ -296,12 +296,12 @@
                                                 mysqli_close($con);
                                             ?>
                                         </div>
-                                        <div class="desc"><?php echo $GLOBALS['ageRange']?></div>
-                                        <div class="desc">Age Range</div>
+                                        <div class="desc" style="font-size: 15px"><?php echo $GLOBALS['ageRange']?></div>
+                                        <!--<div class="desc">Age Range</div>-->
                                     </div>
                                     <a class="more" href="#" id="AgeGroup_ViewMore">
-                                        <span data-translate="viewMore">View more</span>
-                                        <i class="m-icon-swapright m-icon-white"></i>
+                                         <span data-translate="viewMoreAgeRange">View more | Age Range</span> 
+                                         <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
                             </div>
@@ -334,12 +334,12 @@
                                                 mysqli_close($con);
                                             ?>
                                         </div>
-                                        <div class="desc"><?php echo $GLOBALS['department']; ?></div>
-                                        <div class="desc">Department</div>
+                                        <div class="desc" style="font-size: 15px"><?php echo $GLOBALS['department']; ?></div>
+                                        <!--<div class="desc">Department</div>-->
                                     </div>
                                     <a class="more" href="#" id="Dept_ViewMore">
-                                        <span data-translate="viewMore">View more</span>
-                                        <i class="m-icon-swapright m-icon-white"></i>
+                                         <span data-translate="viewMoreDept">View More | Department</span> 
+                                         <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
                             </div>
@@ -375,12 +375,12 @@
                                                 mysqli_close($con);
                                             ?>
                                         </div>
-                                        <div class="desc"><?php echo $GLOBALS['maxReason']; ?></div>
-                                        <div class="desc">Factors</div>
+                                        <div class="desc" style="font-size: 15px"><?php echo $GLOBALS['maxReason']; ?></div>
+                                        <!--<div class="desc">Factors</div>-->
                                     </div>
                                     <a class="more" href="#" id="Factor_ViewMore">
-                                        <span data-translate="viewMore">View more</span>
-                                        <i class="m-icon-swapright m-icon-white"></i>
+                                         <span data-translate="viewMoreFactors">View more | Factors</span> 
+                                         <i class="m-icon-swapright m-icon-white"></i>
                                     </a>                 
                                 </div>
                             </div>
@@ -388,28 +388,34 @@
                         <!-- END DASHBOARD STATS -->
                         <div class="clearfix"></div>
                         <div class="row-fluid">
-                            <div class="span12">
+                            <div class="span7">
                                 <!-- BEGIN PORTLET -->
-                                <div class="portlet solid bordered light-grey">
+                                <div class="portlet" style="padding-top: 0px; padding-bottom: 0px">
                                     <div class="portlet-title">
-                                        <div class="caption"><i class="icon-bar-chart"></i>Churn Comparison with Past and Future</div>
+                                        <div class="caption">
+                                            <select id="churnComparisonField" class="form-control" style="margin-left: 5px; margin-top: 5px">
+                                                <option>Department</option>
+                                                <option>Job Role</option>
+                                                <option>Age</option>
+                                                <option>Salary</option>
+                                                <option>Tenure</option>
+                                            </select>
+                                        </div>
                                         <div class="tools">
+                                            <a href="javascript:;" class="collapse"></a>
+                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                            <a href="javascript:;" class="reload"></a>
+                                            <a href="javascript:;" class="remove"></a>
+                                        </div>
+                                        <!--<div class="tools">
                                             <div class="btn-group pull-right" data-toggle="buttons-radio">
                                                 <a href="" class="btn mini">Past Churn Rate</a>
                                                 <a href="" class="btn mini active">Future Churn Rage</a>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
-                                    <div class="portlet-body">
-                                        <form class="form-inline">
-                                            <div class="form-group">
-                                                <!--<label>Select a Field for Compare :</label>-->
-                                                <select id="churnComparisonField" class="form-control">
-                                                    <option>Department</option>
-                                                    <option>Job Role</option>
-                                                </select>
-                                            </div>
-                                        </form>
+                                    <div class="portlet-body" style="padding-top: 0px">
+                                        
                                         <div id="site_statistics_loading">
                                             <img src="assets/img/loading.gif" alt="loading" />
                                         </div>
@@ -420,180 +426,52 @@
                                 </div>
                                 <!-- END PORTLET -->
                             </div>
-                            <!--div class="span6">
-                                <!-- BEGIN PORTLET -->
-                                <!--div class="portlet solid light-grey bordered">
-                                    <div class="portlet-title">
-                                        <div class="caption"><i class="icon-bullhorn"></i>Activities</div>
-                                        <div class="tools">
-                                            <div class="btn-group pull-right" data-toggle="buttons-radio">
-                                                <a href="#" id="test" class="btn blue mini active">Users</a>
-                                                <a href="" class="btn blue mini">Orders</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div id="site_activities_loading">
-                                            <img src="assets/img/loading.gif" alt="loading" />
-                                        </div>
-                                        <div id="site_activities_content" class="hide">
-                                            <div id="site_activities" style="height:100px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END PORTLET-->
-                                <!-- BEGIN PORTLET-->
-                                <!--div class="portlet solid bordered light-grey">
-                                    <div class="portlet-title">
-                                        <div class="caption"><i class="icon-signal"></i>Server Load</div>
-                                        <div class="tools">
-                                            <div class="btn-group pull-right" data-toggle="buttons-radio">
-                                                <a href="" class="btn red mini active">
-                                                <span class="hidden-phone">Database</span>
-                                                <span class="visible-phone">DB</span></a>
-                                                <a href="" class="btn red mini">Web</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div id="load_statistics_loading">
-                                            <img src="assets/img/loading.gif" alt="loading" />
-                                        </div>
-                                        <div id="load_statistics_content" class="hide">
-                                            <div id="load_statistics" style="height:108px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END PORTLET-->
-                            <!--/div-->
-                        </div>
-                        
-                        <div class="row-fluid">
+                            
+                            <div class="span5">
                             <!-- BEGIN STACK CHART CONTROLS PORTLET-->
-                            <div class="portlet box yellow">
-                                <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>
-                                        Churn Comparison for Gender
-                                    </div>
-                                    <div class="tools">
-                                        <a href="javascript:;" class="collapse"></a>
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                        <a href="javascript:;" class="remove"></a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <form class="form-inline">
-                                        <div class="form-group">
-                                            <!--<label for="exampleInputName2">Select a Field for Compare :</label>-->
-                                            <select id="comparisonField" class="form-control">
+                                <div class="portlet" style="padding-top: 0px; padding-bottom: 5px;">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <select id="comparisonField" class="form-control" style="margin-left: 5px; margin-top: 5px">
                                                 <option>Department</option>
                                                 <option>Job Role</option>
+                                                <option>Age</option>
+                                                <option>Salary</option>
+                                                <option>Reason</option>
+                                                <option>Tenure</option>
                                             </select>
                                         </div>
-                                    </form>
-                                    <div class="form-group">
-                                         
-                                    
-                                    <div id="chart_5" style="height:350px;"></div>
-                                    <div class="btn-toolbar">
-                                        <!--<div class="btn-group stackControls">
-                                            <input type="button" class="btn blue" value="With stacking" />
-                                            <input type="button" class="btn red" value="Without stacking" />
-                                        </div>-->
-                                        <div class="space5"></div>
-                                        <div class="btn-group graphControls">
-                                            <input type="button" class="btn blue" value="Bars" />
-                                            <input type="button" class="btn red" value="Lines" />
-                                            <input type="button" class="btn green" value="Lines with steps" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END STACK CHART CONTROLS PORTLET-->
-                        </div>
-
-                        <!--div class="clearfix"></div>
-                        <!--div class="row-fluid">
-                            <div class="span6">
-                                <div class="portlet box purple">
-                                    <div class="portlet-title">
-                                        <div class="caption"><i class="icon-calendar"></i>General Stats</div>
-                                        <div class="actions">
-                                            <a href="javascript:;" class="btn yellow easy-pie-chart-reload"><i class="icon-repeat"></i> Reload</a>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div class="row-fluid">
-                                            <div class="span4">
-                                                <div class="easy-pie-chart">
-                                                    <div class="number transactions"  data-percent="55"><span>+55</span>%</div>
-                                                    <a class="title" href="#">Transactions <i class="m-icon-swapright"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="margin-bottom-10 visible-phone"></div>
-                                            <div class="span4">
-                                                <div class="easy-pie-chart">
-                                                    <div class="number visits"  data-percent="85"><span>+85</span>%</div>
-                                                    <a class="title" href="#">New Visits <i class="m-icon-swapright"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="margin-bottom-10 visible-phone"></div>
-                                            <div class="span4">
-                                                <div class="easy-pie-chart">
-                                                    <div class="number bounce"  data-percent="46"><span>-46</span>%</div>
-                                                    <a class="title" href="#">Bounce <i class="m-icon-swapright"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="span6">
-                                <div class="portlet box blue">
-                                    <div class="portlet-title">
-                                        <div class="caption"><i class="icon-calendar"></i>Server Stats</div>
                                         <div class="tools">
-                                            <a href="" class="collapse"></a>
+                                            <a href="javascript:;" class="collapse"></a>
                                             <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                            <a href="" class="reload"></a>
-                                            <a href="" class="remove"></a>
+                                            <a href="javascript:;" class="reload"></a>
+                                            <a href="javascript:;" class="remove"></a>
                                         </div>
                                     </div>
-                                    <div class="portlet-body">
-                                        <div class="row-fluid">
-                                            <div class="span4">
-                                                <div class="sparkline-chart">
-                                                    <div class="number" id="sparkline_bar"></div>
-                                                    <a class="title" href="#">Network <i class="m-icon-swapright"></i></a>
-                                                </div>
+                                    <div class="portlet-body" style="padding-top: 0px">
+                                        <!--<form class="form-inline">
+                                             <div class="form-group">
+                                               <label for="exampleInputName2">Select a Field for Compare :</label>-- >
+                                                <!--<select id="comparisonField" class="form-control">
+                                                    <option>Department</option>
+                                                    <option>Job Role</option>
+                                                </select>
                                             </div>
-                                            <div class="margin-bottom-10 visible-phone"></div>
-                                            <div class="span4">
-                                                <div class="sparkline-chart">
-                                                    <div class="number" id="sparkline_bar2"></div>
-                                                    <a class="title" href="#">CPU Load <i class="m-icon-swapright"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="margin-bottom-10 visible-phone"></div>
-                                            <div class="span4">
-                                                <div class="sparkline-chart">
-                                                    <div class="number" id="sparkline_line"></div>
-                                                    <a class="title" href="#">Load Rate <i class="m-icon-swapright"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </form>-->
+
+
+                                        <div id="chart_5" class="chart"></div>
                                     </div>
                                 </div>
+                            <!-- END STACK CHART CONTROLS PORTLET-->
                             </div>
+                        <!-- END PAGE CONTAINER--> 
                         </div>
-                    </div>
-                </div>
-                <!-- END PAGE CONTAINER--> 
-            </div>
         <!-- END PAGE -->
         </div>
+                </div>
         <!-- END CONTAINER -->
+        </div>
         <!-- BEGIN FOOTER -->
         <div class="footer">
             <div class="footer-inner">                
@@ -643,6 +521,8 @@
         <!--script src="assets/plugins/jquery.sparkline.min.js" type="text/javascript"></script-->  
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
+        
         <script src="assets/scripts/app.js" type="text/javascript"></script>
         <script src="assets/scripts/index.js" type="text/javascript"></script>
         <!-- POPUPS -->
@@ -653,6 +533,9 @@
         <!--script src="assets/scripts/tasks.js" type="text/javascript"></script>        
         <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
         <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
+        <!-- CHARTS -->
+        <script src="assets/scripts/highcharts.js"></script>
+        <script src="assets/scripts/exporting.js"></script>
         <!-- END PAGE LEVEL SCRIPTS -->  
         <script>
                 jQuery(document).ready(function() {    
@@ -664,12 +547,10 @@
                    Index.initChat();
                    //Index.initMiniCharts();
                    Index.initIntro();
-                   //Tasks.initDashboardWidget();
+                   Tasks.initDashboardWidget();
                 });
                 
         </script>
-        
-        <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
         <script type="text/javascript">
             var percent_number_step = $.animateNumber.numberStepFactories.append('%')
             <?php                                            

@@ -18,6 +18,9 @@ dictionary = {
         "home" : "Home",
         "semiHead" : "statistics and more",
         "viewMore" : "View More",
+        "viewMoreDept" : "View More | Department",
+        "viewMoreAgeRange" : "View More | Age Range",
+        "viewMoreFactors" : "View More | Factors",
         
         //Analytica Designer Page
         //Predictive Analytic Page
@@ -42,6 +45,9 @@ dictionary = {
         "home" : "මුල් පිටුව",
         "semiHead" : "සංඛ්‍යා ලේඛන සහ වෙනත්" ,
         "viewMore" : "වැඩි විස්තර",
+        "viewMoreDept" : "තවත් බලන්න | දෙපාර්තුමේන්තු",
+        "viewMoreAgeRange" : "තවත් බලන්න | වයස් සීමාවන්",
+        "viewMoreFactors" : "තවත් බලන්න | සාධක",
         
         //Analytica Designer Page
         //Predictive Analytic Page
@@ -66,7 +72,9 @@ dictionary = {
         "home" : "வீட்டில்",
         "semiHead" : "புள்ளியியல் மற்றும் மேலும்",
         "viewMore" : "மேலும் பார்க்க",
-        
+        "viewMoreDept" : "மேலும் பார்க்க | துறை",
+        "viewMoreAgeRange" : "மேலும் பார்க்க | வயது வரம்பு",
+        "viewMoreFactors" : "மேலும் பார்க்க | காரணிகள்",
         //Analytica Designer Page
         //Predictive Analytic Page
         //Lock Screen Page
