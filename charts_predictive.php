@@ -202,10 +202,10 @@
                             </div>
                             <!-- END BEGIN STYLE CUSTOMIZER -->          
                             <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                            <h3 class="page-title">
+                            <h3 class="page-title" style="margin-top: 7px; margin-bottom: 5px">
                                 Visual Charts <small>visual charts & graphs</small>
                             </h3>
-                            <ul class="breadcrumb">
+                            <ul class="breadcrumb" style="margin-bottom: 13px">
                                 <li>
                                     <i class="icon-home"></i>
                                     <a href="index.php">Home</a> 
@@ -221,8 +221,49 @@
                         </div>
                     </div>
                     <!-- END PAGE HEADER-->
-                    <div id ="chartOrTableCon" align="center" style="margin-bottom: 10px;  padding-left: 10px; color: #1E90FF">
-                        <table>
+                    <div id ="chartOrTableCon" align="center" style="margin-bottom: 0px;  padding-left: 10px; color: #1E90FF">
+                        <div class="row-fluid">
+                            <div class="span5" align="right">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="probability" style="padding-right: 15px">Probability:</label>
+                                        <select id="probabilityField" class="form-control" name="probabField">
+                                            <option value="0.9">90%</option>
+                                            <option value="0.8">80%</option>
+                                            <option value="0.7">70%</option>
+                                            <option value="0.6">60%</option>
+                                            <option value="0.5">50%</option>
+                                            <option value="0.4">40%</option>
+                                            <option value="0.3">30%</option>
+                                            <option value="0.2">20%</option>
+                                            <option value="0.1">10%</option>
+                                        </select>
+                                    </div>
+                                </form>    
+                            </div>
+                            <div class="span5">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="group_results" style="padding-right: 15px">Group Results:</label>
+                                        <select id="groupField" class="form-control">
+                                            <option>Department</option>
+                                            <option>Age</option>
+                                            <option>Gender</option>
+                                            <option>Factors</option>
+                                            <option>Salary</option>
+                                            <option>Tenure</option>
+                                            <option>Job Role</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="span1">
+                                <button id="tableBtn" class="btn" style="background-color: white; padding-left: 15px; padding-top: 5px">
+                                    <img src="assets/img/pages/table.png"/>
+                                </button>
+                            </div>
+                        </div>
+                        <!--<table>
                             <tr>
                                 <td style="padding-left: 10px;">
                                     Graph Type:
@@ -279,7 +320,7 @@
                                     </form>
                                 </td>
                             </tr>
-                        </table>
+                        </table>-->
                     </div>
                     <!-- BEGIN PIE CHART PORTLET-->
                     <div class="row-fluid">

@@ -5,11 +5,13 @@
     mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
     
     $requestedField = 'department';
+    $requestedField_prob = $_POST['prob'];
+    $requestedField_group = $_POST['group'];
     
-    $sqlToGetFieldWithPredict = "select ".$requestedField.", avg(probability) as 'prob', count(employee_id) as 'empCount'
+    $sqlToGetFieldWithPredict = "select ".$requestedField_group.", avg(probability) as 'prob', count(employee_id) as 'empCount'
         from employeesit_predict
-        where probability > 0.9
-        group by ".$requestedField; 
+        where probability > ".$requestedField_prob."
+        group by ".$requestedField_group; 
     $predictData = mysqli_query($con,$sqlToGetFieldWithPredict);
     
     $maxCountField = "select f.Department as 'department'
@@ -29,7 +31,7 @@
     $maxDept = "";
 
     while ($row = mysqli_fetch_assoc($predictData)) {
-        $row_array['dept'] = $row[$requestedField];
+        $row_array['dept'] = $row[$requestedField_group];
         $row_array['prob'] = $row['prob'];
         $row_array['count'] = $row['empCount'];
         array_push($predict_arr,$row_array);
@@ -41,6 +43,7 @@
     
     $predictedData = array('predict' => $predict_arr);
     $predictedData['maxDept'] = $maxDept;
+    $predictedData['p'] = $requestedField_prob;
     echo json_encode($predictedData);
     
     mysqli_close($con); 

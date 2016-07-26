@@ -9,17 +9,7 @@ var Charts = function () {
                  Charts.initPieCharts(); 
             });
             
-            //First Dropdown handler
-            $("#probabilityField").change(function () {
-                var prob = this.value;
-                var group = $("#groupField").val();
-                alert(group);
-            });
             
-            $("#groupField").change(function () {
-                var field = this.value;
-                alert(field);
-            });
             
             $("#tableBtn").click(function(){
                 displayTablePopup();
@@ -32,7 +22,7 @@ var Charts = function () {
             if (!jQuery.plot) {
                 return;
             }
-
+            
             var data = [];
             var totalPoints = 250;
 
@@ -455,104 +445,273 @@ var Charts = function () {
         
 
         initPieCharts: function () {
-            var dept = displayCharts();
-            $("#highestFieldBar").val(dept);
-            $("#highestFieldPie").val(dept);
-
-            // DEFAULT
-            /*$.plot($("#pie_chart"), data, {
-                    series: {
-                        pie: {
-                            show: true
-                        }
-                    }
-                });
-*/
-            // GRAPH 1
-            /*$.plot($("#pie_chart_1"), data, {
-                    series: {
-                        pie: {
-                            show: true
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-*/
-            // GRAPH 2
-            /*$.plot($("#pie_chart_2"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 1,
-                                formatter: function (label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.8
-                                }
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-*/
             
+            displayCharts();
+            //$("#highestFieldBar").val(dept);
+            //$("#highestFieldPie").val(dept);
+            $("#groupField").change(function () {
+                var group = this.value;
+                var prob = $("#probabilityField").val();
+                
+                if(group === 'Department')
+                    group = 'department';
+                else if(group === 'Gender')
+                    group = 'Gender';
+                else if(group === 'Job Role')
+                    group = 'Job_Role';
+                
+                var data = [];
+                var barData = [];
+                
+                $.ajax({
+                    type:     "POST",
+                    url:      "assets/controllers/chart_controllers/Chart_Predictive.php",
+                    data:     ({
+                        prob: prob,
+                        group: group
+                    }),
+                    dataType: "json"
+                }).done(function(response) { 
+                    var pieChartData = response['predict'];
+                    var barChartData = response['predict'];
 
-            // GRAPH 4
-           /* $.plot($("#pie_chart_4"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 3 / 4,
-                                formatter: function (label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.5,
-                                    color: '#000'
-                                }
-                            }
+                    for (var i = 0; i < pieChartData.length; i++) {
+                        data[i] = {
+                            label: pieChartData[i]['dept'],
+                            data: pieChartData[i]['count']
+                        }
+                    }
+                    
+                    for (var i = 0; i < barChartData.length; i++) {
+                        barData[i] = [i+1,barChartData[i]['count']];
+                    }
+                    
+                    barHighChart(data,group,prob);
+                    pieHighChart(data,group,prob);
+                    lineHighChart(data,group,prob);
+                });
+                //alert(field);
+            });
+            
+            //First Dropdown handler
+            $("#probabilityField").change(function () {
+                var prob = this.value;
+                var group = $("#groupField").val();
+                
+                if(group === 'Department')
+                    group = 'department';
+                else if(group === 'Gender')
+                    group = 'Gender';
+                else if(group === 'Job Role')
+                    group = 'Job_Role';
+                
+                var data = [];
+                var barData = [];
+                
+                $.ajax({
+                    type:     "POST",
+                    url:      "assets/controllers/chart_controllers/Chart_Predictive.php",
+                    data:     ({
+                        prob: prob,
+                        group: group
+                    }),
+                    dataType: "json"
+                }).done(function(response) { 
+                    var pieChartData = response['predict'];
+                    var barChartData = response['predict'];
+
+                    for (var i = 0; i < pieChartData.length; i++) {
+                        data[i] = {
+                            label: pieChartData[i]['dept'],
+                            data: pieChartData[i]['count']
+                        }
+                    }
+                    
+                    for (var i = 0; i < barChartData.length; i++) {
+                        barData[i] = [i+1,barChartData[i]['count']];
+                    }
+                    
+                    barHighChart(data, group, prob);
+                    pieHighChart(data, group, prob);
+                    lineHighChart(data, group, prob);
+                });
+            });
+            
+            function displayCharts(){
+                var data = [];
+                var barData = [];
+                
+                var prob = 0.9;
+                var group = 'department';
+                var field = group;
+
+                $.ajax({
+                    type:     "POST",
+                    url:      "assets/controllers/chart_controllers/Chart_Predictive.php",
+                    data:     ({
+                        prob: prob,
+                        group: group
+                    }),
+                    dataType: "json"
+                }).done(function(response) {
+                    var pieChartData = response['predict'];
+                    var barChartData = response['predict'];
+
+                    for (var i = 0; i < pieChartData.length; i++) {
+                        data[i] = {
+                            label: pieChartData[i]['dept'],
+                            data: pieChartData[i]['count']
+                        }
+                    }
+
+                    for (var i = 0; i < barChartData.length; i++) {
+                        barData[i] = [i+1,barChartData[i]['count']];
+                    }
+                    //displayPieChart(data);  
+                    //displayBarChart(barData);
+                    //barChart(data);
+                    //pieChart(data);
+                    barHighChart(data,field,prob);
+                    pieHighChart(data,field,prob);
+                    lineHighChart(data,field,prob);
+                    return response['maxDept'];
+                });        
+            }
+
+            function barHighChart(data,field,prob){
+                var labels = [];
+                var count = [];
+                for(i = 0; i < data.length; i++){
+                    labels[i] = data[i].label;
+                    count[i] = parseInt(data[i].data);    
+                }
+
+                $('#bar_data').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: prob + ' vs ' + field //Dynamic
+                    },
+                    credits: {
+                         text: 'Emp-Sense',
+                    },
+                    xAxis: {
+                        categories: labels,
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Employee Count'
                         }
                     },
-                    legend: {
-                        show: false
-                    }
-                });
-*/
-            // GRAPH 5
-           /* $.plot($("#pie_chart_5"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 3 / 4,
-                            label: {
-                                show: true,
-                                radius: 3 / 4,
-                                formatter: function (label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.5,
-                                    color: '#000'
-                                }
-                            }
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
                         }
                     },
-                    legend: {
-                        show: false
-                    }
+                    series: [{
+                        name: 'Department',
+                        data: count
+                    }]
                 });
-*/
+            }
+
+            function pieHighChart(data,field,prob){
+                var dataSeries = [];
+                for(i = 0; i < data.length; i++){
+                    dataSeries.push({name : data[i].label, y : parseInt(data[i].data)});
+                }
+                // Build the chart
+                $('#pie_data').highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: prob + ' vs ' + field //Dynamic
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.y}</b>'
+                    },
+                    credits: {
+                         text: 'Emp-Sense'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    series: [{
+                        name: 'Employee Count',
+                        colorByPoint: true,
+                        data: dataSeries
+                    }]
+                });
+            }
+
+            function lineHighChart(data,field,prob){
+                var labels = [];
+                var count = [];
+                for(i = 0; i < data.length; i++){
+                    labels[i] = data[i].label;
+                    count[i] = parseInt(data[i].data);    
+                }
+
+                $('#line_data').highcharts({
+                    title: {
+                        text: prob + ' vs ' + field, //Dynamic
+                        x: -20 //center
+                    },
+                    xAxis: {
+                        categories:labels
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Employee  Count'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: ''
+                    },
+                    credits: {
+                         text: 'Emp-Sense'
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: 'Employee Count',
+                        data: count
+                    }]
+                });
+            }
+
             // GRAPH 6
             $.plot($("#pie_chart_6"), data, {
                     series: {
@@ -711,253 +870,6 @@ var Charts = function () {
             }  
         } 
     };
-    
-    function displayCharts(){
-        var data = [];
-        var barData = [];
-
-        $.ajax({
-            type:     "POST",
-            url:      "assets/controllers/chart_controllers/Chart_Predictive.php",
-            data:     data,
-            dataType: "json"
-        }).done(function(response) {
-            var pieChartData = response['predict'];
-            var barChartData = response['predict'];
-            
-            for (var i = 0; i < pieChartData.length; i++) {
-                data[i] = {
-                    label: pieChartData[i]['dept'],
-                    data: pieChartData[i]['count']
-                }
-            }
-            
-            for (var i = 0; i < barChartData.length; i++) {
-                barData[i] = [i+1,barChartData[i]['count']];
-            }
-            //displayPieChart(data);  
-            displayBarChart(barData);
-            //barChart(data);
-            //pieChart(data);
-            barHighChart(data);
-            pieHighChart(data);
-            lineHighChart(data);
-            return response['maxDept'];
-        });        
-    }
-    
-    function barChart(data){
-        
-        var labels = [];
-        var count = [];
-        for(i = 0; i < 5; i++){
-            labels[i] = data[i].label;
-            count[i] = data[i].data;    
-        }
-        // line chart data
-        var buyerData = {
-            labels : labels,
-            datasets : [
-                    {
-                            fillColor : "rgba(65,105,225,0.5)",
-                            strokeColor : "rgba(65,105,225,0.5)",
-                            data : count
-                    }
-            ]
-        }
-        // get line chart canvas
-        var buyers = document.getElementById('buyers').getContext('2d');
-
-        // draw line chart
-        new Chart(buyers).Bar(buyerData);
-        
-    }
-    
-    /*function pieChart(data){
-        
-        var labels = [];
-        var count = [];
-        for(i = 0; i < data.length; i++){
-            labels[i] = data[i].label;
-            count[i] = data[i].data;    
-        }
-       // pie chart data
-	var pieData = [
-		{
-			value: count[0],
-			color:"#878BB6",
-                        label:labels[0]
-		},
-		{
-			value : count[1],
-			color : "#4ACAB4",
-                        label:labels[1]
-		},
-		{
-			value : count[2],
-			color : "#FF8153",
-                        label:labels[2]
-		},
-		{
-			value : count[3],
-			color : "#FFEA88",
-                        label:labels[3]
-		},
-                {
-			value : count[4],
-			color : "#FFEC22",
-                        label:labels[4]
-		}
-	];
-        // pie chart options
-	var pieOptions = {
-		segmentShowStroke : false,
-		animateScale : true,
-                animateRotate : true
-	}
-	
-	// get pie chart canvas
-	var countries= document.getElementById('pie_data').getContext("2d");
-	
-	// draw pie chart
-	var pie = new Chart(countries).Pie(pieData, pieOptions);
-        document.getElementById("legendDiv").innerHTML = pie.generateLegend();
-        //$('#pie_data').append(legend);
-    }*/
-    
-    function barHighChart(data){
-        var labels = [];
-        var count = [];
-        for(i = 0; i < data.length; i++){
-            labels[i] = data[i].label;
-            count[i] = parseInt(data[i].data);    
-        }
-        
-        $('#bar_data').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: '0.9 vs Department' //Dynamic
-            },
-            credits: {
-                 text: 'Emp-Sense',
-            },
-            xAxis: {
-                categories: labels,
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Employee Count'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Department',
-                data: count
-            }]
-        });
-    }
-    
-    function pieHighChart(data){
-        var dataSeries = [];
-        for(i = 0; i < data.length; i++){
-            dataSeries.push({name : data[i].label, y : parseInt(data[i].data)});
-        }
-        // Build the chart
-        $('#pie_data').highcharts({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-            },
-            title: {
-                text: '0.9 vs Department' //Dynamic
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.y}</b>'
-            },
-            credits: {
-                 text: 'Emp-Sense'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
-                }
-            },
-            series: [{
-                name: 'Employee Count',
-                colorByPoint: true,
-                data: dataSeries
-            }]
-        });
-    }
-    
-    function lineHighChart(data){
-        var labels = [];
-        var count = [];
-        for(i = 0; i < data.length; i++){
-            labels[i] = data[i].label;
-            count[i] = parseInt(data[i].data);    
-        }
-        
-        $('#line_data').highcharts({
-            title: {
-                text: '0.9 vs Department', //Dynamic
-                x: -20 //center
-            },
-            xAxis: {
-                categories:labels
-            },
-            yAxis: {
-                title: {
-                    text: 'Employee  Count'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                valueSuffix: ''
-            },
-            credits: {
-                 text: 'Emp-Sense'
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                borderWidth: 0
-            },
-            series: [{
-                name: 'Employee Count',
-                data: count
-            }]
-        });
-    }
     
     function displayPieChart(data){
          // GRAPH 3
