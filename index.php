@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!--> 
-<html lang="en" class="no-js"> <!--<![endif]-->
+<html lang="en" class="no-js">
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
@@ -11,9 +8,6 @@
         <meta content="" name="description" />
         <meta content="" name="author" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/datatables.min.css"/>
- 
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/datatables.min.js"></script>
         <link href="assets/plugins/bootstrap/css/bootstrap.custom.css" rel="stylesheet" type="text/css"/>        
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
@@ -24,23 +18,18 @@
         <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
         <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
         <!-- END GLOBAL MANDATORY STYLES -->
-        <!-- BEGIN PAGE LEVEL PLUGIN STYLES --> 
-        <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
-        <link href="assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
-        <!--link href="assets/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/-->
-        <link href="assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+        <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->          
         <link href="assets/css/index.css" rel="stylesheet" type="text/css"/>
-        <!-- END PAGE LEVEL PLUGIN STYLES -->
-        <!-- BEGIN PAGE LEVEL STYLES --> 
-        <link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css" media="screen"/>
-        <!-- END PAGE LEVEL STYLES -->
-        <link rel="shortcut icon" href="assets/img/favicon.ico" />
         
         <!-- Datatables -->
         <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css" rel="stylesheet">
-        <!-- Datatables -->
+        <!-- Datatables -->        
+        <!-- END PAGE LEVEL PLUGIN STYLES -->
+        
+        <link rel="shortcut icon" href="assets/img/favicon.ico" />
+        
+        
         
     </head>
     <!-- END HEAD -->
@@ -271,7 +260,7 @@
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
                                                 //get distinct Doctor Details
-                                                $sqlToGetMaxDept = "Select b.ageRange as 'ageRange',b.avgChurn as 'maxProb'
+                                                $sqlToGetMaxAvgRange = "Select b.ageRange as 'ageRange',b.avgChurn as 'maxProb'
                                                     From ( select concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`, count(*) as `employeeCount`,avg(probability) as `avgChurn` 
                                                           from employeesit_predict 
                                                           group by 1 
@@ -281,7 +270,7 @@
                                                                               from employeesit_predict 
                                                                               group by 1 
                                                                               order by age) d)"; 
-                                                $result = mysqli_query($con,$sqlToGetMaxDept);
+                                                $result = mysqli_query($con,$sqlToGetMaxAvgRange);
 
 
                                                 if ($row = mysqli_fetch_assoc($result)) {
@@ -502,8 +491,16 @@
                             <table id="content" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Employee Name</th>
-                                        <th>Churn Probability(%)</th>
+                                        <th>
+                                            <span data-translate="employeeNameCol">
+                                                Employee Name
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span data-translate="churnProbCol">
+                                                Churn Probability(%)
+                                            </span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -518,13 +515,13 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span12 popupBottom">
-                        <p>                            
+                        <p>   
+                            <span data-translate="empCount"> 
+                                Employee Count : 
+                            </span>
                             <b>
-                                <span data-translate="empCount"> 
-                                    Employee Count : 
-                                </span>
+                                <span id="employeeCount"></span> 
                             </b>
-                            <span id="empCount"></span>
                         </p>
                     </div>
                 </div>    
@@ -537,11 +534,11 @@
                 <div class="row-fluid">
                     <div class="span12 popupHead">
                         <p>
-                            <i class="icon-male"></i>
+                            <i class="icon-group"></i>
                             &nbsp;&nbsp;
                             <b>
-                                <span data-translate="viewMoreEmployeeHead"> 
-                                    More about present working Employees
+                                <span data-translate="viewMoreAgeRangeHead"> 
+                                    Churn Probability with Age Ranges
                                 </span>                                
                             </b>
                         </p>
@@ -553,8 +550,16 @@
                             <table id="content1" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Age Range</th>
-                                        <th>Churn Probability(%)</th>
+                                        <th>
+                                            <span data-translate="ageRangeCol">
+                                                Age Range
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span data-translate="churnProbCol">
+                                                Churn Probability(%)
+                                            </span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -570,12 +575,13 @@
                 <div class="row-fluid">
                     <div class="span12 popupBottom">
                         <p>                            
+                            <span data-translate="churningAgeRange"> 
+                                Highest Churning Age Range : 
+
+                            </span> 
                             <b>
-                                <span data-translate="empCount"> 
-                                    Employee Count : 
-                                </span>
+                                <?php echo $GLOBALS['ageRange'] ?> Age Range 
                             </b>
-                            <span id="highestAgeRange"></span>
                         </p>
                     </div>
                 </div>    
@@ -588,11 +594,11 @@
                 <div class="row-fluid">
                     <div class="span12 popupHead">
                         <p>
-                            <i class="icon-male"></i>
+                            <i class="icon-building"></i>
                             &nbsp;&nbsp;
                             <b>
-                                <span data-translate="viewMoreEmployeeHead"> 
-                                    More about present working Employees
+                                <span data-translate="viewMoreDepartmentHead"> 
+                                    Churn Probability with Departments
                                 </span>                                
                             </b>
                         </p>
@@ -604,8 +610,16 @@
                             <table id="content2" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Department</th>
-                                        <th>Churn Probability(%)</th>
+                                        <th>
+                                            <span data-translate="departmentCol">
+                                                Department
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span data-translate="churnProbCol">
+                                                Churn Probability(%)
+                                            </span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -621,28 +635,28 @@
                 <div class="row-fluid">
                     <div class="span12 popupBottom">
                         <p>                            
+                            <span data-translate="churningDept"> 
+                                Highest Churning Department : 
+                            </span> 
                             <b>
-                                <span data-translate="empCount"> 
-                                    Employee Count : 
-                                </span>
+                                <?php echo $GLOBALS['department'] ?> Department
                             </b>
-                            <span id="highestDept"></span>
                         </p>
                     </div>
                 </div>    
             </div>
         </div>
-        <!-- Employee Age Range PopUp -->
+        <!-- Employee Churn Factor PopUp -->
         <div id="moreFactorPopUp">
             <img src="assets/img/popup/closeicon.png" class="b-close"/>
             <div>
                 <div class="row-fluid">
                     <div class="span12 popupHead">
                         <p>
-                            <i class="icon-male"></i>
+                            <i class="icon-info-sign"></i>
                             &nbsp;&nbsp;
                             <b>
-                                <span data-translate="viewMoreEmployeeHead"> 
+                                <span data-translate="viewMoreReasonHead"> 
                                     Employee Churn with Reasons 
                                 </span>                                
                             </b>
@@ -655,8 +669,16 @@
                             <table id="content3" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Department</th>
-                                        <th>Churn Probability(%)</th>
+                                        <th>
+                                            <span data-translate="churnFactCol">
+                                                Churn Factor
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span data-translate="churnProbCol">
+                                                Churn Probability(%)
+                                            </span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -671,59 +693,34 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span12 popupBottom">
-                        <p>                            
+                        <p>
+                            <span data-translate="churningFactor"> 
+                                Highest Churning Factor :
+                            </span> 
                             <b>
-                                <span data-translate="empCount"> 
-                                    Employee Count : 
-                                </span>
+                                <?php echo $GLOBALS['maxReason'] ?> Department
                             </b>
-                            <span id="highestFact"></span>
                         </p>
                     </div>
                 </div>    
             </div>
         </div>
-        <!-- Popups -->
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->   
         <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
         <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
         <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
         <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
-        <!--[if lt IE 9]>
-        <script src="assets/plugins/excanvas.min.js"></script>
-        <script src="assets/plugins/respond.min.js"></script>  
-        <![endif]-->   
+         
         <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
-        <script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
         <!-- END CORE PLUGINS -->
-        <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <!--script src="assets/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>   
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script-->  
         
-        <script src="assets/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap-daterangepicker/date.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>     
-        <script src="assets/plugins/gritter/js/jquery.gritter.js" type="text/javascript"></script>
-        <script src="assets/plugins/fullcalendar/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+        <!-- BEGIN PAGE LEVEL PLUGINS -->         
         <script src="assets/plugins/flot/jquery.flot.js" type="text/javascript"></script>
-        <script src="assets/plugins/flot/jquery.flot.resize.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js" type="text/javascript"></script>
-        <!--script src="assets/plugins/jquery.sparkline.min.js" type="text/javascript"></script-->  
         <!-- END PAGE LEVEL PLUGINS -->
-        <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
         
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->       
         <script src="assets/scripts/app.js" type="text/javascript"></script>
         <script src="assets/scripts/index.js" type="text/javascript"></script>
         <!-- POPUPS -->
@@ -731,17 +728,22 @@
         <script src="assets/scripts/popup/bootbox.js" type="text/javascript"></script>
         <script src="assets/scripts/popup/jquery.bpopup.min.js" type="text/javascript"></script>
         <!-- POPUPS -->
+        
+        <!-- NUMBER ANIMATE -->
         <script src="assets/scripts/jquery.animateNumber.min.js" type="text/javascript"></script>
+        <!-- NUMBER ANIMATE -->
         
         <!-- Include jQuery Popup Overlay -->
-        <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
-        <!--script src="assets/scripts/tasks.js" type="text/javascript"></script>        
-        <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
-        <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
+        <!--script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script-->
+        
+        <!-- LANGUAGE -->
+        <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
+        <!-- LANGUAGE -->
+        
         <!-- CHARTS -->
         <script src="assets/scripts/highcharts.js"></script>
         <script src="assets/scripts/exporting.js"></script>
-        <!-- END PAGE LEVEL SCRIPTS -->  
+        <!-- CHARTS -->
         
         <!-- DataTables -->
         <script src="assets/scripts/dataTables/jquery.dataTables.min.js"></script>
@@ -753,21 +755,22 @@
 	<script src="assets/scripts/dataTables/buttons.html5.min.js"></script>
 	<script src="assets/scripts/dataTables/buttons.print.min.js"></script>
         <!-- DataTables -->
-        <script>
-                jQuery(document).ready(function() {    
-                   App.init(); // initlayout and core plugins
-                   Index.init();
-                   //Index.initJQVMAP(); // init index page's custom scripts
-                   //Index.initCalendar(); // init index page's custom scripts
-                   Index.initCharts(); // init index page's custom scripts
-                   Index.initChat();
-                   //Index.initMiniCharts();
-                   Index.initIntro();
-                   Tasks.initDashboardWidget();
-                });
-                
-        </script>
+        
+        <!-- END PAGE LEVEL SCRIPTS -->         
+        
         <script type="text/javascript">
+            jQuery(document).ready(function() {    
+               App.init(); // initlayout and core plugins
+               Index.init();
+               //Index.initJQVMAP(); // init index page's custom scripts
+               //Index.initCalendar(); // init index page's custom scripts
+               Index.initCharts(); // init index page's custom scripts
+               //Index.initChat();
+               //Index.initMiniCharts();
+               //Index.initIntro();
+               //Tasks.initDashboardWidget();
+            });
+                
             var percent_number_step = $.animateNumber.numberStepFactories.append('%')
             <?php                                            
                 $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
@@ -790,19 +793,7 @@
                     2000
             );
     
-            <?php                                            
-                /*$con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
-                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
-
-                //get distinct Doctor Details
-                $sqlToGetChurnRate = "SELECT avg(probability) as 'averageChurn' FROM `employeesit_predict`"; 
-                $result = mysqli_query($con,$sqlToGetChurnRate);
-
-                if ($row = mysqli_fetch_assoc($result)) {
-                    echo $row['averageChurn']."%";
-                } 
-
-                mysqli_close($con);*/
+            <?php       
                 $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
@@ -828,11 +819,11 @@
             ?>
             var age = '<?php echo $age; ?>';
             $('#ageRange').animateNumber(
-                    { 
-                        number: age,
-                        numberStep: percent_number_step
-                    },
-                    2000
+                { 
+                    number: age,
+                    numberStep: percent_number_step
+                },
+                2000
             );
                
             <?php                                            
@@ -858,11 +849,11 @@
             ?>
             var dept = '<?php echo $dept; ?>';
             $('#deptPercent').animateNumber(
-                    { 
-                        number: dept,
-                        numberStep: percent_number_step
-                    },
-                    2000
+                { 
+                    number: dept,
+                    numberStep: percent_number_step
+                },
+                2000
             );
     
             <?php                                            
@@ -891,46 +882,12 @@
             ?>
             var reason = '<?php echo $reason; ?>';
             $('#reasonPercent').animateNumber(
-                    { 
-                        number: reason,
-                        numberStep: percent_number_step
-                    },
-                    2000
+                { 
+                    number: reason,
+                    numberStep: percent_number_step
+                },
+                2000
             );
-            /*$(document).ready(function(){
-                                 $("#Rightcontent").load("dashboard.html");
-                                 $('.page-sidebar-menu').on('click', 'li', function() {
-                                        $('.page-sidebar-menu li.active').removeClass('active');
-                                        $(this).addClass('active');
-                                 });
-                 $("#Dashboard").click(function(){
-                     $("#Rightcontent").load("dashboard.html");
-                     $('.page-sidebar-menu li.active').removeClass('active');
-                     $(this).addClass('active');
-                     $(this).add('span').class('selected');
-                 });
-
-                 $("#AnalyticalDesigner").click(function(){
-                     $("#Rightcontent").load("charts.html");
-                     $(this).add('span').class('selected');
-                 });
-
-                 $("#PredictiveAnalytics").click(function(){
-                     $("#Rightcontent").load("charts.html");
-                 });
-                                 $("#UserProfile").click(function(){
-                     $("#Rightcontent").load("extra_profile.html");
-                 });
-                                 $("#Faq").click(function(){
-                     $("#Rightcontent").load("extra_faq.html");
-                 });
-                                 $("#AboutUs").click(function(){
-                     $("#Rightcontent").load("extra_about.html");
-                 });
-                                 $("#ContactUs").click(function(){
-                     $("#Rightcontent").load("extra_contact.html");
-                 });
-            });*/
         </script>
         <!-- END JAVASCRIPTS -->
     </body>
