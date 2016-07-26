@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!--> 
-<html lang="en" class="no-js"> <!--<![endif]-->
+<html lang="en" class="no-js">
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
@@ -11,9 +8,6 @@
         <meta content="" name="description" />
         <meta content="" name="author" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/datatables.min.css"/>
- 
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/datatables.min.js"></script>
         <link href="assets/plugins/bootstrap/css/bootstrap.custom.css" rel="stylesheet" type="text/css"/>        
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
@@ -24,23 +18,18 @@
         <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
         <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
         <!-- END GLOBAL MANDATORY STYLES -->
-        <!-- BEGIN PAGE LEVEL PLUGIN STYLES --> 
-        <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
-        <link href="assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
-        <!--link href="assets/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/-->
-        <link href="assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+        <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->          
         <link href="assets/css/index.css" rel="stylesheet" type="text/css"/>
-        <!-- END PAGE LEVEL PLUGIN STYLES -->
-        <!-- BEGIN PAGE LEVEL STYLES --> 
-        <link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css" media="screen"/>
-        <!-- END PAGE LEVEL STYLES -->
-        <link rel="shortcut icon" href="assets/img/favicon.ico" />
         
         <!-- Datatables -->
         <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css" rel="stylesheet">
-        <!-- Datatables -->
+        <!-- Datatables -->        
+        <!-- END PAGE LEVEL PLUGIN STYLES -->
+        
+        <link rel="shortcut icon" href="assets/img/favicon.ico" />
+        
+        
         
     </head>
     <!-- END HEAD -->
@@ -716,47 +705,22 @@
                 </div>    
             </div>
         </div>
-        <!-- Popups -->
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->   
         <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
         <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
         <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
         <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
-        <!--[if lt IE 9]>
-        <script src="assets/plugins/excanvas.min.js"></script>
-        <script src="assets/plugins/respond.min.js"></script>  
-        <![endif]-->   
+         
         <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
-        <script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
         <!-- END CORE PLUGINS -->
-        <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <!--script src="assets/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>   
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
-        <script src="assets/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script-->  
         
-        <script src="assets/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap-daterangepicker/date.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>     
-        <script src="assets/plugins/gritter/js/jquery.gritter.js" type="text/javascript"></script>
-        <script src="assets/plugins/fullcalendar/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+        <!-- BEGIN PAGE LEVEL PLUGINS -->         
         <script src="assets/plugins/flot/jquery.flot.js" type="text/javascript"></script>
-        <script src="assets/plugins/flot/jquery.flot.resize.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js" type="text/javascript"></script>
-        <!--script src="assets/plugins/jquery.sparkline.min.js" type="text/javascript"></script-->  
         <!-- END PAGE LEVEL PLUGINS -->
-        <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
         
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->       
         <script src="assets/scripts/app.js" type="text/javascript"></script>
         <script src="assets/scripts/index.js" type="text/javascript"></script>
         <!-- POPUPS -->
@@ -764,17 +728,22 @@
         <script src="assets/scripts/popup/bootbox.js" type="text/javascript"></script>
         <script src="assets/scripts/popup/jquery.bpopup.min.js" type="text/javascript"></script>
         <!-- POPUPS -->
+        
+        <!-- NUMBER ANIMATE -->
         <script src="assets/scripts/jquery.animateNumber.min.js" type="text/javascript"></script>
+        <!-- NUMBER ANIMATE -->
         
         <!-- Include jQuery Popup Overlay -->
-        <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
-        <!--script src="assets/scripts/tasks.js" type="text/javascript"></script>        
-        <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
-        <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
+        <!--script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script-->
+        
+        <!-- LANGUAGE -->
+        <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
+        <!-- LANGUAGE -->
+        
         <!-- CHARTS -->
         <script src="assets/scripts/highcharts.js"></script>
         <script src="assets/scripts/exporting.js"></script>
-        <!-- END PAGE LEVEL SCRIPTS -->  
+        <!-- CHARTS -->
         
         <!-- DataTables -->
         <script src="assets/scripts/dataTables/jquery.dataTables.min.js"></script>
@@ -786,21 +755,22 @@
 	<script src="assets/scripts/dataTables/buttons.html5.min.js"></script>
 	<script src="assets/scripts/dataTables/buttons.print.min.js"></script>
         <!-- DataTables -->
-        <script>
-                jQuery(document).ready(function() {    
-                   App.init(); // initlayout and core plugins
-                   Index.init();
-                   //Index.initJQVMAP(); // init index page's custom scripts
-                   //Index.initCalendar(); // init index page's custom scripts
-                   Index.initCharts(); // init index page's custom scripts
-                   //Index.initChat();
-                   //Index.initMiniCharts();
-                   //Index.initIntro();
-                   //Tasks.initDashboardWidget();
-                });
-                
-        </script>
+        
+        <!-- END PAGE LEVEL SCRIPTS -->         
+        
         <script type="text/javascript">
+            jQuery(document).ready(function() {    
+               App.init(); // initlayout and core plugins
+               Index.init();
+               //Index.initJQVMAP(); // init index page's custom scripts
+               //Index.initCalendar(); // init index page's custom scripts
+               Index.initCharts(); // init index page's custom scripts
+               //Index.initChat();
+               //Index.initMiniCharts();
+               //Index.initIntro();
+               //Tasks.initDashboardWidget();
+            });
+                
             var percent_number_step = $.animateNumber.numberStepFactories.append('%')
             <?php                                            
                 $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
