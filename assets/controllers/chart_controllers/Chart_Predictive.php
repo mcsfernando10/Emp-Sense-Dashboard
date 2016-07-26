@@ -14,17 +14,17 @@
         group by ".$requestedField_group; 
     $predictData = mysqli_query($con,$sqlToGetFieldWithPredict);
     
-    $maxCountField = "select f.Department as 'department'
-        from (select department, avg(probability) as 'prob', count(employee_id) as 'empCount'
+    $maxCountField = "select f.".$requestedField_group." as 'department'
+        from (select ".$requestedField_group.", avg(probability) as 'prob', count(employee_id) as 'empCount'
                 from employeesit_predict
-                where probability > 0.9
-                group by department) f
+                where probability > ".$requestedField_prob."
+                group by ".$requestedField_group.") f
         where f.empCount = (       
         select max(d.empCount)
         from (select count(employee_id) as 'empCount' 
         from employeesit_predict 
-        where probability > 0.9
-        group by department) d)";
+        where probability > ".$requestedField_prob."
+        group by ".$requestedField_group.") d)";
     $maxEmpCountField = mysqli_query($con,$maxCountField);   
 
     $predict_arr = array(); 

@@ -328,12 +328,14 @@
                             <!-- BEGIN PORTLET -->
                                 <div class="portlet box blue">
                                     <div class="portlet-title">
-                                        <div class="caption"><i class="icon-bar-chart"></i>Highest Rate - 
-                                            <b id="highestFieldBar">IT Department</b>
+                                        <div class="caption"><i class="icon-bar-chart"></i>Highest Count - 
+                                            <b id="highestFieldBar"></b>
                                         </div>
                                         <div class="tools">
+                                            <a href="javascript:;" class="collapse"></a>
                                             <a href="#portlet-config" data-toggle="modal" class="config"></a>
                                             <a href="javascript:;" class="reload"></a>
+                                            <a href="javascript:;" class="remove"></a>
                                         </div>
                                     </div>
                                     <div class="portlet-body">
@@ -354,12 +356,14 @@
                         <div class="span6">
                             <div class="portlet box blue">
                                 <div class="portlet-title">
-                                    <div class="caption"><i class="icon-bar-chart"></i>Highest Rate - 
-                                        <b id="highestFieldPie">IT Department</b>
+                                    <div class="caption"><i class="icon-bar-chart"></i>Highest Count - 
+                                        <b id="highestFieldPie"></b>
                                     </div>
                                     <div class="tools">
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
+                                        <a href="javascript:;" class="collapse"></a>
+                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                            <a href="javascript:;" class="reload"></a>
+                                            <a href="javascript:;" class="remove"></a>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
@@ -384,19 +388,20 @@
                             <!-- BEGIN INTERACTIVE CHART PORTLET-->
                             <div class="portlet box red">
                                 <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Highest Rate - IT Department</div>
-                                    <div class="tools">
-                                        <a href="javascript:;" class="collapse"></a>
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                        <a href="javascript:;" class="remove"></a>
+                                    <div class="caption"><i class="icon-reorder"></i>Highest Count - 
+                                        <b id="highestFieldLine"></b>
+                                        <div class="tools">
+                                            <a href="javascript:;" class="collapse"></a>
+                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                            <a href="javascript:;" class="reload"></a>
+                                            <a href="javascript:;" class="remove"></a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
                                     <!--<div id="chart_2" class="chart"></div>-->
                                     <div id="line_data"></div>
                                 </div>
-                            </div>
                             <!-- END INTERACTIVE CHART PORTLET-->                 
                         </div>
                     </div>

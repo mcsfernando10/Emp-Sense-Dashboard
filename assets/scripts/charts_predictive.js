@@ -447,6 +447,7 @@ var Charts = function () {
         initPieCharts: function () {
             
             displayCharts();
+            //alert(v);
             //$("#highestFieldBar").val(dept);
             //$("#highestFieldPie").val(dept);
             $("#groupField").change(function () {
@@ -462,6 +463,7 @@ var Charts = function () {
                 
                 var data = [];
                 var barData = [];
+                var heighest;
                 
                 $.ajax({
                     type:     "POST",
@@ -489,6 +491,8 @@ var Charts = function () {
                     barHighChart(data,group,prob);
                     pieHighChart(data,group,prob);
                     lineHighChart(data,group,prob);
+                    heighest = response['maxDept'];
+                    getHeighest(heighest);
                 });
                 //alert(field);
             });
@@ -507,6 +511,7 @@ var Charts = function () {
                 
                 var data = [];
                 var barData = [];
+                var heighest;
                 
                 $.ajax({
                     type:     "POST",
@@ -534,6 +539,8 @@ var Charts = function () {
                     barHighChart(data, group, prob);
                     pieHighChart(data, group, prob);
                     lineHighChart(data, group, prob);
+                    heighest = response['maxDept'];
+                    getHeighest(heighest);
                 });
             });
             
@@ -544,6 +551,7 @@ var Charts = function () {
                 var prob = 0.9;
                 var group = 'department';
                 var field = group;
+                var heighest;
 
                 $.ajax({
                     type:     "POST",
@@ -574,8 +582,15 @@ var Charts = function () {
                     barHighChart(data,field,prob);
                     pieHighChart(data,field,prob);
                     lineHighChart(data,field,prob);
-                    return response['maxDept'];
-                });        
+                    heighest = response['maxDept'];
+                    getHeighest(heighest);
+                });  
+            }
+            
+            function getHeighest(heighest){
+                document.getElementById("highestFieldBar").innerHTML=heighest;
+                document.getElementById("highestFieldPie").innerHTML=heighest;
+                document.getElementById("highestFieldLine").innerHTML=heighest;
             }
 
             function barHighChart(data,field,prob){
@@ -621,7 +636,7 @@ var Charts = function () {
                         }
                     },
                     series: [{
-                        name: 'Department',
+                        name: 'Employee Count',
                         data: count
                     }]
                 });
