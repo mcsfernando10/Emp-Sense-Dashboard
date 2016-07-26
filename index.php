@@ -30,11 +30,18 @@
         <link href="assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
         <!--link href="assets/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/-->
         <link href="assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+        <link href="assets/css/index.css" rel="stylesheet" type="text/css"/>
         <!-- END PAGE LEVEL PLUGIN STYLES -->
         <!-- BEGIN PAGE LEVEL STYLES --> 
         <link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css" media="screen"/>
         <!-- END PAGE LEVEL STYLES -->
         <link rel="shortcut icon" href="assets/img/favicon.ico" />
+        
+        <!-- Datatables -->
+        <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css" rel="stylesheet">
+        <!-- Datatables -->
+        
     </head>
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
@@ -259,19 +266,7 @@
                                     </div>
                                     <div class="details">
                                         <div class="number" id="ageRange">
-                                            <?php                                            
-                                                /*$con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
-                                                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
-
-                                                //get distinct Doctor Details
-                                                $sqlToGetChurnRate = "SELECT avg(probability) as 'averageChurn' FROM `employeesit_predict`"; 
-                                                $result = mysqli_query($con,$sqlToGetChurnRate);
-
-                                                if ($row = mysqli_fetch_assoc($result)) {
-                                                    echo $row['averageChurn']."%";
-                                                } 
-
-                                                mysqli_close($con);*/
+                                            <?php 
                                                 $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
@@ -429,40 +424,40 @@
                             
                             <div class="span5">
                             <!-- BEGIN STACK CHART CONTROLS PORTLET-->
-                                <div class="portlet" style="padding-top: 0px; padding-bottom: 5px;">
-                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <select id="comparisonField" class="form-control" style="margin-left: 5px; margin-top: 5px">
-                                                <option>Department</option>
-                                                <option>Job Role</option>
-                                                <option>Age</option>
-                                                <option>Salary</option>
-                                                <option>Reason</option>
-                                                <option>Tenure</option>
-                                            </select>
-                                        </div>
-                                        <div class="tools">
-                                            <a href="javascript:;" class="collapse"></a>
-                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                            <a href="javascript:;" class="reload"></a>
-                                            <a href="javascript:;" class="remove"></a>
-                                        </div>
+                            <div class="portlet" style="padding-top: 0px; padding-bottom: 5px;">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <select id="comparisonField" class="form-control" style="margin-left: 5px; margin-top: 5px">
+                                            <option>Department</option>
+                                            <option>Job Role</option>
+                                            <option>Age</option>
+                                            <option>Salary</option>
+                                            <option>Reason</option>
+                                            <option>Tenure</option>
+                                        </select>
                                     </div>
-                                    <div class="portlet-body" style="padding-top: 0px">
-                                        <!--<form class="form-inline">
-                                             <div class="form-group">
-                                               <label for="exampleInputName2">Select a Field for Compare :</label>-- >
-                                                <!--<select id="comparisonField" class="form-control">
-                                                    <option>Department</option>
-                                                    <option>Job Role</option>
-                                                </select>
-                                            </div>
-                                        </form>-->
-
-
-                                        <div id="chart_5" class="chart"></div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse"></a>
+                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                        <a href="javascript:;" class="reload"></a>
+                                        <a href="javascript:;" class="remove"></a>
                                     </div>
                                 </div>
+                                <div class="portlet-body" style="padding-top: 0px">
+                                    <!--<form class="form-inline">
+                                         <div class="form-group">
+                                           <label for="exampleInputName2">Select a Field for Compare :</label>-- >
+                                            <!--<select id="comparisonField" class="form-control">
+                                                <option>Department</option>
+                                                <option>Job Role</option>
+                                            </select>
+                                        </div>
+                                    </form>-->
+
+
+                                    <div id="chart_5" class="chart"></div>
+                                </div>
+                            </div>
                             <!-- END STACK CHART CONTROLS PORTLET-->
                             </div>
                         <!-- END PAGE CONTAINER--> 
@@ -483,6 +478,212 @@
                 </span>
             </div>
         </div>
+        <!-- Popups -->
+        <!-- Employee Churn PopUp -->
+        <div id="moreEmployeePopUp">
+            <img src="assets/img/popup/closeicon.png" class="b-close"/>
+            <div>
+                <div class="row-fluid">
+                    <div class="span12 popupHead">
+                        <p>
+                            <i class="icon-male"></i>
+                            &nbsp;&nbsp;
+                            <b>
+                                <span data-translate="viewMoreEmployeeHead"> 
+                                    More about present working Employees
+                                </span>                                
+                            </b>
+                        </p>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 popupContent">
+                        <div style="padding:10px;">
+                            <table id="content" class="display nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <th>Churn Probability(%)</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+
+                                </tfoot>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 popupBottom">
+                        <p>                            
+                            <b>
+                                <span data-translate="empCount"> 
+                                    Employee Count : 
+                                </span>
+                            </b>
+                            <span id="empCount"></span>
+                        </p>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <!-- Employee Age Range PopUp -->
+        <div id="moreAgeRangePopUp">
+            <img src="assets/img/popup/closeicon.png" class="b-close"/>
+            <div>
+                <div class="row-fluid">
+                    <div class="span12 popupHead">
+                        <p>
+                            <i class="icon-male"></i>
+                            &nbsp;&nbsp;
+                            <b>
+                                <span data-translate="viewMoreEmployeeHead"> 
+                                    More about present working Employees
+                                </span>                                
+                            </b>
+                        </p>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 popupContent">
+                        <div style="padding:10px;">
+                            <table id="content1" class="display nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Age Range</th>
+                                        <th>Churn Probability(%)</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+
+                                </tfoot>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 popupBottom">
+                        <p>                            
+                            <b>
+                                <span data-translate="empCount"> 
+                                    Employee Count : 
+                                </span>
+                            </b>
+                            <span id="highestAgeRange"></span>
+                        </p>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <!-- Employee Department PopUp -->
+        <div id="moreADeptPopUp">
+            <img src="assets/img/popup/closeicon.png" class="b-close"/>
+            <div>
+                <div class="row-fluid">
+                    <div class="span12 popupHead">
+                        <p>
+                            <i class="icon-male"></i>
+                            &nbsp;&nbsp;
+                            <b>
+                                <span data-translate="viewMoreEmployeeHead"> 
+                                    More about present working Employees
+                                </span>                                
+                            </b>
+                        </p>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 popupContent">
+                        <div style="padding:10px;">
+                            <table id="content2" class="display nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Department</th>
+                                        <th>Churn Probability(%)</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+
+                                </tfoot>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 popupBottom">
+                        <p>                            
+                            <b>
+                                <span data-translate="empCount"> 
+                                    Employee Count : 
+                                </span>
+                            </b>
+                            <span id="highestDept"></span>
+                        </p>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <!-- Employee Age Range PopUp -->
+        <div id="moreFactorPopUp">
+            <img src="assets/img/popup/closeicon.png" class="b-close"/>
+            <div>
+                <div class="row-fluid">
+                    <div class="span12 popupHead">
+                        <p>
+                            <i class="icon-male"></i>
+                            &nbsp;&nbsp;
+                            <b>
+                                <span data-translate="viewMoreEmployeeHead"> 
+                                    Employee Churn with Reasons 
+                                </span>                                
+                            </b>
+                        </p>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 popupContent">
+                        <div style="padding:10px;">
+                            <table id="content3" class="display nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Department</th>
+                                        <th>Churn Probability(%)</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+
+                                </tfoot>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 popupBottom">
+                        <p>                            
+                            <b>
+                                <span data-translate="empCount"> 
+                                    Employee Count : 
+                                </span>
+                            </b>
+                            <span id="highestFact"></span>
+                        </p>
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <!-- Popups -->
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->   
@@ -528,8 +729,12 @@
         <!-- POPUPS -->
         <script src="assets/scripts/popup/ModelMessage.js" type="text/javascript"></script>
         <script src="assets/scripts/popup/bootbox.js" type="text/javascript"></script>
+        <script src="assets/scripts/popup/jquery.bpopup.min.js" type="text/javascript"></script>
         <!-- POPUPS -->
         <script src="assets/scripts/jquery.animateNumber.min.js" type="text/javascript"></script>
+        
+        <!-- Include jQuery Popup Overlay -->
+        <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
         <!--script src="assets/scripts/tasks.js" type="text/javascript"></script>        
         <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
         <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
@@ -537,6 +742,17 @@
         <script src="assets/scripts/highcharts.js"></script>
         <script src="assets/scripts/exporting.js"></script>
         <!-- END PAGE LEVEL SCRIPTS -->  
+        
+        <!-- DataTables -->
+        <script src="assets/scripts/dataTables/jquery.dataTables.min.js"></script>
+	<script src="assets/scripts/dataTables/dataTables.buttons.min.js"></script>
+	<script src="assets/scripts/dataTables/buttons.flash.min.js"></script>
+	<script src="assets/scripts/dataTables/jszip.min.js"></script>
+	<script src="assets/scripts/dataTables/pdfmake.min.js"></script>
+	<script src="assets/scripts/dataTables/vfs_fonts.js"></script>
+	<script src="assets/scripts/dataTables/buttons.html5.min.js"></script>
+	<script src="assets/scripts/dataTables/buttons.print.min.js"></script>
+        <!-- DataTables -->
         <script>
                 jQuery(document).ready(function() {    
                    App.init(); // initlayout and core plugins

@@ -10,17 +10,41 @@ var Index = function () {
                 });
             });
             
-            $("#Emp_ViewMore").click(function () {
-                displayEmployeePopup();
+            displayEmployeePopup();
+            displayAgeGroupPopup();
+            displayDeptChurnPopup();
+            displayFactorPopup();
+            $("#Emp_ViewMore").click(function () {                
+                $('#moreEmployeePopUp').bPopup({
+                    easing: 'easeOutBack', //uses jQuery easing plugin
+                    speed: 600,
+                    transition: 'slideDown',
+                    modalClose : false
+                });
             });
             $("#AgeGroup_ViewMore").click(function () {
-                displayAgeGroupPopup();
+                $('#moreAgeRangePopUp').bPopup({
+                    easing: 'easeOutBack', //uses jQuery easing plugin
+                    speed: 600,
+                    transition: 'slideDown',
+                    modalClose : false
+                });
             });
-            $("#Dept_ViewMore").click(function () {
-                displayDeptChurnPopup();
+            $("#Dept_ViewMore").click(function () {                
+                $('#moreADeptPopUp').bPopup({
+                    easing: 'easeOutBack', //uses jQuery easing plugin
+                    speed: 600,
+                    transition: 'slideDown',
+                    modalClose : false
+                });
             });
             $("#Factor_ViewMore").click(function () {
-                displayFactorPopup();
+                $('#moreFactorPopUp').bPopup({
+                    easing: 'easeOutBack', //uses jQuery easing plugin
+                    speed: 600,
+                    transition: 'slideDown',
+                    modalClose : false
+                });
             });          
         },
 
@@ -1078,42 +1102,27 @@ function displayEmployeePopup(){
         data:     $(this).serialize(),
         dataType: "json"
     }).done(function(response) {
-        var employeeChurnData = response;
-        var title = '<p  align=center style="background-color:#3BB9FF; padding: 10px; margin-right: 15px; color: white;">' +
-                '<i class="icon-male"></i>&nbsp;&nbsp;<b> More about present working Employees</b></p>';
-        var message = ""; 
-        message +='<table class="table table-hover">';
-        message +='<thead><tr><th bgcolor="#3BB9FF" style="padding-left:80px">Employee Name</th>' + 
-                '<th bgcolor="#3BB9FF">Churn Probability</th></tr></thead>'
+        var employeeChurnData = response;        
+        var data = [];
         for (var i = 0; i < employeeChurnData.length; i++) {
             var churnProb = parseFloat(employeeChurnData[i]['prob']);
             churnProb = Number((churnProb).toFixed(2));
-            if(churnProb >= 0.8){
-                var prob = churnProb * 100
-                message += '<tr class="error">';
-                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
-                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
-                message += '</tr>';
-            } else if(churnProb < 0.8 & churnProb >= 0.5){
-                var prob = churnProb * 100
-                message += '<tr class="warning">';
-                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
-                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
-                message += '</tr>';
-            } else{
-                var prob = churnProb * 100
-                message += '<tr class="info">';
-                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
-                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
-                message += '</tr>';
-            }
-        }
-        message += '<tr class="success">';
-        message += '<td style="padding-left:80px"><b> Employee Count </b></td>';
-        message += '<td style="padding-left:55px"><b>'+employeeChurnData.length+'</b></td>';
-        message += '</tr>';
-        message +='</table>'
-        showEmployeeChurn(title,message);        
+            
+            var empName = employeeChurnData[i]['empName'];
+            var prob = churnProb * 100;
+            data[i] = [empName,prob];
+        }       
+
+        $('#content').DataTable( {
+            data:data,
+            dom: 'Bfrtip',
+            "order": [[ 1, "desc" ]],
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+        
+        $("#empCount").text(employeeChurnData.length.toString());
     });
 }
 
@@ -1124,20 +1133,27 @@ function displayAgeGroupPopup(){
         data:     $(this).serialize(),
         dataType: "json"
     }).done(function(response) {
-        var employeeChurnData = response;
-        var title = '<i class="icon-building"></i> ' +
-            '<span>Churn Probability with Age range</span>';
-        var message = "";
-        message +='<table class="table table-hover">';
-        message +='<th>Age Range</th>' + '<th>Churn Probability</th>'
+        var employeeChurnData = response;  
+        var data = [];
         for (var i = 0; i < employeeChurnData.length; i++) {
-            message += '<tr>';
-            message += '<td>'+employeeChurnData[i]['ageRange']+'</td>';
-            message += '<td>'+employeeChurnData[i]['prob']+'</td>';
-            message += '</tr>';   
-        }
-        message +='</table>';
-        showEmployeeChurn(title,message);        
+            var churnProb = parseFloat(employeeChurnData[i]['prob']);
+            churnProb = Number((churnProb).toFixed(2));
+            
+            var ageRange = employeeChurnData[i]['ageRange'];
+            var prob = churnProb * 100;
+            data[i] = [ageRange,prob];
+        }       
+
+        $('#content1').DataTable( {
+            data:data,
+            dom: 'Bfrtip',
+            "order": [[ 1, "desc" ]],
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+        
+        $("#highestAgeRange").text("ABC");
     });
 }
 
@@ -1147,21 +1163,28 @@ function displayDeptChurnPopup(){
         url:      "assets/controllers/popup_controllers/employeeChurnDeptData.php",
         data:     $(this).serialize(),
         dataType: "json"
-    }).done(function(response) {
-        var employeeChurnData = response;
-        var title = '<i class="icon-male"></i> ' +
-            '<span>Churn Probability with Departments</span>';
-        var message = "";
-        message +='<table>';
-        message +='<th>Department</th>' + '<th>Churn Probability</th>'
+    }).done(function(response) {        
+        var employeeChurnData = response;  
+        var data = [];
         for (var i = 0; i < employeeChurnData.length; i++) {
-            message += '<tr>';
-            message += '<td>'+employeeChurnData[i]['dept']+'</td>';
-            message += '<td>'+employeeChurnData[i]['prob']+'</td>';
-            message += '</tr>';   
-        }
-        message +='</table>';
-        showEmployeeChurn(title,message);        
+            var churnProb = parseFloat(employeeChurnData[i]['prob']);
+            churnProb = Number((churnProb).toFixed(2));
+            
+            var empDept = employeeChurnData[i]['dept'];
+            var prob = churnProb * 100;
+            data[i] = [empDept,prob];
+        }       
+
+        $('#content2').DataTable( {
+            data:data,
+            dom: 'Bfrtip',
+            "order": [[ 1, "desc" ]],
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+        
+        $("#highestDept").text("ABC");
     });
 }
 
@@ -1171,21 +1194,28 @@ function displayFactorPopup(){
         url:      "assets/controllers/popup_controllers/employeeChurnFactorData.php",
         data:     $(this).serialize(),
         dataType: "json"
-    }).done(function(response) {
-        var employeeChurnFactorData = response;
-        var title = '<i class="icon-info-sign"></i> ' +
-            '<span>Employee Churn with Reasons </span>';
-        var message = "";
-        message +='<table>';
-        message +='<th>Reason To Leave</th>' + '<th>Churn Probability</th>'
-        for (var i = 0; i < employeeChurnFactorData.length; i++) {
-            message += '<tr>';
-            message += '<td>'+employeeChurnFactorData[i]['reason']+'</td>';
-            message += '<td>'+employeeChurnFactorData[i]['prob']+'</td>';
-            message += '</tr>'; 
-        }
-        message +='</table>'
-        showEmployeeChurn(title,message);        
+    }).done(function(response) {        
+        var employeeChurnData = response;  
+        var data = [];
+        for (var i = 0; i < employeeChurnData.length; i++) {
+            var churnProb = parseFloat(employeeChurnData[i]['prob']);
+            churnProb = Number((churnProb).toFixed(2));
+            
+            var reason = employeeChurnData[i]['reason'];
+            var prob = churnProb * 100;
+            data[i] = [reason,prob];
+        }       
+
+        $('#content3').DataTable( {
+            data:data,
+            dom: 'Bfrtip',
+            "order": [[ 1, "desc" ]],
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+        
+        $("#highestFact").text("ABC");
     });
 }
 

@@ -21,6 +21,9 @@ dictionary = {
         "viewMoreDept" : "View More | Department",
         "viewMoreAgeRange" : "View More | Age Range",
         "viewMoreFactors" : "View More | Factors",
+        "viewMoreEmployeeHead" : "More about present working Employees",
+        "empCount" : "Employee Count :",
+        
         
         //Analytica Designer Page
         //Predictive Analytic Page
@@ -48,6 +51,8 @@ dictionary = {
         "viewMoreDept" : "තවත් බලන්න | දෙපාර්තුමේන්තු",
         "viewMoreAgeRange" : "තවත් බලන්න | වයස් සීමාවන්",
         "viewMoreFactors" : "තවත් බලන්න | සාධක",
+        "viewMoreEmployeeHead" : "සේවකයන් පිලිබඳ වැඩි විස්තර",
+        "empCount" : "සේවකයන් ගණන :",
         
         //Analytica Designer Page
         //Predictive Analytic Page
@@ -75,6 +80,8 @@ dictionary = {
         "viewMoreDept" : "மேலும் பார்க்க | துறை",
         "viewMoreAgeRange" : "மேலும் பார்க்க | வயது வரம்பு",
         "viewMoreFactors" : "மேலும் பார்க்க | காரணிகள்",
+        "viewMoreEmployeeHead" : "தற்போது வேலை ஊழியர் பற்றி மேலும்",
+        "empCount" : "ஊழியர்களின் எண்ணிக்கை :",
         //Analytica Designer Page
         //Predictive Analytic Page
         //Lock Screen Page

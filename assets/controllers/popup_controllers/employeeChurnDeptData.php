@@ -7,6 +7,7 @@
     //get distinct Doctor Details
     $sqlToGetEmployeeChurn = "SELECT department,avg(probability) as 'avgProb' 
         FROM `employeesit_predict` 
+        WHERE department <> ''
         group by department 
         ORDER BY avg(probability) DESC"; 
     $result = mysqli_query($con,$sqlToGetEmployeeChurn);
