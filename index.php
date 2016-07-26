@@ -271,7 +271,7 @@
                                                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
                                                 //get distinct Doctor Details
-                                                $sqlToGetMaxDept = "Select b.ageRange as 'ageRange',b.avgChurn as 'maxProb'
+                                                $sqlToGetMaxAvgRange = "Select b.ageRange as 'ageRange',b.avgChurn as 'maxProb'
                                                     From ( select concat(5 * round(age / 5), '-', 5 * round(age / 5) + 4) as `ageRange`, count(*) as `employeeCount`,avg(probability) as `avgChurn` 
                                                           from employeesit_predict 
                                                           group by 1 
@@ -281,7 +281,7 @@
                                                                               from employeesit_predict 
                                                                               group by 1 
                                                                               order by age) d)"; 
-                                                $result = mysqli_query($con,$sqlToGetMaxDept);
+                                                $result = mysqli_query($con,$sqlToGetMaxAvgRange);
 
 
                                                 if ($row = mysqli_fetch_assoc($result)) {
@@ -502,8 +502,16 @@
                             <table id="content" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Employee Name</th>
-                                        <th>Churn Probability(%)</th>
+                                        <th>
+                                            <span data-translate="employeeNameCol">
+                                                Employee Name
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span data-translate="churnProbCol">
+                                                Churn Probability(%)
+                                            </span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -518,13 +526,13 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span12 popupBottom">
-                        <p>                            
+                        <p>   
+                            <span data-translate="empCount"> 
+                                Employee Count : 
+                            </span>
                             <b>
-                                <span data-translate="empCount"> 
-                                    Employee Count : 
-                                </span>
+                                <span id="employeeCount"></span> 
                             </b>
-                            <span id="empCount"></span>
                         </p>
                     </div>
                 </div>    
@@ -537,11 +545,11 @@
                 <div class="row-fluid">
                     <div class="span12 popupHead">
                         <p>
-                            <i class="icon-male"></i>
+                            <i class="icon-group"></i>
                             &nbsp;&nbsp;
                             <b>
-                                <span data-translate="viewMoreEmployeeHead"> 
-                                    More about present working Employees
+                                <span data-translate="viewMoreAgeRangeHead"> 
+                                    Churn Probability with Age Ranges
                                 </span>                                
                             </b>
                         </p>
@@ -553,8 +561,16 @@
                             <table id="content1" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Age Range</th>
-                                        <th>Churn Probability(%)</th>
+                                        <th>
+                                            <span data-translate="ageRangeCol">
+                                                Age Range
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span data-translate="churnProbCol">
+                                                Churn Probability(%)
+                                            </span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -570,12 +586,13 @@
                 <div class="row-fluid">
                     <div class="span12 popupBottom">
                         <p>                            
+                            <span data-translate="churningAgeRange"> 
+                                Highest Churning Age Range : 
+
+                            </span> 
                             <b>
-                                <span data-translate="empCount"> 
-                                    Employee Count : 
-                                </span>
+                                <?php echo $GLOBALS['ageRange'] ?> Age Range 
                             </b>
-                            <span id="highestAgeRange"></span>
                         </p>
                     </div>
                 </div>    
@@ -588,11 +605,11 @@
                 <div class="row-fluid">
                     <div class="span12 popupHead">
                         <p>
-                            <i class="icon-male"></i>
+                            <i class="icon-building"></i>
                             &nbsp;&nbsp;
                             <b>
-                                <span data-translate="viewMoreEmployeeHead"> 
-                                    More about present working Employees
+                                <span data-translate="viewMoreDepartmentHead"> 
+                                    Churn Probability with Departments
                                 </span>                                
                             </b>
                         </p>
@@ -604,8 +621,16 @@
                             <table id="content2" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Department</th>
-                                        <th>Churn Probability(%)</th>
+                                        <th>
+                                            <span data-translate="departmentCol">
+                                                Department
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span data-translate="churnProbCol">
+                                                Churn Probability(%)
+                                            </span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -621,28 +646,28 @@
                 <div class="row-fluid">
                     <div class="span12 popupBottom">
                         <p>                            
+                            <span data-translate="churningDept"> 
+                                Highest Churning Department : 
+                            </span> 
                             <b>
-                                <span data-translate="empCount"> 
-                                    Employee Count : 
-                                </span>
+                                <?php echo $GLOBALS['department'] ?> Department
                             </b>
-                            <span id="highestDept"></span>
                         </p>
                     </div>
                 </div>    
             </div>
         </div>
-        <!-- Employee Age Range PopUp -->
+        <!-- Employee Churn Factor PopUp -->
         <div id="moreFactorPopUp">
             <img src="assets/img/popup/closeicon.png" class="b-close"/>
             <div>
                 <div class="row-fluid">
                     <div class="span12 popupHead">
                         <p>
-                            <i class="icon-male"></i>
+                            <i class="icon-info-sign"></i>
                             &nbsp;&nbsp;
                             <b>
-                                <span data-translate="viewMoreEmployeeHead"> 
+                                <span data-translate="viewMoreReasonHead"> 
                                     Employee Churn with Reasons 
                                 </span>                                
                             </b>
@@ -655,8 +680,16 @@
                             <table id="content3" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Department</th>
-                                        <th>Churn Probability(%)</th>
+                                        <th>
+                                            <span data-translate="churnFactCol">
+                                                Churn Factor
+                                            </span>
+                                        </th>
+                                        <th>
+                                            <span data-translate="churnProbCol">
+                                                Churn Probability(%)
+                                            </span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -671,13 +704,13 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span12 popupBottom">
-                        <p>                            
+                        <p>
+                            <span data-translate="churningFactor"> 
+                                Highest Churning Factor :
+                            </span> 
                             <b>
-                                <span data-translate="empCount"> 
-                                    Employee Count : 
-                                </span>
+                                <?php echo $GLOBALS['maxReason'] ?> Department
                             </b>
-                            <span id="highestFact"></span>
                         </p>
                     </div>
                 </div>    
@@ -760,10 +793,10 @@
                    //Index.initJQVMAP(); // init index page's custom scripts
                    //Index.initCalendar(); // init index page's custom scripts
                    Index.initCharts(); // init index page's custom scripts
-                   Index.initChat();
+                   //Index.initChat();
                    //Index.initMiniCharts();
-                   Index.initIntro();
-                   Tasks.initDashboardWidget();
+                   //Index.initIntro();
+                   //Tasks.initDashboardWidget();
                 });
                 
         </script>
@@ -790,19 +823,7 @@
                     2000
             );
     
-            <?php                                            
-                /*$con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
-                mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
-
-                //get distinct Doctor Details
-                $sqlToGetChurnRate = "SELECT avg(probability) as 'averageChurn' FROM `employeesit_predict`"; 
-                $result = mysqli_query($con,$sqlToGetChurnRate);
-
-                if ($row = mysqli_fetch_assoc($result)) {
-                    echo $row['averageChurn']."%";
-                } 
-
-                mysqli_close($con);*/
+            <?php       
                 $con=mysqli_connect("$host", "$username", "$password")or die("cannot connect"); 
                 mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
@@ -828,11 +849,11 @@
             ?>
             var age = '<?php echo $age; ?>';
             $('#ageRange').animateNumber(
-                    { 
-                        number: age,
-                        numberStep: percent_number_step
-                    },
-                    2000
+                { 
+                    number: age,
+                    numberStep: percent_number_step
+                },
+                2000
             );
                
             <?php                                            
@@ -858,11 +879,11 @@
             ?>
             var dept = '<?php echo $dept; ?>';
             $('#deptPercent').animateNumber(
-                    { 
-                        number: dept,
-                        numberStep: percent_number_step
-                    },
-                    2000
+                { 
+                    number: dept,
+                    numberStep: percent_number_step
+                },
+                2000
             );
     
             <?php                                            
@@ -891,46 +912,12 @@
             ?>
             var reason = '<?php echo $reason; ?>';
             $('#reasonPercent').animateNumber(
-                    { 
-                        number: reason,
-                        numberStep: percent_number_step
-                    },
-                    2000
+                { 
+                    number: reason,
+                    numberStep: percent_number_step
+                },
+                2000
             );
-            /*$(document).ready(function(){
-                                 $("#Rightcontent").load("dashboard.html");
-                                 $('.page-sidebar-menu').on('click', 'li', function() {
-                                        $('.page-sidebar-menu li.active').removeClass('active');
-                                        $(this).addClass('active');
-                                 });
-                 $("#Dashboard").click(function(){
-                     $("#Rightcontent").load("dashboard.html");
-                     $('.page-sidebar-menu li.active').removeClass('active');
-                     $(this).addClass('active');
-                     $(this).add('span').class('selected');
-                 });
-
-                 $("#AnalyticalDesigner").click(function(){
-                     $("#Rightcontent").load("charts.html");
-                     $(this).add('span').class('selected');
-                 });
-
-                 $("#PredictiveAnalytics").click(function(){
-                     $("#Rightcontent").load("charts.html");
-                 });
-                                 $("#UserProfile").click(function(){
-                     $("#Rightcontent").load("extra_profile.html");
-                 });
-                                 $("#Faq").click(function(){
-                     $("#Rightcontent").load("extra_faq.html");
-                 });
-                                 $("#AboutUs").click(function(){
-                     $("#Rightcontent").load("extra_about.html");
-                 });
-                                 $("#ContactUs").click(function(){
-                     $("#Rightcontent").load("extra_contact.html");
-                 });
-            });*/
         </script>
         <!-- END JAVASCRIPTS -->
     </body>

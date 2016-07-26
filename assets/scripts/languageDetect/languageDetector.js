@@ -17,12 +17,28 @@ dictionary = {
         //Index Page
         "home" : "Home",
         "semiHead" : "statistics and more",
+        
         "viewMore" : "View More",
         "viewMoreDept" : "View More | Department",
         "viewMoreAgeRange" : "View More | Age Range",
         "viewMoreFactors" : "View More | Factors",
+        
         "viewMoreEmployeeHead" : "More about present working Employees",
+        "viewMoreAgeRangeHead" : "Churn Probability with Age Ranges",
+        "viewMoreDepartmentHead" : "Churn Probability with Departments",
+        "viewMoreReasonHead" : "Employee Churn with Reasons",
+        
         "empCount" : "Employee Count :",
+        "churningAgeRange" : "Highest Churning Age Range : ",
+        "churningDept" : "Highest Churning Department : ",
+        "churningFactor" : "Highest Churning Factor : ",
+        
+        
+        "employeeNameCol" : "Employee Name",
+        "churnProbCol" : "Churn Probability(%)",
+        "ageRangeCol" : "Age Range",
+        "departmentCol" : "Department",
+        "churnFactCol" : "Churn Factor",
         
         
         //Analytica Designer Page
@@ -47,12 +63,27 @@ dictionary = {
         //Index Page
         "home" : "මුල් පිටුව",
         "semiHead" : "සංඛ්‍යා ලේඛන සහ වෙනත්" ,
+        
         "viewMore" : "වැඩි විස්තර",
         "viewMoreDept" : "තවත් බලන්න | දෙපාර්තුමේන්තු",
         "viewMoreAgeRange" : "තවත් බලන්න | වයස් සීමාවන්",
         "viewMoreFactors" : "තවත් බලන්න | සාධක",
+        
         "viewMoreEmployeeHead" : "සේවකයන් පිලිබඳ වැඩි විස්තර",
+        "viewMoreAgeRangeHead" : "ඉවත් විමේ සම්භාවිතාව සමඟ වයස් පරතරය ",
+        "viewMoreDepartmentHead" : "ඉවත් විමේ සම්භාවිතාව සමඟ දෙපාර්තුමේන්තු",
+        "viewMoreReasonHead" : "ඉවත් විමේ සම්භාවිතාව සමඟ ඉවත් වීමට හේතු",
+        
         "empCount" : "සේවකයන් ගණන :",
+        "churningAgeRange" : "වැඩිම ඉවත් විමේ සම්භාවිතාවක් ඇති වයස් සීමාව : ",
+        "churningDept" : "වැඩිම ඉවත් විමේ සම්භාවිතාවක් ඇති දෙපාර්තුමේන්තුව : ",
+        "churningFactor" : "වැඩිම ඉවත් විමේ සම්භාවිතාවක් ඇති හේතුව : ",
+        
+        "employeeNameCol" : "සේවකයගේ නම",
+        "churnProbCol" : "ඉවත් වීමේ සම්භාවිතාව(%)",
+        "ageRangeCol" : "වයස් පරාසය",
+        "departmentCol" : "දෙපාර්තුමේන්තු",
+        "churnFactCol" : "ඉවත් වීමට හේතුව",
         
         //Analytica Designer Page
         //Predictive Analytic Page
@@ -76,12 +107,27 @@ dictionary = {
         //Index Page
         "home" : "வீட்டில்",
         "semiHead" : "புள்ளியியல் மற்றும் மேலும்",
+        
         "viewMore" : "மேலும் பார்க்க",
         "viewMoreDept" : "மேலும் பார்க்க | துறை",
         "viewMoreAgeRange" : "மேலும் பார்க்க | வயது வரம்பு",
         "viewMoreFactors" : "மேலும் பார்க்க | காரணிகள்",
+        
         "viewMoreEmployeeHead" : "தற்போது வேலை ஊழியர் பற்றி மேலும்",
+        "viewMoreAgeRangeHead" : "வயது எல்லைகள் கொண்டு கடைந்து நிகழ்தகவு",
+        "viewMoreDepartmentHead" : "துறைகளுடன் கடைந்து நிகழ்தகவு",
+        "viewMoreReasonHead" : "காரணங்கள் கொண்டு பணியாளர் கடைந்து",
+        
         "empCount" : "ஊழியர்களின் எண்ணிக்கை :",
+        "churningAgeRange" : "உயர்ந்த கடையும் வயது வரம்பு : ",
+        "churningDept" : "உயர்ந்த கடையும் துறை : ",
+        "churningFactor" : "உயர்ந்த கடையும் காரணி : ",
+        
+        "employeeNameCol" : "பணியாளர் பெயர்",
+        "churnProbCol" : "கடையும் நிகழ்தகவு(%)",
+        "ageRangeCol" : "வயது வரம்பு",
+        "departmentCol" : "துறை",
+        "churnFactCol" : "கடையும் காரணி",
         //Analytica Designer Page
         //Predictive Analytic Page
         //Lock Screen Page
