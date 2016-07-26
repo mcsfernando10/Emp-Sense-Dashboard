@@ -390,12 +390,12 @@
                                 <div class="portlet-title">
                                     <div class="caption"><i class="icon-reorder"></i>Highest Count - 
                                         <b id="highestFieldLine"></b>
-                                        <div class="tools">
-                                            <a href="javascript:;" class="collapse"></a>
-                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                            <a href="javascript:;" class="reload"></a>
-                                            <a href="javascript:;" class="remove"></a>
-                                        </div>
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse"></a>
+                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                        <a href="javascript:;" class="reload"></a>
+                                        <a href="javascript:;" class="remove"></a>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
