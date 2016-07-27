@@ -44,7 +44,7 @@
     else{
         $sqlToGetDeptForMale = "SELECT ".$requestedField.",gender,avg(probability) as 'avgProb'
                                 FROM `employeesit_predict`
-                                where gender = 'male'
+                                where gender = 'male' and department <> '' or job_role <> ''
                                 group by ".$requestedField.",gender
                                 ORDER BY avg(probability) DESC"; 
         $deptMaleData = mysqli_query($con,$sqlToGetDeptForMale);
@@ -88,7 +88,7 @@
     else{
         $sqlToGetDeptForFemale = "SELECT ".$requestedField.",gender,avg(probability) as 'avgProb'
                                 FROM `employeesit_predict`
-                                where gender = 'female'
+                                where gender = 'female' and department <> '' or job_role <> ''
                                 group by ".$requestedField.",gender
                                 ORDER BY avg(probability) DESC"; 
         $deptFemaleData = mysqli_query($con,$sqlToGetDeptForFemale);

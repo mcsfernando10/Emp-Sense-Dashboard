@@ -33,6 +33,7 @@
     else{
         $sqlToGetDeptWithPredict = "SELECT ".$requestedField.",avg(probability) as 'avgProb' "
                 . "FROM `employeesit_predict` "
+                . "where department <> '' "
                 . "group by ".$requestedField." "
                 . "ORDER BY avg(probability) DESC"; 
         $predictData = mysqli_query($con,$sqlToGetDeptWithPredict);
@@ -65,6 +66,7 @@
     else {
         $sqlToGetDeptWithTrain = "SELECT ".$requestedField.",avg(probability) as 'avgProb' "
             . "FROM `employeesit_train` "
+            . "where department <> '' "
             . "group by ".$requestedField." "
             . "ORDER BY avg(probability) DESC"; 
         $trainData = mysqli_query($con,$sqlToGetDeptWithTrain);
