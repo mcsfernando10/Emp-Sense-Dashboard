@@ -198,359 +198,379 @@
                                                     </div>
                                                     <!-- END BEGIN STYLE CUSTOMIZER -->          
                                                     <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                                                    <h3 class="page-title">
-                                                            Visual Charts <small>visual charts & graphs</small>
+                                                    <h3 class="page-title" style="margin-top: 7px; margin-bottom: 5px">
+                                                        Analytical Designer <small>visual charts & graphs</small>
                                                     </h3>
-                                                    <ul class="breadcrumb">
-                                                            <li>
-                                                                    <i class="icon-home"></i>
-                                                                    <a href="index.php">Home</a> 
-                                                                    <i class="icon-angle-right"></i>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Visual Charts</a>
-                                                                <i class="icon-angle-right"></i>
-                                                            </li>
-                                                            <li><a href="#">Analytical Designer</a></li>
+                                                    <ul class="breadcrumb" style="margin-bottom: 13px">
+                                                        <li>
+                                                            <i class="icon-home"></i>
+                                                            <a href="index.php">Home</a> 
+                                                            <i class="icon-angle-right"></i>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Visual Charts</a>
+                                                            <i class="icon-angle-right"></i>
+                                                        </li>
+                                                        <li><a href="#">Analytical Designer</a></li>
                                                     </ul>
                                                     <!-- END PAGE TITLE & BREADCRUMB-->
                                             </div>
                                     </div>
                                     <!-- END PAGE HEADER-->
                                     <!-- BEGIN CHART PORTLETS-->
-                                    <div class="row-fluid">
-                                            
-                                                    <!-- BEGIN BASIC CHART PORTLET-->
-                                                    <div class="portlet box yellow">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Basic Chart</div>
-                                                                    <div class="tools">
-                                                                            <a href="javascript:;" class="collapse"></a>
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                            <a href="javascript:;" class="remove"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <div id="chart_1" class="chart"></div>
-                                                            </div>
+                                    <div id ="chartOrTableCon" align="center" style="margin-bottom: 0px;  padding-left: 10px; color: #1E90FF">
+                                        <div class="row-fluid">
+                                            <div class="span5" align="right">
+                                                <form class="form-inline">
+                                                    <div class="form-group">
+                                                        <label for="probability" style="padding-right: 15px">Probability:</label>
+                                                        <select id="probabilityField" class="form-control" name="probabField">
+                                                            <option value="0.9">90%</option>
+                                                            <option value="0.8">80%</option>
+                                                            <option value="0.7">70%</option>
+                                                            <option value="0.6">60%</option>
+                                                            <option value="0.5">50%</option>
+                                                            <option value="0.4">40%</option>
+                                                            <option value="0.3">30%</option>
+                                                            <option value="0.2">20%</option>
+                                                            <option value="0.1">10%</option>
+                                                        </select>
                                                     </div>
-                                                    <!-- END BASIC CHART PORTLET-->                 
-                                                    <!-- BEGIN TRACKING CURVES PORTLET-->
-                                                    <div class="portlet box green">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Tracking Curves</div>
-                                                                    <div class="tools">
-                                                                            <a href="javascript:;" class="collapse"></a>
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                            <a href="javascript:;" class="remove"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <div id="chart_3" class="chart"></div>
-                                                            </div>
-                                                    </div>
-                                                    <!-- END TRACKING CURVES PORTLET-->
-                                                    <!-- BEGIN DYNAMIC CHART PORTLET-->
-                                                    <div class="portlet box blue">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Dynamic Chart</div>
-                                                                    <div class="tools">
-                                                                            <a href="javascript:;" class="collapse"></a>
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                            <a href="javascript:;" class="remove"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <div id="chart_4" class="chart"></div>
-                                                            </div>
-                                                    </div>
-                                                    <!-- END DYNAMIC CHART PORTLET-->
-                                                    <!-- BEGIN STACK CHART CONTROLS PORTLET-->
-                                                    <div class="portlet box yellow">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Stack Chart Controls</div>
-                                                                    <div class="tools">
-                                                                            <a href="javascript:;" class="collapse"></a>
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                            <a href="javascript:;" class="remove"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <div id="chart_5" style="height:350px;"></div>
-                                                                    <div class="btn-toolbar">
-                                                                            <div class="btn-group stackControls">
-                                                                                    <input type="button" class="btn blue" value="With stacking" />
-                                                                                    <input type="button" class="btn red" value="Without stacking" />
-                                                                            </div>
-                                                                            <div class="space5"></div>
-                                                                            <div class="btn-group graphControls">
-                                                                                    <input type="button" class="btn" value="Bars" />
-                                                                                    <input type="button" class="btn" value="Lines" />
-                                                                                    <input type="button" class="btn" value="Lines with steps" />
-                                                                            </div>
-                                                                    </div>
-                                                            </div>
-                                                    </div>
-                                                    <!-- END STACK CHART CONTROLS PORTLET-->
-                                                    <!-- BEGIN INTERACTIVE CHART PORTLET-->
-                                                    <div class="portlet box red">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Interactive Chart</div>
-                                                                    <div class="tools">
-                                                                            <a href="javascript:;" class="collapse"></a>
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                            <a href="javascript:;" class="remove"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <div id="chart_2" class="chart"></div>
-                                                            </div>
-                                                    </div>
-                                                    <!-- END INTERACTIVE CHART PORTLET-->                 
+                                                </form>    
                                             </div>
+                                            <div class="span5">
+                                                <form class="form-inline">
+                                                    <div class="form-group">
+                                                        <label for="group_results" style="padding-right: 15px">Group Results:</label>
+                                                        <select id="groupField" class="form-control">
+                                                            <option>Department</option>
+                                                            <option>Age</option>
+                                                            <option>Gender</option>
+                                                            <option>Factors</option>
+                                                            <option>Salary</option>
+                                                            <option>Tenure</option>
+                                                            <option>Job Role</option>
+                                                        </select>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="span1">
+                                                <button id="tableBtn" class="btn" style="background-color: white; padding-left: 15px; padding-top: 5px">
+                                                    <img src="assets/img/pages/table.png"/>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--<table>
+                                            <tr>
+                                                <td style="padding-left: 10px;">
+                                                    Graph Type:
+                                                    <button id="graphBtn" class="btn" style="background-color: white">
+                                                        <img src="assets/img/pages/graph.png"/>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <div class="verticalLine">
+                                                        <button id="tableBtn" class="btn" style="background-color: white">
+                                                            <img src="assets/img/pages/table.png"/>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 40px;">
+                                                    Probability: 
+                                                </td>
+                                                <td>
+                                                    <br/>
+                                                    <form class="form-inline">
+                                                        <div class="form-group">
+                                                            <label for="probability"></label>
+                                                            <select id="probabilityField" class="form-control" name="probabField">
+                                                                <option>90%</option>
+                                                                <option>80%</option>
+                                                                <option>70%</option>
+                                                                <option>60%</option>
+                                                                <option>50%</option>
+                                                                <option>40%</option>
+                                                                <option>30%</option>
+                                                                <option>20%</option>
+                                                                <option>10%</option>
+                                                            </select>
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                                <td style="padding-left: 40px; margin-right: 10px">
+                                                    Group Results: 
+                                                </td>
+                                                <td>
+                                                    <br/>
+                                                    <form class="form-inline">
+                                                        <div class="form-group">
+                                                            <label for="probability"></label>
+                                                            <select id="groupField" class="form-control">
+                                                                <option>Department</option>
+                                                                <option>Age</option>
+                                                                <option>Gender</option>
+                                                                <option>Factors</option>
+                                                                <option>Salary</option>
+                                                                <option>Tenure</option>
+                                                            </select>
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </table>-->
                                     </div>
-                                    <!-- END CHART PORTLETS-->
                                     <!-- BEGIN PIE CHART PORTLET-->
                                     <div class="row-fluid">
-                                            <div class="span6">
-                                                    <div class="portlet box yellow">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Default</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>Default Pie with Legend.</h4>
-                                                                    <div id="pie_chart" class="chart"></div>
-                                                            </div>
+                                        <div class="span6">
+                                            <!-- BEGIN PORTLET -->
+                                                <div class="portlet box blue">
+                                                    <div class="portlet-title">
+                                                        <div class="caption"><i class="icon-bar-chart"></i>Highest Count - 
+                                                            <b id="highestFieldBar"></b>
+                                                        </div>
+                                                        <div class="tools">
+                                                            <a href="javascript:;" class="collapse"></a>
+                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                                            <a href="javascript:;" class="reload"></a>
+                                                            <a href="javascript:;" class="remove"></a>
+                                                        </div>
                                                     </div>
-                                                    <div class="portlet box purple">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph1</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>Default Pie without Legend</h4>
-                                                                    <div id="pie_chart_1" class="chart"></div>
-                                                            </div>
+                                                    <div class="portlet-body">
+
+                                                        <!--<div id="site_activities_loading">
+                                                            <img src="assets/img/loading.gif" alt="loading" />
+                                                        </div>
+                                                        <div id="site_activities_content" class="hide">
+                                                            <div id="site_activities" class="chart"></div>
+                                                        </div>-->
+                                                        <div id="bar_data">
+                                                        </div>
+
                                                     </div>
-                                            </div>
-                                            <div class="span6">
-                                                    <div class="portlet box blue">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph2</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>Added a semi-transparent background to the labels and a custom labelFormatter function.</h4>
-                                                                    <div id="pie_chart_2" class="chart"></div>
-                                                            </div>
+                                                </div>
+                                                <!-- END PORTLET-->                            
+                                        </div>
+                                        <div class="span6">
+                                            <div class="portlet box blue">
+                                                <div class="portlet-title">
+                                                    <div class="caption"><i class="icon-bar-chart"></i>Highest Count - 
+                                                        <b id="highestFieldPie"></b>
                                                     </div>
-                                                    <div class="portlet box red">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph3</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>Slightly more transparent label backgrounds and adjusted the radius values to place them within the pie.</h4>
-                                                                    <div id="pie_chart_3" class="chart"></div>
-                                                            </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse"></a>
+                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                                            <a href="javascript:;" class="reload"></a>
+                                                            <a href="javascript:;" class="remove"></a>
                                                     </div>
-                                            </div>
+                                                </div>
+                                                <div class="portlet-body">
+                                                    <div id="pie_data"></div>
+                                                    <!--<div id="pie_chart_3" class="chart"></div>
+                                                    <table class="chart">
+                                                            <tr>
+                                                                <td style="width:65%"><canvas id="pie_data"></canvas></td>
+                                                                <td id="legendDiv" class="chart-legend" style="width:35%"></td>
+                                                            </tr>
+                                                    </table>-->
+                                                </div>
+                                            </div> 
+                                        </div>
                                     </div>
+
                                     <!-- END PIE CHART PORTLET-->
-                                    <!-- BEGIN PIE CHART PORTLET-->
+                                    <!-- BEGIN CHART PORTLETS-->
                                     <div class="row-fluid">
-                                            <div class="span6">
-                                                    <div class="portlet box yellow">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph4</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>Semi-transparent, black-colored label background.</h4>
-                                                                    <div id="pie_chart_4" class="chart"></div>
-                                                            </div>
+                                        <div class="span12">
+                                            <!-- END STACK CHART CONTROLS PORTLET-->
+                                            <!-- BEGIN INTERACTIVE CHART PORTLET-->
+                                            <div class="portlet box red">
+                                                <div class="portlet-title">
+                                                    <div class="caption"><i class="icon-reorder"></i>Highest Count - 
+                                                        <b id="highestFieldLine"></b>
                                                     </div>
-                                                    <div class="portlet box purple">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph5</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>Semi-transparent, black-colored label background placed at pie edge.</h4>
-                                                                    <div id="pie_chart_5" class="chart"></div>
-                                                            </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse"></a>
+                                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                                        <a href="javascript:;" class="reload"></a>
+                                                        <a href="javascript:;" class="remove"></a>
                                                     </div>
-                                            </div>
-                                            <div class="span6">
-                                                    <div class="portlet box blue">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph6</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>Added a semi-transparent background to the labels and a custom labelFormatter function.</h4>
-                                                                    <div id="pie_chart_6" class="chart"></div>
-                                                            </div>
-                                                    </div>
-                                                    <div class="portlet box red">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph7</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>Labels can be hidden if the slice is less than a given percentage of the pie (10% in this case).</h4>
-                                                                    <div id="pie_chart_7" class="chart"></div>
-                                                            </div>
-                                                    </div>
-                                            </div>
+                                                </div>
+                                                <div class="portlet-body">
+                                                    <!--<div id="chart_2" class="chart"></div>-->
+                                                    <div id="line_data"></div>
+                                                </div>
+                                            <!-- END INTERACTIVE CHART PORTLET-->                 
+                                        </div>
                                     </div>
-                                    <!-- END PIE CHART PORTLET-->
-                                    <!-- BEGIN PIE CHART PORTLET-->
-                                    <div class="row-fluid">
-                                            <div class="span6">
-                                                    <div class="portlet box yellow">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph8</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>The radius can also be set to a specific size (even larger than the container itself).</h4>
-                                                                    <div id="pie_chart_8" class="chart"></div>
-                                                            </div>
-                                                    </div>
-                                                    <div class="portlet box purple">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph9</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>The pie can be tilted at an angle.</h4>
-                                                                    <div id="pie_chart_9" class="chart"></div>
-                                                            </div>
-                                                    </div>
-                                            </div>
-                                            <div class="span6">
-                                                    <div class="portlet box blue">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph10</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>A donut hole can be added.</h4>
-                                                                    <div id="donut" class="chart"></div>
-                                                            </div>
-                                                    </div>
-                                                    <div class="portlet box red">
-                                                            <div class="portlet-title">
-                                                                    <div class="caption"><i class="icon-reorder"></i>Graph11</div>
-                                                                    <div class="tools">
-                                                                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                                                            <a href="javascript:;" class="reload"></a>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="portlet-body">
-                                                                    <h4>The pie can be made interactive with hover and click events.</h4>
-                                                                    <div id="interactive" class="chart"></div>
-                                                            </div>
-                                                    </div>
-                                            </div>
-                                    </div>
-                                    <!-- END PIE CHART PORTLET-->
-                                    <!-- END PAGE CONTENT-->
+
+                                </div>
+                                <!-- BEGIN PAGE CONTAINER--> 
                             </div>
-                            <!-- BEGIN PAGE CONTAINER--> 
+                            <!-- END PAGE -->
                     </div>
-                    <!-- END PAGE -->
-            </div>
-            <!-- END CONTAINER -->
-            <!-- BEGIN FOOTER -->
-            <div class="footer">
-                    <div class="footer-inner">
-                            2016 &copy; Emp - Sense by Sri Lanka Institute of Information Technology.
-                    </div>
-                    <div class="footer-tools">
-                            <span class="go-top">
-                            <i class="icon-angle-up"></i>
-                            </span>
-                    </div>
-            </div>
-            <!-- END FOOTER -->
-            <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-            <!-- BEGIN CORE PLUGINS -->   <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
-            <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-            <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-            <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
-            <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-            <script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
-            <!--[if lt IE 9]>
-            <script src="assets/plugins/excanvas.min.js"></script>
-            <script src="assets/plugins/respond.min.js"></script>  
-            <![endif]-->   
-            <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-            <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
-            <script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
-            <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
-            <!-- END CORE PLUGINS -->
-            <!-- BEGIN PAGE LEVEL PLUGINS -->
-            <script src="assets/plugins/flot/jquery.flot.js"></script>
-            <script src="assets/plugins/flot/jquery.flot.resize.js"></script>
-            <script src="assets/plugins/flot/jquery.flot.pie.js"></script>
-            <script src="assets/plugins/flot/jquery.flot.stack.js"></script>
-            <script src="assets/plugins/flot/jquery.flot.crosshair.js"></script>
-            <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
-            <!-- END PAGE LEVEL PLUGINS -->
-            <!-- BEGIN PAGE LEVEL SCRIPTS -->
-            <script src="assets/scripts/app.js"></script>
-            <script src="assets/scripts/charts_analytical.js"></script>
-            
-            <script>
-                jQuery(document).ready(function() {    
-                   App.init(); // initlayout and core plugins                   
-                   Charts.init();
-                   Charts.initCharts();
-                   Charts.initPieCharts();
+    <!--<div id="tablee-container" style="display:none">
+        <table id="aaaa" class="display"></table>
+    </div>-->
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="footer">
+        <div class="footer-inner">
+            2016 &copy; Emp - Sense by Sri Lanka Institute of Information Technology.
+        </div>
+        <div class="footer-tools">
+            <span class="go-top">
+            <i class="icon-angle-up"></i>
+            </span>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->   
+    <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/datatables.min.js"></script>
+    <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/excanvas.min.js"></script>
+    <script src="assets/plugins/respond.min.js"></script>  
+    <![endif]-->   
+    <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
+    <script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="assets/plugins/flot/jquery.flot.js"></script>
+    <script src="assets/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="assets/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="assets/plugins/flot/jquery.flot.stack.js"></script>
+    <script src="assets/plugins/flot/jquery.flot.crosshair.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- POPUPS -->
+    <script src="assets/scripts/popup/ModelMessage.js" type="text/javascript"></script>
+    <script src="assets/scripts/popup/bootbox.js" type="text/javascript"></script>
+    
+    <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
+    <!-- POPUPS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="assets/scripts/app.js"></script>
+    <script src="assets/scripts/charts_analytical.js"></script>
+    <!-- CHARTS -->
+    <script src="assets/scripts/highcharts.js"></script>
+    <script src="assets/scripts/exporting.js"></script>
+    
+    <script>
+        jQuery(document).ready(function() {    
+           App.init(); // initlayout and core plugins                   
+           Charts.init();
+           Charts.initCharts();
+           Charts.initPieCharts();
+        });
+    </script>
+    <script type="text/javascript">
+        /*$("#tableBtn").click(function(){
+                displayTablePopup();
+            });
+            var message ="";
+            function displayTablePopup(){
+                
+                var table = document.createElement('table');
+                var title = '<p  align=center style="background-color:#3BB9FF; padding: 10px; margin-right: 15px; color: white;">' +
+                                '<i class="icon-male"></i>&nbsp;&nbsp;<b> More about present working Employees</b></p>';
+                $.ajax({
+                        type:     "post",
+                        url:      "assets/controllers/popup_controllers/employeeChurnData.php",
+                        data:     $(this).serialize(),
+                        dataType: "json"
+                    }).done(function(response) {
+                        var employeeChurnData = response;
+                        //message +='<div id="table-container" style="display:none">'
+                        //message +='<table class="table table-hover">';
+                        message +='<thead><tr><th bgcolor="#3BB9FF" style="padding-left:80px">Employee Name</th>' + 
+                                '<th bgcolor="#3BB9FF">Churn Probability</th></tr></thead>'
+                        for (var i = 0; i < employeeChurnData.length; i++) {
+                            var churnProb = parseFloat(employeeChurnData[i]['prob']);
+                            churnProb = Number((churnProb).toFixed(2));
+                            if(churnProb >= 0.8){
+                                var prob = churnProb * 100
+                                message += '<tr class="error">';
+                                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                                message += '</tr>';
+                            } else if(churnProb < 0.8 & churnProb >= 0.5){
+                                var prob = churnProb * 100
+                                message += '<tr class="warning">';
+                                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                                message += '</tr>';
+                            } else{
+                                var prob = churnProb * 100
+                                message += '<tr class="info">';
+                                message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                                message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                                message += '</tr>';
+                            }
+                        }
+                        message += '<tr class="success">';
+                        message += '<td style="padding-left:80px"><b> Employee Count </b></td>';
+                        message += '<td style="padding-left:55px"><b>'+employeeChurnData.length+'</b></td>';
+                        message += '</tr>';
+                        //message +='</table>'
+                        //alert(message);
+                        
+                        //table.id = 'aaaa';
+                        //table.className= 'display';
+                        //table.innerHTML = message;
+                        var a = document.getElementById('aaaa');
+                        a.innerHTML = message;
+                        //alert(a.innerHTML);
+                        //alert(div);
+                        
+                        //container.find('div').attr('id', 'aaaa');
+            });
+            var container = $('#tablee-container').clone();
+            //document.getElementById('tablee-container').appendChild(table);
+            container.find('table').attr('id', 'aaaa');
+                
+                var box = bootbox.dialog({
+                  show: false,
+                  message: "a",
+                  title: title,
+                  buttons: {
+                    OK: {
+                      label: "OK",
+                      className: "btn-primary",
+                      callback: function() {
+                        console.log('OK Button');
+                      }
+                    },
+                    cancel: {
+                      label: "Cancel",
+                      className: "btn-default"
+                    }
+                  }
                 });
-            </script>
-            
-    </body>
+
+                box.on("shown.bs.modal", function() {
+                   $('#aaaa').DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": {
+                            "url": "assets/controllers/popup_controllers/employeeChurnData.php",
+                            "type": "POST"
+                        },
+                        "columns": [
+                            { "data": "empName" }
+                        ]        
+                   }); 
+                });
+
+                box.modal('show');     
+        }*/
+    </script>
+</body>
     <!-- END BODY -->
 </html>

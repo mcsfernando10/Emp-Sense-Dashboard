@@ -260,10 +260,10 @@
                                         <div class="team-info">
                                             <ul class="social-icons pull-left">
                                                 <p></p>
-                                                <li><a href="#" data-original-title="facebook" class="facebook"></a></li>
-                                                <li><a href="#" data-original-title="linkedin" class="linkedin"></a></li>
-                                                <li><a href="#" data-original-title="Goole Plus" class="googleplus"></a></li>
-                                                <li><a href="#" data-original-title="skype" class="skype"></a></li>
+                                                <li><a target="_blank" href="https://www.facebook.com/darrel.rayen?fref=ts" data-original-title="facebook" class="facebook"></a></li>
+                                                <li><a target="_blank" href="#" data-original-title="linkedin" class="linkedin"></a></li>
+                                                <li><a target="_blank" href="https://plus.google.com/u/0/111219632461734297829/posts" data-original-title="Goole Plus" class="googleplus"></a></li>
+                                                <li><a href="skype:anthonydarry?chat" data-original-title="skype" class="skype"></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -275,10 +275,10 @@
                                         <div class="team-info">
                                             <ul class="social-icons pull-left">
                                                 <p></p>
-                                                <li><a href="#" data-original-title="facebook" class="facebook"></a></li>
-                                                <li><a href="#" data-original-title="linkedin" class="linkedin"></a></li>
-                                                <li><a href="#" data-original-title="Goole Plus" class="googleplus"></a></li>
-                                                <li><a href="#" data-original-title="skype" class="skype"></a></li>
+                                                <li><a target="_blank" href="https://www.facebook.com/chinthaka.suren?fref=ts" data-original-title="facebook" class="facebook"></a></li>
+                                                <li><a target="_blank" href="#" data-original-title="linkedin" class="linkedin"></a></li>
+                                                <li><a target="_blank" href="https://plus.google.com/u/0/102698231877384744047/posts" data-original-title="Goole Plus" class="googleplus"></a></li>
+                                                <li><a href="skype:mcsfernando10?chat" data-original-title="skype" class="skype"></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -290,10 +290,10 @@
                                         <div class="team-info">
                                             <ul class="social-icons pull-left">
                                                 <p></p>
-                                                <li><a href="#" data-original-title="facebook" class="facebook"></a></li>
-                                                <li><a href="#" data-original-title="linkedin" class="linkedin"></a></li>
-                                                <li><a href="#" data-original-title="Goole Plus" class="googleplus"></a></li>
-                                                <li><a href="#" data-original-title="skype" class="skype"></a></li>
+                                                <li><a target="_blank" href="https://www.facebook.com/adenjoes4345?fref=ts" data-original-title="facebook" class="facebook"></a></li>
+                                                <li><a target="_blank" href="#" data-original-title="linkedin" class="linkedin"></a></li>
+                                                <li><a target="_blank" href="https://plus.google.com/u/0/110004944356593682782/posts" data-original-title="Goole Plus" class="googleplus"></a></li>
+                                                <li><a href="skype:nirmal.madasekera?chat" data-original-title="skype" class="skype"></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -305,10 +305,10 @@
                                         <div class="team-info">
                                             <ul class="social-icons pull-left">
                                                 <p></p>
-                                                <li><a href="#" data-original-title="facebook" class="facebook"></a></li>
-                                                <li><a href="#" data-original-title="linkedin" class="linkedin"></a></li>
-                                                <li><a href="#" data-original-title="Goole Plus" class="googleplus"></a></li>
-                                                <li><a href="#" data-original-title="skype" class="skype"></a></li>
+                                                <li><a target="_blank" href="https://www.facebook.com/lakini.senanayaka?fref=ts" data-original-title="facebook" class="facebook"></a></li>
+                                                <li><a target="_blank" href="#" data-original-title="linkedin" class="linkedin"></a></li>
+                                                <li><a target="_blank" href="https://plus.google.com/u/0/110809094733488533934/posts" data-original-title="Goole Plus" class="googleplus"></a></li>
+                                                <li><a href="skype:lakiniss1992?chat" data-original-title="skype" class="skype"></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -379,6 +379,7 @@
         <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
         <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
         <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
+        <script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
         <!-- END PAGE LEVEL SCRIPTS -->  
         <script>
                 jQuery(document).ready(function() {    

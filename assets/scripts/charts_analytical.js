@@ -9,6 +9,12 @@ var Charts = function () {
                  Charts.initPieCharts(); 
             });
             
+            
+            
+            $("#tableBtn").click(function(){
+                displayTablePopup();
+            });
+            
         },
 
         initCharts: function () {
@@ -16,7 +22,7 @@ var Charts = function () {
             if (!jQuery.plot) {
                 return;
             }
-
+            
             var data = [];
             var totalPoints = 250;
 
@@ -426,144 +432,300 @@ var Charts = function () {
                 });
 
                 plotWithOptions();
-            }
-
+            }      
+                        
             //graph
-            chart1();
-            chart2();
-            chart3();
-            chart4();
-            chart5();
+            //chart1();
+            //chart2();
+            //chart3();
+            //chart4();
+            //chart5();
 
         },
+        
 
         initPieCharts: function () {
-
-            var data = [];
-            var series = Math.floor(Math.random() * 10) + 1;
-            series = series < 5 ? 5 : series;
             
-            for (var i = 0; i < series; i++) {
-                data[i] = {
-                    label: "Series" + (i + 1),
-                    data: Math.floor(Math.random() * 100) + 1
-                }
+            displayCharts();
+            //alert(v);
+            //$("#highestFieldBar").val(dept);
+            //$("#highestFieldPie").val(dept);
+            $("#groupField").change(function () {
+                var group = this.value;
+                var prob = $("#probabilityField").val();
+                
+                if(group === 'Department')
+                    group = 'department';
+                else if(group === 'Gender')
+                    group = 'Gender';
+                else if(group === 'Job Role')
+                    group = 'Job_Role';
+                
+                var data = [];
+                var barData = [];
+                var heighest;
+                
+                $.ajax({
+                    type:     "POST",
+                    url:      "assets/controllers/chart_controllers/Chart_Analytical.php",
+                    data:     ({
+                        prob: prob,
+                        group: group
+                    }),
+                    dataType: "json"
+                }).done(function(response) { 
+                    var pieChartData = response['predict'];
+                    var barChartData = response['predict'];
+
+                    for (var i = 0; i < pieChartData.length; i++) {
+                        data[i] = {
+                            label: pieChartData[i]['dept'],
+                            data: pieChartData[i]['count']
+                        }
+                    }
+                    
+                    for (var i = 0; i < barChartData.length; i++) {
+                        barData[i] = [i+1,barChartData[i]['count']];
+                    }
+                    
+                    barHighChart(data,group,prob);
+                    pieHighChart(data,group,prob);
+                    lineHighChart(data,group,prob);
+                    heighest = response['maxDept'];
+                    getHeighest(heighest);
+                });
+                //alert(field);
+            });
+            
+            //First Dropdown handler
+            $("#probabilityField").change(function () {
+                var prob = this.value;
+                var group = $("#groupField").val();
+                
+                if(group === 'Department')
+                    group = 'department';
+                else if(group === 'Gender')
+                    group = 'Gender';
+                else if(group === 'Job Role')
+                    group = 'Job_Role';
+                
+                var data = [];
+                var barData = [];
+                var heighest;
+                
+                $.ajax({
+                    type:     "POST",
+                    url:      "assets/controllers/chart_controllers/Chart_Analytical.php",
+                    data:     ({
+                        prob: prob,
+                        group: group
+                    }),
+                    dataType: "json"
+                }).done(function(response) { 
+                    var pieChartData = response['predict'];
+                    var barChartData = response['predict'];
+
+                    for (var i = 0; i < pieChartData.length; i++) {
+                        data[i] = {
+                            label: pieChartData[i]['dept'],
+                            data: pieChartData[i]['count']
+                        }
+                    }
+                    
+                    for (var i = 0; i < barChartData.length; i++) {
+                        barData[i] = [i+1,barChartData[i]['count']];
+                    }
+                    
+                    barHighChart(data, group, prob);
+                    pieHighChart(data, group, prob);
+                    lineHighChart(data, group, prob);
+                    heighest = response['maxDept'];
+                    getHeighest(heighest);
+                });
+            });
+            
+            function displayCharts(){
+                var data = [];
+                var barData = [];
+                
+                var prob = 0.9;
+                var group = 'department';
+                var field = group;
+                var heighest;
+
+                $.ajax({
+                    type:     "POST",
+                    url:      "assets/controllers/chart_controllers/Chart_Analytical.php",
+                    data:     ({
+                        prob: prob,
+                        group: group
+                    }),
+                    dataType: "json"
+                }).done(function(response) {
+                    var pieChartData = response['predict'];
+                    var barChartData = response['predict'];
+
+                    for (var i = 0; i < pieChartData.length; i++) {
+                        data[i] = {
+                            label: pieChartData[i]['dept'],
+                            data: pieChartData[i]['count']
+                        }
+                    }
+
+                    for (var i = 0; i < barChartData.length; i++) {
+                        barData[i] = [i+1,barChartData[i]['count']];
+                    }
+                    //displayPieChart(data);  
+                    //displayBarChart(barData);
+                    //barChart(data);
+                    //pieChart(data);
+                    barHighChart(data,field,prob);
+                    pieHighChart(data,field,prob);
+                    lineHighChart(data,field,prob);
+                    heighest = response['maxDept'];
+                    getHeighest(heighest);
+                });  
+            }
+            
+            function getHeighest(heighest){
+                document.getElementById("highestFieldBar").innerHTML=heighest;
+                document.getElementById("highestFieldPie").innerHTML=heighest;
+                document.getElementById("highestFieldLine").innerHTML=heighest;
             }
 
-            // DEFAULT
-            $.plot($("#pie_chart"), data, {
-                    series: {
-                        pie: {
-                            show: true
-                        }
-                    }
-                });
+            function barHighChart(data,field,prob){
+                var labels = [];
+                var count = [];
+                for(i = 0; i < data.length; i++){
+                    labels[i] = data[i].label;
+                    count[i] = parseInt(data[i].data);    
+                }
 
-            // GRAPH 1
-            $.plot($("#pie_chart_1"), data, {
-                    series: {
-                        pie: {
-                            show: true
+                $('#bar_data').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: prob + ' vs ' + field //Dynamic
+                    },
+                    credits: {
+                         text: 'Emp-Sense',
+                    },
+                    xAxis: {
+                        categories: labels,
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Employee Count'
                         }
                     },
-                    legend: {
-                        show: false
-                    }
-                });
-
-            // GRAPH 2
-            $.plot($("#pie_chart_2"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 1,
-                                formatter: function (label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.8
-                                }
-                            }
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
                         }
                     },
-                    legend: {
-                        show: false
-                    }
+                    series: [{
+                        name: 'Employee Count',
+                        data: count
+                    }]
                 });
+            }
 
-            // GRAPH 3
-            $.plot($("#pie_chart_3"), data, {
-                    series: {
+            function pieHighChart(data,field,prob){
+                var dataSeries = [];
+                for(i = 0; i < data.length; i++){
+                    dataSeries.push({name : data[i].label, y : parseInt(data[i].data)});
+                }
+                // Build the chart
+                $('#pie_data').highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: prob + ' vs ' + field //Dynamic
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.y}</b>'
+                    },
+                    credits: {
+                         text: 'Emp-Sense'
+                    },
+                    plotOptions: {
                         pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 3 / 4,
-                                formatter: function (label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.5
-                                }
-                            }
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
                         }
                     },
-                    legend: {
-                        show: false
-                    }
+                    series: [{
+                        name: 'Employee Count',
+                        colorByPoint: true,
+                        data: dataSeries
+                    }]
                 });
+            }
 
-            // GRAPH 4
-            $.plot($("#pie_chart_4"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 3 / 4,
-                                formatter: function (label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.5,
-                                    color: '#000'
-                                }
-                            }
-                        }
+            function lineHighChart(data,field,prob){
+                var labels = [];
+                var count = [];
+                for(i = 0; i < data.length; i++){
+                    labels[i] = data[i].label;
+                    count[i] = parseInt(data[i].data);    
+                }
+
+                $('#line_data').highcharts({
+                    title: {
+                        text: prob + ' vs ' + field, //Dynamic
+                        x: -20 //center
+                    },
+                    xAxis: {
+                        categories:labels
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Employee  Count'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: ''
+                    },
+                    credits: {
+                         text: 'Emp-Sense'
                     },
                     legend: {
-                        show: false
-                    }
-                });
-
-            // GRAPH 5
-            $.plot($("#pie_chart_5"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 3 / 4,
-                            label: {
-                                show: true,
-                                radius: 3 / 4,
-                                formatter: function (label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.5,
-                                    color: '#000'
-                                }
-                            }
-                        }
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
                     },
-                    legend: {
-                        show: false
-                    }
+                    series: [{
+                        name: 'Employee Count',
+                        data: count
+                    }]
                 });
+            }
 
             // GRAPH 6
             $.plot($("#pie_chart_6"), data, {
@@ -704,6 +866,9 @@ var Charts = function () {
                 });
             $("#interactive").bind("plothover", pieHover);
             $("#interactive").bind("plotclick", pieClick);
+			
+			            
+        
 
             function pieHover(event, pos, obj) {
             if (!obj)
@@ -717,10 +882,169 @@ var Charts = function () {
                     return;
                 percent = parseFloat(obj.series.percent).toFixed(2);
                 alert('' + obj.series.label + ': ' + percent + '%');
+            }  
+        } 
+    };
+    
+    function displayPieChart(data){
+         // GRAPH 3
+        $.plot($("#pie_chart_3"), data, {                
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    label: {
+                        show: true,
+                        radius: 3 / 4,
+                        formatter: function (label, point) {
+                            return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + point.data[0][1] + '</div>';
+                        },
+                        background: {
+                            opacity: 0.5
+                        }
+                    }
+                }
+            },
+            legend: {
+                show: false
             }
+        });
+    }
+    
+    function displayBarChart(data){
+        if ($('#site_activities').size() != 0) {
+        //site activities
+            var previousPoint2 = null;
+            $('#site_activities_loading').hide();
+            $('#site_activities_content').show();
 
+            /*var data = [
+                [1, 10],
+                [2, 9],
+                [3, 8],
+                [4, 6],
+                [5, 5],
+                [6, 3],
+                [7, 9],
+                [8, 10],
+                [9, 12],
+                [10, 14],
+                [11, 15],
+                [12, 13],
+                [13, 11],
+                [14, 10],
+                [15, 9],
+                [16, 8]
+            ];*/
+
+            var plot_activities = $.plot(
+                $("#site_activities"), [{
+                    data: data,
+                    color: "rgba(65,105,225,0.5)",
+                    shadowSize: 0,
+                    bars: {
+                        show: true,
+                        lineWidth: 0,
+                        fill: true,
+                        fillColor: {
+                            colors: [{
+                                    opacity: 1
+                                }, {
+                                    opacity: 1
+                                }
+                            ]
+                        }
+                    }
+                }
+            ], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.9
+                    }
+                },
+                grid: {
+                    show: false,
+                    hoverable: true,
+                    clickable: false,
+                    autoHighlight: true,
+                    borderWidth: 0
+                },
+                yaxis: {
+                    min: 0,
+                    max: 20
+                }
+            });
+            
+            $("#site_activities").bind("plothover", function (event, pos, item) {
+                $("#x").text(pos.x.toFixed(2));
+                $("#y").text(pos.y.toFixed(2));
+                if (item) {
+                    if (previousPoint2 != item.dataIndex) {
+                        previousPoint2 = item.dataIndex;
+                        $("#tooltip").remove();
+                        var x = item.datapoint[0].toFixed(2),
+                            y = item.datapoint[1].toFixed(2);
+                        showTooltip('24 Feb 2013', item.pageX, item.pageY, x);
+                    }
+                }
+            });
+
+            $('#site_activities').bind("mouseleave", function () {
+                $("#tooltip").remove();
+            });
         }
         
-    };
+    }
+    
+    function displayTablePopup(){
+            $.ajax({
+                type:     "post",
+                url:      "assets/controllers/popup_controllers/employeeChurnData.php",
+                data:     $(this).serialize(),
+                dataType: "json"
+            }).done(function(response) {
+                var employeeChurnData = response;
+                var title = '<p  align=center style="background-color:#3BB9FF; padding: 10px; margin-right: 15px; color: white;">' +
+                        '<i class="icon-male"></i>&nbsp;&nbsp;<b> More about present working Employees</b></p>';
+                var message = ""; 
+                message +='<table id="predictiveDataTable" class="table table-hover">';
+                message +='<thead><tr><th bgcolor="#3BB9FF" style="padding-left:80px">Employee Name</th>' + 
+                        '<th bgcolor="#3BB9FF">Churn Probability</th></tr></thead>'
+                for (var i = 0; i < employeeChurnData.length; i++) {
+                    var churnProb = parseFloat(employeeChurnData[i]['prob']);
+                    churnProb = Number((churnProb).toFixed(2));
+                    if(churnProb >= 0.8){
+                        var prob = churnProb * 100
+                        message += '<tr class="error">';
+                        message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                        message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                        message += '</tr>';
+                    } else if(churnProb < 0.8 & churnProb >= 0.5){
+                        var prob = churnProb * 100
+                        message += '<tr class="warning">';
+                        message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                        message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                        message += '</tr>';
+                    } else{
+                        var prob = churnProb * 100
+                        message += '<tr class="info">';
+                        message += '<td style="padding-left:80px">'+employeeChurnData[i]['empName']+'</td>';
+                        message += '<td style="padding-left:55px">'+prob+'%'+'</td>';
+                        message += '</tr>';
+                    }
+                }
+                message += '<tr class="success">';
+                message += '<td style="padding-left:80px"><b> Employee Count </b></td>';
+                message += '<td style="padding-left:55px"><b>'+employeeChurnData.length+'</b></td>';
+                message += '</tr>';
+                message +='</table>'
+                showEmployeeChurn(title,message);  
+                //alert();
+                //var a = $('#predictiveDataTable').DataTable();
+                //alert(a);
+            });
+
+        }
 
 }();
