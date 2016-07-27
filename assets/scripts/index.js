@@ -338,7 +338,12 @@ function displayAgeGroupPopup(){
             dom: 'Bfrtip',
             "order": [[ 1, "desc" ]],
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                'copy', 'csv', 'excel', 
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Emp-Sense Age Range vs Churn Probability'
+                }, 
+                'print'
             ]
         } );        
     });

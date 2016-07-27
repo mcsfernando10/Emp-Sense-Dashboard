@@ -488,7 +488,7 @@
                 <div class="row-fluid">
                     <div class="span12 popupContent">
                         <div style="padding:10px;">
-                            <table id="content" class="display nowrap" cellspacing="0" width="100%">
+                            <table id="content" class="display nowrap tableContent" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>
@@ -547,7 +547,7 @@
                 <div class="row-fluid">
                     <div class="span12 popupContent">
                         <div style="padding:10px;">
-                            <table id="content1" class="display nowrap" cellspacing="0" width="100%">
+                            <table id="content1" class="display nowrap tableContent" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>
@@ -607,7 +607,7 @@
                 <div class="row-fluid">
                     <div class="span12 popupContent">
                         <div style="padding:10px;">
-                            <table id="content2" class="display nowrap" cellspacing="0" width="100%">
+                            <table id="content2" class="display nowrap tableContent" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>
@@ -666,7 +666,7 @@
                 <div class="row-fluid">
                     <div class="span12 popupContent">
                         <div style="padding:10px;">
-                            <table id="content3" class="display nowrap" cellspacing="0" width="100%">
+                            <table id="content3" class="display nowrap tableContent" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>
