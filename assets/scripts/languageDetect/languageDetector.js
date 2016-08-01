@@ -39,7 +39,7 @@ dictionary = {
         "ageRangeCol" : "Age Range",
         "departmentCol" : "Department",
         "churnFactCol" : "Churn Factor",
-        
+        "reasonToLeaveCol" : "Reason To Leave",
         
         //Analytica Designer Page
         //Predictive Analytic Page
@@ -84,6 +84,7 @@ dictionary = {
         "ageRangeCol" : "වයස් පරාසය",
         "departmentCol" : "දෙපාර්තුමේන්තු",
         "churnFactCol" : "ඉවත් වීමට හේතුව",
+        "reasonToLeaveCol" : "ඉවත් වීමට හේතුව",
         
         //Analytica Designer Page
         //Predictive Analytic Page
@@ -128,6 +129,7 @@ dictionary = {
         "ageRangeCol" : "வயது வரம்பு",
         "departmentCol" : "துறை",
         "churnFactCol" : "கடையும் காரணி",
+        "reasonToLeaveCol" : "விட்டு காரணம்",
         //Analytica Designer Page
         //Predictive Analytic Page
         //Lock Screen Page

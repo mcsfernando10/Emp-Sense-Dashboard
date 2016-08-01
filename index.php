@@ -499,6 +499,11 @@
                                                 Churn Probability(%)
                                             </span>
                                         </th>
+                                        <th>
+                                            <span data-translate="reasonToLeaveCol">
+                                                Reason To Leave
+                                            </span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tfoot>

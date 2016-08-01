@@ -311,7 +311,8 @@ function displayEmployeePopup(){
             
             var empName = employeeChurnData[i]['empName'];
             var prob = churnProb * 100;
-            data[i] = [empName,prob];
+            var reason = employeeChurnData[i]['reason'];
+            data[i] = [empName,prob,reason];
         }       
 
         $('#content').DataTable( {
