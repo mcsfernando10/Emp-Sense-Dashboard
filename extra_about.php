@@ -19,6 +19,7 @@
         <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
         <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/pages/about-us.css" rel="stylesheet" type="text/css"/>
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN PAGE LEVEL PLUGIN STYLES --> 
         <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>

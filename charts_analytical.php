@@ -19,10 +19,13 @@
             <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
             <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
             <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+            <link href="assets/css/charts_analytics.css" rel="stylesheet" type="text/css"/>
             <!-- END GLOBAL MANDATORY STYLES -->
             <link rel="shortcut icon" href="assets/img/favicon.ico" />
-            
-            <script src="assets/scripts/Chart.min.js"></script>   
+            <!-- Datatables -->
+            <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+            <link href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css" rel="stylesheet">
+            <!-- Datatables -->
     </head>
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
@@ -423,6 +426,64 @@
             </span>
         </div>
     </div>
+    <!-- Employee Churn PopUp -->
+    <div id="tablePopUp">
+        <img src="assets/img/popup/closeicon.png" class="b-close"/>
+        <div>
+            <div class="row-fluid">
+                <div class="span12 popupHead">
+                    <p>
+                        <i class="icon-info-sign"></i>
+                        &nbsp;&nbsp;
+                        <b>
+                            <span id="popupHead" data-translate="viewMoreEmployeeHead"> 
+                                More about present working Employees
+                            </span>                                
+                        </b>
+                    </p>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12 popupContent">
+                    <div style="padding:10px;">
+                        <table id="content" class="display nowrap tableContent" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+
+                            </tfoot>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12 popupBottom">
+                    <p>   
+                        <span data-translate="empCount"> 
+                            Employee Count : 
+                        </span>
+                        <b>
+                            <span id="employeeCount"></span> 
+                        </b>
+                    </p>
+                </div>
+            </div>    
+        </div>
+    </div>
     <!-- END FOOTER -->
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->   
@@ -449,12 +510,25 @@
     <script src="assets/plugins/flot/jquery.flot.stack.js"></script>
     <script src="assets/plugins/flot/jquery.flot.crosshair.js"></script>
     <!-- END PAGE LEVEL PLUGINS -->
+    <!-- DataTables -->
+    <script src="assets/scripts/dataTables/jquery.dataTables.min.js"></script>
+    <script src="assets/scripts/dataTables/dataTables.buttons.min.js"></script>
+    <script src="assets/scripts/dataTables/buttons.flash.min.js"></script>
+    <script src="assets/scripts/dataTables/jszip.min.js"></script>
+    <script src="assets/scripts/dataTables/pdfmake.min.js"></script>
+    <script src="assets/scripts/dataTables/vfs_fonts.js"></script>
+    <script src="assets/scripts/dataTables/buttons.html5.min.js"></script>
+    <script src="assets/scripts/dataTables/buttons.print.min.js"></script>
+    <!-- DataTables -->
+    
     <!-- POPUPS -->
     <script src="assets/scripts/popup/ModelMessage.js" type="text/javascript"></script>
     <script src="assets/scripts/popup/bootbox.js" type="text/javascript"></script>
+    <script src="assets/scripts/popup/jquery.bpopup.min.js" type="text/javascript"></script>
+    <!-- POPUPS -->
     
     <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
-    <!-- POPUPS -->
+    
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="assets/scripts/app.js"></script>
     <script src="assets/scripts/charts_analytical.js"></script>

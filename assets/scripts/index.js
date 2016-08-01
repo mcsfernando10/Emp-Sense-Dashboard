@@ -165,7 +165,19 @@ var Index = function () {
                 var xaxisLables = [];
 
                 var j = 1;
-
+                
+                if(maleData.length > femaleData.length)
+                {
+                    for (var i = 0; i < maleData.length; i++) {
+                        xaxisLables.push([j++,maleData[i]['dept']]);
+                    } 
+                }
+                else
+                {
+                    for (var i = 0; i < femaleData.length; i++) {
+                        xaxisLables.push([j++,femaleData[i]['dept']]);
+                    } 
+                }
                 //first index fill with empty values
                 for (var i = 0; i < maleData.length; i++) {                    
                     var predProb = maleData[i]['probMale'];

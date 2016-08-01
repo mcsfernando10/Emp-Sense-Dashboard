@@ -341,13 +341,11 @@
                                                 //get distinct Doctor Details
                                                 $sqlToGetMaxReason = "select d.Reason_To_Leave as 'maxReason',d.avgProb as 'maxProb'
                                                     from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' 
-                                                            FROM `employeesit_train` 
-                                                            where Reason_To_Leave<>'' 
+                                                            FROM `employeesit_predict` 
                                                             group by Reason_To_Leave) d
                                                     where d.avgProb = (Select max(d.avgProb) as 'maxAvg'
                                                             from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' 
-                                                            FROM `employeesit_train` 
-                                                            where Reason_To_Leave<>'' 
+                                                            FROM `employeesit_predict`
                                                             group by Reason_To_Leave) d)"; 
                                                 $result = mysqli_query($con,$sqlToGetMaxReason);
                                                 
@@ -863,13 +861,11 @@
                 //get distinct Doctor Details
                 $sqlToGetMaxReason = "select d.Reason_To_Leave as 'maxReason',d.avgProb as 'maxProb'
                     from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' 
-                            FROM `employeesit_train` 
-                            where Reason_To_Leave<>'' 
+                            FROM `employeesit_predict`
                             group by Reason_To_Leave) d
                     where d.avgProb = (Select max(d.avgProb) as 'maxAvg'
                             from (SELECT Reason_To_Leave,avg(probability) as 'avgProb' 
-                            FROM `employeesit_train` 
-                            where Reason_To_Leave<>'' 
+                            FROM `employeesit_predict`
                             group by Reason_To_Leave) d)"; 
                 $result = mysqli_query($con,$sqlToGetMaxReason);
 

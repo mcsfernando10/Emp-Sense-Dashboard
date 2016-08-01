@@ -35,7 +35,7 @@
     }
     else if($requestedField == 'Reason_To_Leave'){
         $sqlToGetDeptForMale = "SELECT ".$requestedField.",gender,avg(probability) as 'avgProb'
-                                FROM employeesit_train
+                                FROM employeesit_predict
                                 where gender = 'male'
                                 group by ".$requestedField.",gender
                                 ORDER BY avg(probability) DESC"; 
@@ -44,7 +44,7 @@
     else{
         $sqlToGetDeptForMale = "SELECT ".$requestedField.",gender,avg(probability) as 'avgProb'
                                 FROM `employeesit_predict`
-                                where gender = 'male' and department <> '' or job_role <> ''
+                                where gender = 'male' and department <> ''
                                 group by ".$requestedField.",gender
                                 ORDER BY avg(probability) DESC"; 
         $deptMaleData = mysqli_query($con,$sqlToGetDeptForMale);
@@ -70,7 +70,7 @@
     }
     else if($requestedField == 'Reason_To_Leave'){
         $sqlToGetDeptForFemale = "SELECT ".$requestedField.",gender,avg(probability) as 'avgProb'
-                                FROM employeesit_train
+                                FROM employeesit_predict
                                 where gender = 'female'
                                 group by ".$requestedField.",gender
                                 ORDER BY avg(probability) DESC"; 
@@ -88,7 +88,7 @@
     else{
         $sqlToGetDeptForFemale = "SELECT ".$requestedField.",gender,avg(probability) as 'avgProb'
                                 FROM `employeesit_predict`
-                                where gender = 'female' and department <> '' or job_role <> ''
+                                where gender = 'female' and department <> ''
                                 group by ".$requestedField.",gender
                                 ORDER BY avg(probability) DESC"; 
         $deptFemaleData = mysqli_query($con,$sqlToGetDeptForFemale);
