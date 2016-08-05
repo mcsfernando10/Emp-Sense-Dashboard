@@ -107,7 +107,7 @@ var App = function () {
         if (isIE8) {
             var currheight;
             $(window).resize(function() {
-                if(currheight == document.documentElement.clientHeight) {
+                if(currheight === document.documentElement.clientHeight) {
                     return; //quite event since only body resized not window.
                 }                
                 if (resize) {

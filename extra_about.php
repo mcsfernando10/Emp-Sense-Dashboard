@@ -95,7 +95,16 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>                
+                    </li>  
+                    <li>
+                        <a href="feature_contribution.php" id="FeatureContribution">
+                            <i class="icon-tags"></i> 
+                            <span class="title" data-translate="menu_feature_con">
+                                Feature Contribution
+                            </span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
                     <li class="active">
                         <a href="#">
                             <i class="icon-gift"></i> 

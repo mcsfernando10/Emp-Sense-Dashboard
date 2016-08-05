@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> 
-<html lang="en"> <!--<![endif]-->
+<html lang="en" class="no-js">
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
-        <title>Emp-Sense | Contact Us</title>
+        <title>Emp-Sense | Admin Dashboard</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <meta content="" name="description" />
         <meta content="" name="author" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="assets/plugins/bootstrap/css/bootstrap.custom.css" rel="stylesheet" type="text/css"/>        
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -20,17 +18,28 @@
         <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
         <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
         <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->          
+        <link href="assets/css/feature_contribution.css" rel="stylesheet" type="text/css"/>
+        
+        <!-- Datatables -->
+        <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css" rel="stylesheet">
+        <!-- Datatables -->        
+        <!-- END PAGE LEVEL PLUGIN STYLES -->
+        
         <link rel="shortcut icon" href="assets/img/favicon.ico" />
+        
+        
+        
     </head>
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
     <body class="page-header-fixed">
-        <!-- BEGIN HEADER -->   
         <?php include_once("header.php"); ?>
-        <!-- END HEADER -->
-        <!-- BEGIN CONTAINER -->   
-        <div class="page-container row-fluid">
-            <!-- BEGIN SIDEBAR -->
+
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+             <!-- BEGIN SIDEBAR -->
             <div class="page-sidebar nav-collapse collapse">
                 <!-- BEGIN SIDEBAR MENU -->        
                 <ul class="page-sidebar-menu">
@@ -50,7 +59,7 @@
                         </form>
                         <!-- END RESPONSIVE QUICK SEARCH FORM -->
                     </li>
-                    <li class="start">
+                    <li>
                         <a href="index.php" id="Dashboard">
                             <i class="icon-dashboard"></i> 
                             <span class="title" data-translate="menu_dashboard">
@@ -85,8 +94,8 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>   
-                    <li>
+                    </li>
+                    <li class="start active">
                         <a href="feature_contribution.php" id="FeatureContribution">
                             <i class="icon-tags"></i> 
                             <span class="title" data-translate="menu_feature_con">
@@ -95,18 +104,18 @@
                             <span class="selected"></span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li >
                         <a href="#">
                             <i class="icon-gift"></i> 
                             <span class="title" data-translate="menu_extra">Extra</span>
-                            <span class="arrow open"></span>
-                            <span class="selected"></span>
+                            <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu">
                             <!--li >
                                 <a href="extra_profile.php" id="UserProfile">
                                     <i class="icon-user"></i>
-                                    User Profile</a>
+                                    Feature Contribution
+                                </a>
                             </li-->
                             <li>
                                 <a href="extra_lock.php">
@@ -114,8 +123,8 @@
                                     <span data-translate="menu_lockScreen">Lock Screen</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="extra_faq.php" id="Faq" class="active">
+                            <li >
+                                <a href="extra_faq.php" id="Faq">
                                     <i class="icon-info"></i>
                                     <span data-translate="menu_faq">FAQ</span>
                                 </a>
@@ -126,7 +135,7 @@
                                     <span data-translate="menu_about_us">About Us</span>
                                 </a>
                             </li>
-                            <li class="active">
+                            <li >
                                 <a href="extra_contact.php" id="ContactUs">
                                     <i class="icon-envelope-alt"></i>
                                     <span data-translate="menu_contact_us">Contact Us</span>
@@ -140,17 +149,6 @@
             <!-- END SIDEBAR -->
             <!-- BEGIN PAGE -->
             <div class="page-content">
-                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-                <div id="portlet-config" class="modal hide">
-                    <div class="modal-header">
-                        <button data-dismiss="modal" class="close" type="button"></button>
-                        <h3>portlet Settings</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p>Here will be a configuration form</p>
-                    </div>
-                </div>
-                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
                 <!-- BEGIN PAGE CONTAINER-->
                 <div class="container-fluid">
                     <!-- BEGIN PAGE HEADER-->
@@ -200,141 +198,131 @@
                                     </label>
                                 </div>
                             </div>
-                            <!-- END BEGIN STYLE CUSTOMIZER --> 
+                            <!-- END BEGIN STYLE CUSTOMIZER -->    
                             <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                            <h3 class="page-title">
-                                Contact Us <small>contact us page</small>
-                            </h3>
-                            <ul class="breadcrumb">
-                                <li>
-                                    <i class="icon-home"></i>
-                                    <a href="index.php">Home</a> 
-                                    <i class="icon-angle-right"></i>
-                                </li>
-                                <li>
-                                    <a href="#">Pages</a>
-                                    <i class="icon-angle-right"></i>
-                                </li>
-                                <li><a href="#">Contact Us</a></li>
+                            <h4 class="page-title">
+                                <span data-translate="menu_feature_con">
+                                    Feature Contribution
+                                </span> 
+                                <small>
+                                    <span data-translate="semiHead">
+                                        statistics and more
+                                    </span>
+                                </small>
+                            </h4>
+                            <ul class="breadcrumb" style="margin-bottom: 7px">
+                                    <li>
+                                        <i class="icon-home"></i>
+                                        <a href="index.php">
+                                            <span data-translate="home">Home</span>
+                                        </a> 
+                                        <i class="icon-angle-right"></i>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span data-translate="menu_feature_con">
+                                                Feature Contribution
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="pull-right no-text-shadow">
+                                        <div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
+                                            <i class="icon-calendar"></i>
+                                            <span></span>
+                                            <i class="icon-angle-down"></i>
+                                        </div>
+                                    </li>
                             </ul>
                             <!-- END PAGE TITLE & BREADCRUMB-->
                         </div>
                     </div>
                     <!-- END PAGE HEADER-->
-                    <!-- BEGIN PAGE CONTENT-->
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <!-- Google Map -->
-                            <div class="row-fluid">
-                                <div id="map" class="gmaps margin-bottom-40" style="height:400px;"></div>
-                            </div>
-                            <div class="row-fluid margin-bottom-20">
-                                <div class="span6">
-                                    <div class="space20"></div>
-                                    <h3 class="form-section">Contacts</h3>
-                                    <!--p>Lorem ipsum dolor sit amet, Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p-->
-                                    <div class="well">
-                                        <h4>Address</h4>
-                                        <address>
-                                            <strong>Sri Lanka Institute of Information Technology</strong><br>
-                                            New Kandy Rd, <br>
-                                            Malabe 10115 <br>
-                                            <abbr title="Phone">P:</abbr> 011-7544801
-                                        </address>
-                                        <address>
-                                            <strong>Email</strong><br>
-                                            <a href="mailto:#">empsense@gmail.com</a>
-                                        </address>
-                                        <ul class="social-icons margin-bottom-10">
-                                            <li><a href="#" data-original-title="facebook" class="facebook"></a></li>
-                                            <li><a href="#" data-original-title="github" class="github"></a></li>
-                                            <li><a href="#" data-original-title="Goole Plus" class="googleplus"></a></li>
-                                            <li><a href="#" data-original-title="linkedin" class="linkedin"></a></li>
-                                            <li><a href="#" data-original-title="rss" class="rss"></a></li>
-                                            <li><a href="#" data-original-title="skype" class="skype"></a></li>
-                                            <li><a href="#" data-original-title="twitter" class="twitter"></a></li>
-                                            <li><a href="#" data-original-title="youtube" class="youtube"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <div class="space20"></div>
-                                    <!-- BEGIN FORM-->
-                                    <form action="#" class="horizontal-form">
-                                        <h3 class="form-section">Feedback Form</h3>
-                                        <div class="control-group">
-                                            <label class="control-label">Name</label>
-                                            <div class="controls">
-                                                <input type="text" class="m-wrap span12" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" >Email</label>
-                                            <div class="controls">
-                                                <input type="text" class="m-wrap span12" >
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" >Message</label>
-                                            <div class="controls">
-                                                <textarea class="m-wrap span12" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn blue"><i class="icon-ok"></i> Send</button>
-                                        <button type="button" class="btn">Cancel</button>
-                                    </form>
-                                    <!-- END FORM-->  
-                                </div>
-                            </div>
-                        </div>
+                    <div id="dashboard">
+                        
                     </div>
-                    <!-- END PAGE CONTENT-->
                 </div>
-                <!-- END PAGE CONTAINER-->  
+            <!-- END CONTAINER -->
             </div>
-            <!-- END PAGE -->    
-        </div>
-        <!-- END CONTAINER -->
-        <!-- BEGIN FOOTER -->
-        <div class="footer">
-                <div class="footer-inner">
+            <!-- BEGIN FOOTER -->
+            <div class="footer">
+                <div class="footer-inner">                
                     2016 &copy; Emp - Sense by Sri Lanka Institute of Information Technology.
                 </div>
                 <div class="footer-tools">
-                        <span class="go-top">
+                    <span class="go-top">
                         <i class="icon-angle-up"></i>
-                        </span>
+                    </span>
                 </div>
-        </div>
+            </div>
+        </div>        
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-        <!-- BEGIN CORE PLUGINS -->   <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <!-- BEGIN CORE PLUGINS -->   
+        <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
         <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
         <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
         <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
-        <!--[if lt IE 9]>
-        <script src="assets/plugins/excanvas.min.js"></script>
-        <script src="assets/plugins/respond.min.js"></script>  
-        <![endif]-->   
+         
         <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
-        <script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
         <!-- END CORE PLUGINS -->
-        <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+        
+        <!-- BEGIN PAGE LEVEL PLUGINS -->         
+        <script src="assets/plugins/flot/jquery.flot.js" type="text/javascript"></script>
+        <!-- END PAGE LEVEL PLUGINS -->
+        
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->       
+        <script src="assets/scripts/app.js" type="text/javascript"></script>
+        <script src="assets/scripts/feature_contribution.js" type="text/javascript"></script>
+        <!-- POPUPS -->
+        <script src="assets/scripts/popup/jquery.bpopup.min.js" type="text/javascript"></script>
+        <!-- POPUPS -->
+        
+        <!-- NUMBER ANIMATE -->
+        <script src="assets/scripts/jquery.animateNumber.min.js" type="text/javascript"></script>
+        <!-- NUMBER ANIMATE -->
+        
+        <!-- Include jQuery Popup Overlay -->
+        <!--script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script-->
+        
+        <!-- LANGUAGE -->
         <script src="assets/scripts/languageDetect/languageDetector.js" type="text/javascript"></script>
-        <script src="assets/plugins/gmaps/gmaps.js" type="text/javascript"></script>
-        <script src="assets/scripts/app.js"></script>    
-        <script src="assets/scripts/contact-us.js"></script>  
-        <script>
+        <!-- LANGUAGE -->
+        
+        <!-- CHARTS -->
+        <script src="assets/scripts/highcharts.js"></script>
+        <script src="assets/scripts/exporting.js"></script>
+        <!-- CHARTS -->
+        
+        <!-- DataTables -->
+        <script src="assets/scripts/dataTables/jquery.dataTables.min.js"></script>
+	<script src="assets/scripts/dataTables/dataTables.buttons.min.js"></script>
+	<script src="assets/scripts/dataTables/buttons.flash.min.js"></script>
+	<script src="assets/scripts/dataTables/jszip.min.js"></script>
+	<script src="assets/scripts/dataTables/pdfmake.min.js"></script>
+	<script src="assets/scripts/dataTables/vfs_fonts.js"></script>
+	<script src="assets/scripts/dataTables/buttons.html5.min.js"></script>
+	<script src="assets/scripts/dataTables/buttons.print.min.js"></script>
+        <!-- DataTables -->
+        
+        <!-- END PAGE LEVEL SCRIPTS -->         
+        
+        <script type="text/javascript">
             jQuery(document).ready(function() {    
-               App.init();
-               ContactUs.init();
+               App.init(); // initlayout and core plugins
+               Index.init();
+               //Index.initJQVMAP(); // init index page's custom scripts
+               //Index.initCalendar(); // init index page's custom scripts
+               Index.initCharts(); // init index page's custom scripts
+               //Index.initChat();
+               //Index.initMiniCharts();
+               //Index.initIntro();
+               //Tasks.initDashboardWidget();
             });
         </script>
+                
+            
         <!-- END JAVASCRIPTS -->
     </body>
     <!-- END BODY -->
 </html>
+

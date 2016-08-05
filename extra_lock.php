@@ -35,29 +35,34 @@
     <body>
         <div class="page-lock">
             <div class="page-logo">
-                <a class="brand" href="">
-                    <img src="assets/img/logo_emp.png" alt="logo" />
-                </a>
+                
             </div>
             <div class="page-body">
                 <img class="page-lock-img" src="assets/img/profile/profile_lock.png" alt="">
                 <div class="page-lock-info">
+                    <div style="text-align: center">
+                        <img style="width: 100px; height: 85px; " src="assets/img/logo_emp.png" alt="logo" />
+                    </div>
                     <h1><?php echo ucfirst($_SESSION[$GLOBALS['sessionName']]) ?></h1>
                     <span><em>Locked</em></span>
                     <form class="form-search" method="post">
                         <div class="input-append" id="passwordField">
                             <input type="password" class="m-wrap" placeholder="Password" name="inputPassword">
-                            <button name="login" type="submit" class="btn blue icn-only"><i class="m-icon-swapright m-icon-white"></i></button>
+                            <button name="login" type="submit" class="btn blue icn-only">
+                                <i class="m-icon-swapright m-icon-white"></i>
+                            </button>
                         </div>                                  
                     </form>
+                    
                 </div>
-            </div>
-            <div class="page-footer">
-                2016 &copy; Emp - Sense. Admin Dashboard.
-            </div>
+                <div>
+                    2016 &copy; Emp - Sense. Admin Dashboard.
+                </div>
+            </div>            
         </div>
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-        <!-- BEGIN CORE PLUGINS -->   <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
+        <!-- BEGIN CORE PLUGINS -->   
+        <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
         <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
         <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
         <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      

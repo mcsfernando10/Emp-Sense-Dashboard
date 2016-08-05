@@ -95,6 +95,15 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="feature_contribution.php" id="FeatureContribution">
+                            <i class="icon-tags"></i> 
+                            <span class="title" data-translate="menu_feature_con">
+                                Feature Contribution
+                            </span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
                     <li >
                         <a href="#">
                             <i class="icon-gift"></i> 
@@ -105,7 +114,8 @@
                             <!--li >
                                 <a href="extra_profile.php" id="UserProfile">
                                     <i class="icon-user"></i>
-                                    User Profile</a>
+                                    Feature Contribution
+                                </a>
                             </li-->
                             <li>
                                 <a href="extra_lock.php">
@@ -453,6 +463,7 @@
         </div>
                 </div>
         <!-- END CONTAINER -->
+        </div>
         </div>
         <!-- BEGIN FOOTER -->
         <div class="footer">
