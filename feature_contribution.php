@@ -238,7 +238,53 @@
                     </div>
                     <!-- END PAGE HEADER-->
                     <div id="dashboard">
-                        
+                        <div>
+                            <div class="row-fluid">
+                                <div class="span12 popupContent">
+                                    <div style="padding:10px;">
+                                        <table id="content" class="display nowrap tableContent" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <span data-translate="employeeNameCol">
+                                                            Employee Name
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="churnProbCol">
+                                                            Churn Probability(%)
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="reasonToLeaveCol">
+                                                            Reason To Leave
+                                                        </span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+
+                                            </tfoot>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12 popupBottom">
+                                    <p>   
+                                        <span data-translate="empCount"> 
+                                            Employee Count : 
+                                        </span>
+                                        <b>
+                                            <span id="employeeCount"></span> 
+                                        </b>
+                                    </p>
+                                </div>
+                            </div>    
+                        </div>
                     </div>
                 </div>
             <!-- END CONTAINER -->
@@ -305,21 +351,6 @@
         <!-- DataTables -->
         
         <!-- END PAGE LEVEL SCRIPTS -->         
-        
-        <script type="text/javascript">
-            jQuery(document).ready(function() {    
-               App.init(); // initlayout and core plugins
-               Index.init();
-               //Index.initJQVMAP(); // init index page's custom scripts
-               //Index.initCalendar(); // init index page's custom scripts
-               Index.initCharts(); // init index page's custom scripts
-               //Index.initChat();
-               //Index.initMiniCharts();
-               //Index.initIntro();
-               //Tasks.initDashboardWidget();
-            });
-        </script>
-                
             
         <!-- END JAVASCRIPTS -->
     </body>
