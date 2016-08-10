@@ -7,6 +7,7 @@
     //get distinct Doctor Details
     $sqlToGetEmployeeChurn = "SELECT Employee_Name,probability,	Reason_To_Leave 
         FROM `employeesit_predict`
+        WHERE probability < 0.97
         Order by probability DESC"; 
     $result = mysqli_query($con,$sqlToGetEmployeeChurn);
 

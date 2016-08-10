@@ -251,13 +251,103 @@
                                                         </span>
                                                     </th>
                                                     <th>
-                                                        <span data-translate="churnProbCol">
+                                                        <span data-translate="">
+                                                            Age
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Gender
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Marital Status
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Degree
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Job Role
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Department
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Work From
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Work To
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Tenure
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Salary
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Bonus
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Claims
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Worked Projects
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            No of Leaves
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            Distance
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            No of Parents
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            No of Children
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
+                                                            No of Complaints
+                                                        </span>
+                                                    </th>
+                                                    <th>
+                                                        <span data-translate="">
                                                             Churn Probability(%)
                                                         </span>
                                                     </th>
                                                     <th>
-                                                        <span data-translate="reasonToLeaveCol">
-                                                            Reason To Leave
+                                                        <span data-translate="">
+                                                            Max Feature
                                                         </span>
                                                     </th>
                                                 </tr>
@@ -273,13 +363,23 @@
                                 </div>
                             </div>
                             <div class="row-fluid">
-                                <div class="span12 popupBottom">
+                                <div class="span2 popupBottom">
                                     <p>   
                                         <span data-translate="empCount"> 
                                             Employee Count : 
                                         </span>
                                         <b>
                                             <span id="employeeCount"></span> 
+                                        </b>
+                                    </p>
+                                </div>
+                                <div class="span4 popupBottom">
+                                    <p>   
+                                        <span data-translate="empCount"> 
+                                            Bias : 
+                                        </span>
+                                        <b>
+                                            <span id="bias"></span> 
                                         </b>
                                     </p>
                                 </div>
