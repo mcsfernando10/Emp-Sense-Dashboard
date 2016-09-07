@@ -43,6 +43,8 @@ $(document).ready(function() {
         } );
         var empCount = employeeChurnData.length.toString();
         $("#employeeCount").text(empCount);
+        var bias = employeeChurnData[employeeChurnData.length-1]['bias'].toString();
+        $("#bias").text(bias);
     });
 });
 

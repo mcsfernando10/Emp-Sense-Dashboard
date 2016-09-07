@@ -375,7 +375,7 @@
                                 </div>
                                 <div class="span4 popupBottom">
                                     <p>   
-                                        <span data-translate="empCount"> 
+                                        <span data-translate=""> 
                                             Bias : 
                                         </span>
                                         <b>

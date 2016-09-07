@@ -512,7 +512,7 @@
                                         </th>
                                         <th>
                                             <span data-translate="reasonToLeaveCol">
-                                                Reason To Leave
+                                                Most possible reasons to leave
                                             </span>
                                         </th>
                                     </tr>

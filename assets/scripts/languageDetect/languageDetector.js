@@ -40,7 +40,7 @@ dictionary = {
         "ageRangeCol" : "Age Range",
         "departmentCol" : "Department",
         "churnFactCol" : "Churn Factor",
-        "reasonToLeaveCol" : "Reason To Leave",
+        "reasonToLeaveCol" : "Most possible reasons to leave",
         
         //Analytica Designer Page
         //Predictive Analytic Page

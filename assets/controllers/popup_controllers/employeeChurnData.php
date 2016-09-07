@@ -5,9 +5,9 @@
     mysqli_select_db($con,"$db_name")or die("cannot select DB"); 
 
     //get distinct Doctor Details
-    $sqlToGetEmployeeChurn = "SELECT Employee_Name,probability,	Reason_To_Leave 
-        FROM `employeesit_predict`
-        WHERE probability < 0.97
+    $sqlToGetEmployeeChurn = "SELECT ep.Employee_Name as 'Employee_Name',ep.probability as 'probability', ep.Reason_To_Leave as 'Reason_To_Leave', ef.Max_Feature as 'Max_Feature' 
+        FROM `employeesit_predict` ep,`employeesit_predict_feature_cont` ef
+        WHERE probability < 0.97 and ep.Employee_ID=ef.Employee_ID
         Order by probability DESC"; 
     $result = mysqli_query($con,$sqlToGetEmployeeChurn);
 
@@ -17,6 +17,7 @@
         $row_array['empName'] = $row['Employee_Name'];
         $row_array['prob'] = $row['probability'];
         $row_array['reason'] = $row['Reason_To_Leave'];
+        $row_array['max_feature'] = $row['Max_Feature'];
         array_push($return_arr,$row_array);
     }
 

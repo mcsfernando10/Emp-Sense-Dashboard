@@ -311,7 +311,7 @@ function displayEmployeePopup(){
             
             var empName = employeeChurnData[i]['empName'];
             var prob = churnProb * 100;
-            var reason = employeeChurnData[i]['reason'] + '<small> might be the <br>most possible reason</small>';
+            var reason = employeeChurnData[i]['reason'] + ' and '+ employeeChurnData[i]['max_feature'];
             data[i] = [empName,prob,reason];
         }       
 
